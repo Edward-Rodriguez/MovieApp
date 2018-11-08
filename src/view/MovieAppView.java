@@ -49,13 +49,28 @@ public class MovieAppView {
             "https://i.imgur.com/7RFjjoy.jpg"
     );
 
+    Movie movie3 = new Movie("Haloween",
+            "alien stuff",
+            "PG",
+            "GENERAL",
+            "https://i.imgur.com/7RFjjoy.jpg"
+    );
+
     public MovieAppView() {
         movieList = new MovieTableModel();
 
         movieListPane = new FlowPane();
+        movieListPane.setVgap(8);
+        movieListPane.setHgap(4);
+        movieListPane.setPrefWrapLength(950); // preferred width = 300
 
         movieList.addMovie(movie);
         movieList.addMovie(movie2);
+        movieList.addMovie(movie3);
+        movieList.addMovie(movie3);
+        movieList.addMovie(movie3);
+        movieList.addMovie(movie3);
+        movieList.addMovie(movie3);
     }
 
     private void initTopBarPane() {
