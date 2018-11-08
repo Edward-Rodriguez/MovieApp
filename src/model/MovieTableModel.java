@@ -10,12 +10,12 @@ import javafx.scene.image.Image;
 
 public class MovieTableModel {
 
-    ObservableList<Movie> movie;
+    ObservableList<Movie> movies;
     private Movie selectedMovie;
 
     public MovieTableModel() {
         //ui = initUI;
-        movie = FXCollections.observableArrayList();
+        movies = FXCollections.observableArrayList();
         //  isDraft = false;
         // isOutboxMessage = false;
         reset();
@@ -29,7 +29,7 @@ public class MovieTableModel {
         return selectedMovie == TestMovie;
     }
     public ObservableList<Movie> getMovies() {
-        return movie;
+        return movies;
     }
     public Movie getSelectedMovie() {
         return selectedMovie;
@@ -55,20 +55,21 @@ public class MovieTableModel {
 
 
     public void reset() {
-        movie.clear();
+        movies.clear();
         selectedMovie = null;
     }
     /**
      * Adds a movie to the moviePane.
      */
-    public void addMovie( String url, String Title, String rating, String description, String releaseType ) {
-        Movie movieToAdd = new Movie( Title, description, rating, releaseType, url);
-        movie.add(0, movieToAdd);
-        //ui.reloadMessagePane();
-    }
 
     public void addMovie( Movie movie) {
-        this.movie.add(movie);
+        this.movies.add(movie);
+    }
+
+    public void addMovie( int ID, String movieTitle, String description, String rating, String releaseType, String cinemaPlaying, String urlOfImage) {
+
+        Movie movie = new Movie(ID, movieTitle, description, rating, releaseType, cinemaPlaying, urlOfImage);
+        movies.add(0, movie);
     }
     /**
      * Removes the currently selected message from list
@@ -76,14 +77,14 @@ public class MovieTableModel {
      */
     public void removeSelectedMovie() {
         if (isMovieSelected()) {
-            movie.remove(selectedMovie);
+            movies.remove(selectedMovie);
             selectedMovie = null;
             //ui.reloadMessagePane();
         }
     }
 
-    public void removeMessage(Movie message) {
-        movie.remove(movie);
+    public void removeMovie(Movie movie) {
+        movies.remove(movie);
     }
 
 }

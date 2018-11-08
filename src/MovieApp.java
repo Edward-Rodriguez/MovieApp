@@ -1,3 +1,4 @@
+import database.DatabaseManager;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -5,12 +6,20 @@ import view.MovieAppView;
 
 public class MovieApp extends Application {
 
-    MovieAppView ui = new MovieAppView();
+    DatabaseManager db = new DatabaseManager();
+    MovieAppView ui = new MovieAppView(db);
 
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        ui.startUI(primaryStage, "MovieApp");
+        try{
+            this.db.getConnection();
+            ui.startUI(primaryStage, "MovieApp");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 

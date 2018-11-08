@@ -1,5 +1,6 @@
 package view;
 
+import database.DatabaseManager;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
@@ -33,45 +34,36 @@ public class MovieAppView {
 
     Scene primaryScene;
 
+    DatabaseManager db;
+
     /* **********
     Example movies
      */
-    Movie movie = new Movie("Venom",
+    Movie movie = new Movie(1,"Venom",
                             "alien stuff",
                             "R",
                                 "GENERAL",
+                            "Mom and Pops",
                             "https://i.imgur.com/H0u6dJp.jpg"
                                 );
 
-    Movie movie2 = new Movie("Haloween",
-            "alien stuff",
-            "PG",
-            "GENERAL",
-            "https://i.imgur.com/7RFjjoy.jpg"
-    );
-
-    Movie movie3 = new Movie("Haloween",
-            "alien stuff",
-            "PG",
-            "GENERAL",
-            "https://i.imgur.com/7RFjjoy.jpg"
-    );
-
-    public MovieAppView() {
+    public MovieAppView(DatabaseManager db) {
+        this.db = db;
         movieList = new MovieTableModel();
+        movieList = db.getMovieTableModel();
 
         movieListPane = new FlowPane();
 //        movieListPane.setVgap(8);
 //        movieListPane.setHgap(4);
-        movieListPane.setPrefWrapLength(940); // preferred width = 300
+        movieListPane.setPrefWrapLength(945); // preferred width = 300
 
-        movieList.addMovie(movie);
-        movieList.addMovie(movie2);
-        movieList.addMovie(movie3);
-        movieList.addMovie(movie3);
-        movieList.addMovie(movie3);
-        movieList.addMovie(movie3);
-        movieList.addMovie(movie3);
+//        movieList.addMovie(movie);
+//        movieList.addMovie(movie);
+//        movieList.addMovie(movie);
+//        movieList.addMovie(movie);
+//        movieList.addMovie(movie);
+//        movieList.addMovie(movie);
+//        movieList.addMovie(movie);
     }
 
     private void initTopBarPane() {
@@ -116,7 +108,7 @@ public class MovieAppView {
         borderPane.setTop(topBarPane);
         borderPane.setCenter(scrollPane);
 
-        primaryScene = new Scene(borderPane, 945, 600);
+        primaryScene = new Scene(borderPane, 955, 600);
         primaryScene.getStylesheets().add("css/movieStyle.css");
 
         window.setScene(primaryScene);

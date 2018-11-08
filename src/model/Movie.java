@@ -12,16 +12,20 @@ public class Movie {
 
 
     private String rating;
+    private int id;
     private String releaseType;
     private String urlOfImage;
+    private String cinemaPlaying;
     private ObservableList<String> listOfCinemas;
 
 
-    public Movie(String movieTitle, String description, String rating, String releaseType, String urlOfImage) {
+    public Movie(int ID, String movieTitle, String description, String rating, String releaseType, String cinemaPlaying, String urlOfImage) {
+        this.id = ID;
         this.movieTitle = movieTitle;
         this.description = description;
         this.rating = rating;
         this.releaseType = releaseType;
+        this.cinemaPlaying = cinemaPlaying;
         this.urlOfImage = urlOfImage;
     }
 
