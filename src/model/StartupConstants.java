@@ -20,7 +20,9 @@ public class StartupConstants {
     public static String    CSS_CLASS_POSTER_TITLE = "movie_title";
     public static String    CSS_CLASS_POSTER_RATING = "movie_rating";
     public static String    CSS_CLASS_POSTER_IMAGE = "movie_poster_image";
-    public static String    CSS_CLASS_MOVIE_BOX = "movie_box";
+    public static String    CSS_CLASS_TOP_BAR_PANE= "top_bar_pane";
+    public static String    CSS_CLASS_BORDER_PANE= "border_pane";
+    public static String    CSS_CLASS_FLOW_PANE= "flow_pane";
 
     // CSS - FOR MAIN APP GUI CONTROLS
     public static String    CSS_CLASS_LANG_USERNAME_LABEL = "lang_username_label";

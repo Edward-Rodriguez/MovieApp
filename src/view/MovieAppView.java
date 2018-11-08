@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 import model.Movie;
 import model.MovieTableModel;
 
+import static model.StartupConstants.CSS_CLASS_FLOW_PANE;
+import static model.StartupConstants.CSS_CLASS_TOP_BAR_PANE;
 import static model.StartupConstants.CSS_CLASS_WELCOME_LABEL;
 
 public class MovieAppView {
@@ -53,25 +55,17 @@ public class MovieAppView {
         movieList = db.getMovieTableModel();
 
         movieListPane = new FlowPane();
-//        movieListPane.setVgap(8);
-//        movieListPane.setHgap(4);
         movieListPane.setPrefWrapLength(945); // preferred width = 300
-
-//        movieList.addMovie(movie);
-//        movieList.addMovie(movie);
-//        movieList.addMovie(movie);
-//        movieList.addMovie(movie);
-//        movieList.addMovie(movie);
-//        movieList.addMovie(movie);
-//        movieList.addMovie(movie);
+        movieListPane.getStyleClass().add(CSS_CLASS_FLOW_PANE);
     }
 
     private void initTopBarPane() {
         topBarPane = new HBox();
         welcomeLabel = new Label("Welcome to MovieApp");
         welcomeLabel.getStyleClass().add(CSS_CLASS_WELCOME_LABEL);
+        topBarPane.getStyleClass().add(CSS_CLASS_TOP_BAR_PANE);
         topBarPane.setAlignment(Pos.CENTER);
-
+        topBarPane.setMinHeight(70);
         topBarPane.getChildren().addAll(welcomeLabel);
     }
 

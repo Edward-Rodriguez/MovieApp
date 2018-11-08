@@ -6,6 +6,7 @@
     .welcome_label {
         -fx-alignment: center;
         -fx-font: normal bold 30px 'Arial';
+        -fx-text-fill: #950740;
     }
 
     .movie_title {
@@ -24,5 +25,14 @@
 
     }
 
-    .movie_box {
+    .top_bar_pane {
+        -fx-background-color: #1A1A1D;
+
+    }
+    .border_pane {
+        -fx-background-color: #1A1A1D;
+
+    }
+    .flow_pane {
+
     }
