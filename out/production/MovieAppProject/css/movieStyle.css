@@ -1,0 +1,28 @@
+
+    .now_playing_label {
+
+    }
+
+    .welcome_label {
+        -fx-alignment: center;
+        -fx-font: normal bold 30px 'Arial';
+    }
+
+    .movie_title {
+        -fx-alignment: center;
+        -fx-font: normal bold 15px 'Arial';
+        -fx-padding:4;
+    }
+
+    .movie_rating {
+        -fx-font: normal bold 15px 'Arial';
+        -fx-padding:4;
+    }
+
+    .movie_poster_image {
+
+    }
+
+    .movie_box {
+        -fx-padding:15;
+    }
