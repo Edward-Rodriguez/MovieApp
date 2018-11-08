@@ -1,6 +1,7 @@
 package view;
 
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -60,9 +61,9 @@ public class MovieAppView {
         movieList = new MovieTableModel();
 
         movieListPane = new FlowPane();
-        movieListPane.setVgap(8);
-        movieListPane.setHgap(4);
-        movieListPane.setPrefWrapLength(950); // preferred width = 300
+//        movieListPane.setVgap(8);
+//        movieListPane.setHgap(4);
+        movieListPane.setPrefWrapLength(940); // preferred width = 300
 
         movieList.addMovie(movie);
         movieList.addMovie(movie2);
@@ -96,6 +97,13 @@ public class MovieAppView {
         for (Movie movie : movieList.getMovies()) {
             MovieView movieEditor = new MovieView(movie, movieList);
             movieListPane.getChildren().add(movieEditor);
+
+            movieEditor.getImageView().setOnMouseEntered(e ->  {
+                primaryScene.setCursor(Cursor.HAND);
+            });
+            movieEditor.getImageView().setOnMouseExited(e -> {
+                primaryScene.setCursor(Cursor.DEFAULT);
+            });
         }
     }
 
@@ -108,7 +116,7 @@ public class MovieAppView {
         borderPane.setTop(topBarPane);
         borderPane.setCenter(scrollPane);
 
-        primaryScene = new Scene(borderPane, 900, 600);
+        primaryScene = new Scene(borderPane, 945, 600);
         primaryScene.getStylesheets().add("css/movieStyle.css");
 
         window.setScene(primaryScene);

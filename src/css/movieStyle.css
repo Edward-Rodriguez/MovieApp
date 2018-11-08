@@ -16,7 +16,7 @@
 
     .movie_rating {
         -fx-font: normal bold 15px 'Arial';
-        -fx-padding:4;
+     /*   -fx-padding:4; */
     }
 
     .movie_poster_image {
