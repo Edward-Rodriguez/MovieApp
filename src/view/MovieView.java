@@ -42,10 +42,10 @@ public class MovieView extends VBox {
         imageView.setImage(posterImage);
         imageView.setFitHeight(195);
         imageView.setFitWidth(150);
+        imageView.getStyleClass().add(CSS_CLASS_POSTER_IMAGE);
 
         this.setAlignment(Pos.CENTER);
         this.setPadding(new Insets(15, 15, 15, 22));
-        //this.getStylesheets().add(CSS_CLASS_MOVIE_BOX);
 
         getChildren().addAll(titleLabel, imageView, ratingLabel);
     }

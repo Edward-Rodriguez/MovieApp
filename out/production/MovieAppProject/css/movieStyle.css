@@ -20,9 +20,9 @@
     }
 
     .movie_poster_image {
+        -fx-effect: dropshadow(three-pass-box, derive(cadetblue, -20%), 10, 0, 4, 4);
 
     }
 
-  /*  .movie_box {
-        -fx-padding:15;
-    }*/
+    .movie_box {
+    }
