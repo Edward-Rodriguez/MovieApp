@@ -4,11 +4,13 @@ import database.DatabaseManager;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Movie;
 import model.MovieTableModel;
@@ -27,10 +29,18 @@ public class MovieAppView {
     ScrollPane scrollPane;
 
     HBox topBarPane;
+    
+    HBox hboxFilter;
+    
+    HBox cbLocation;
+    
+    VBox vbox;
 
     Label welcomeLabel;
 
     Label nowPlayingLabel;
+    
+    Label filterLabel;
 
     Stage window;
 
@@ -68,10 +78,34 @@ public class MovieAppView {
         topBarPane.setMinHeight(70);
         topBarPane.getChildren().addAll(welcomeLabel);
     }
+    
+    private void VeeBox() {
+    	vbox= new VBox();
+    	 topBarPane = new HBox();
+         welcomeLabel = new Label("Welcome to MovieApp");
+         welcomeLabel.getStyleClass().add(CSS_CLASS_WELCOME_LABEL);
+         topBarPane.getStyleClass().add(CSS_CLASS_TOP_BAR_PANE);
+         topBarPane.setAlignment(Pos.CENTER);
+         topBarPane.getChildren().addAll(welcomeLabel);
+         cbLocation = new HBox();
+         filterLabel= new Label("Filter by Rating: ");
+     	CheckBox checkBox1 = new CheckBox("All");
+     	CheckBox checkBox2 = new CheckBox("G");
+     	 CheckBox checkBox3 = new CheckBox("PG");
+         CheckBox checkBox4 = new CheckBox("PG-13");
+         CheckBox checkBox5 = new CheckBox("R");
+         CheckBox checkBox6 = new CheckBox("NC-17");
+         cbLocation.setAlignment(Pos.TOP_RIGHT);
+     	
+     	cbLocation.getChildren().addAll(filterLabel,checkBox1,checkBox2,checkBox3,checkBox4,checkBox5,checkBox6);
+         
+    	vbox.getChildren().addAll(topBarPane,cbLocation);
+    	
+    }
 
     public void startUI(Stage primaryStage, String windowTitle){
         window = primaryStage;
-        initTopBarPane();
+        VeeBox();
         initWindow(windowTitle);
         reloadMovieListPane();
 
@@ -99,7 +133,7 @@ public class MovieAppView {
         scrollPane.setContent(movieListPane);
 
         borderPane = new BorderPane();
-        borderPane.setTop(topBarPane);
+        borderPane.setTop(vbox);
         borderPane.setCenter(scrollPane);
 
         primaryScene = new Scene(borderPane, 955, 600);
