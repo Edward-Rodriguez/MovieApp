@@ -1,4 +1,9 @@
-
+/*
+    This CSS provides all the style settings for
+    JavaFX controls
+    @author Edward Rodriguez
+ **/
+    /* MAIN SCREEN CONTROLS AND LABELS*/
     .now_playing_label {
 
     }
@@ -12,27 +17,54 @@
     .movie_title {
         -fx-alignment: center;
         -fx-font: normal bold 15px 'Arial';
+        -fx-text-fill: #e7e7e7;
         -fx-padding:4;
     }
 
     .movie_rating {
         -fx-font: normal bold 15px 'Arial';
+        -fx-text-fill: #e7e7e7;
      /*   -fx-padding:4; */
     }
 
     .movie_poster_image {
-        -fx-effect: dropshadow(three-pass-box, derive(cadetblue, -20%), 10, 0, 4, 4);
+        -fx-effect: dropshadow(three-pass-box, derive(black, -20%), 10, 0, 4, 4);
 
     }
-
-    .top_bar_pane {
-        -fx-background-color: #1A1A1D;
+    .filter_box {
 
     }
-    .border_pane {
+    .close_button {
+        -fx-border-width: 0;
+        -fx-background-radius: 0;
+        -fx-background-color: transparent;
+    }
+    .minimize_button {
+        -fx-border-width: 0;
+        -fx-background-radius: 0;
+        -fx-background-color: transparent;
+        }
+
+    .header_pane {
         -fx-background-color: #1A1A1D;
+    }
+    .scroll_pane {
+        -fx-background-color:transparent;
+/*
+        -fx-background-color: linear-gradient(from 0px 0px to 600px 600px, #000C40, #F0F2F0 );
+*/
 
     }
     .flow_pane {
-
+        /*-fx-background-image: url("../img/cinemaBackground.jpg");
+        -fx-background-repeat: stretch;
+        -fx-background-position: center center;*/
+/*
+        -fx-background-color: linear-gradient(from 0px 0px to 600px 600px, #000C40, #F0F2F0 );
+*/
     }
+
+/* CREDIT FOR IMAGES:
+    https://www.freepik.com/free-vector/dark-pixels-background_800591.htm">Designed by Freepik
+
+*/
