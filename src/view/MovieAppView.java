@@ -27,7 +27,10 @@ public class MovieAppView {
 
     // THIS PANE ORGANIZES THE BIG PICTURE CONTAINERS FOR THE
     // APPLICATION GUI
-    BorderPane rootPane;;
+    VBox rootPane;
+
+    // WORKSPACE
+    BorderPane maPane;
 
     // THIS WILL GO AT THE TOP OF SCREEN
     VBox headerPane;
@@ -96,7 +99,7 @@ public class MovieAppView {
 
         // STYLE CLASSES
         movieListPane.getStyleClass().add(CSS_CLASS_FLOW_PANE);
-        scrollPane.getStyleClass().add(CSS_CLASS_SCROLL_PANE);
+        scrollPane.getStyleClass().add("edge-to-edge");
     }
 
     private void initTopBarPane() {
@@ -132,13 +135,14 @@ public class MovieAppView {
         windowPane.setAlignment(Pos.TOP_RIGHT);
         welcomeLabel.getStyleClass().add(CSS_CLASS_WELCOME_LABEL);
         filterBox.getStyleClass().add(CSS_CLASS_FILTER_BOX);
-        closeButton.getStyleClass().addAll(CSS_CLASS_CLOSE_BUTTON);
-        headerPane.getStyleClass().addAll(CSS_CLASS_HEADER_PANE);
-        minimizeButton.getStyleClass().addAll(CSS_CLASS_MINIMIZE_BUTTON);
+        closeButton.getStyleClass().add(CSS_CLASS_CLOSE_BUTTON);
+        headerPane.getStyleClass().add(CSS_CLASS_HEADER_PANE);
+        minimizeButton.getStyleClass().add(CSS_CLASS_MINIMIZE_BUTTON);
+        windowPane.getStyleClass().add(CSS_CLASS_WINDOW_PANE);
 
         filterBox.getChildren().addAll(filterLabel, allCheckBox, gRatingCheckBox, pgRatingCheckBox, pg13RatingCheckBox,
                                        rRatingCheckBox, nc17RatingCheckBox);
-        headerPane.getChildren().addAll(windowPane, welcomeLabel, filterBox);
+        headerPane.getChildren().addAll(welcomeLabel, filterBox);
 
     }
 
@@ -154,8 +158,6 @@ public class MovieAppView {
     }
 
     private void reloadMovieListPane() {
-        //movieListPane.getChildren().clear();
-
         for (Movie movie : movieList.getMovies()) {
             MovieView movieEditor = new MovieView(movie, movieList);
             movieListPane.getChildren().add(movieEditor);
@@ -182,14 +184,17 @@ public class MovieAppView {
     private void initWindow(String windowTitle) {
         window.setTitle(windowTitle);
 
-        rootPane = new BorderPane();
-        rootPane.setTop(headerPane);
-        rootPane.setCenter(movieListPane);
-        scrollPane.setContent(rootPane);
-        //rootPane.setBackground(background);
+        maPane = new BorderPane();
+        maPane.setTop(headerPane);
+        maPane.setCenter(movieListPane);
+
+        scrollPane.setContent(maPane);
         movieListPane.setBackground(background);
 
-        primaryScene = new Scene(scrollPane, 955, 600);
+        rootPane = new VBox();
+        rootPane.getChildren().addAll(windowPane, scrollPane);
+
+        primaryScene = new Scene(rootPane, 955, 600);
         primaryScene.getStylesheets().add("css/movieStyle.css");
 
         window.setScene(primaryScene);
