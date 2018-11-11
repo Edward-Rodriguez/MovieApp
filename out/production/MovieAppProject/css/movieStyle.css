@@ -28,7 +28,7 @@
     }
 
     .movie_poster_image {
-        -fx-effect: dropshadow(three-pass-box, derive(black, -20%), 10, 0, 4, 4);
+        -fx-effect: dropshadow(three-pass-box, derive(blueviolet, -80%), 10, 0, 4, 4);
 
     }
     .filter_box {
@@ -46,7 +46,10 @@
         }
 
     .header_pane {
+/*
         -fx-background-color: #1A1A1D;
+*/
+        -fx-background-color: #000000;
     }
     .scroll_pane {
         -fx-background-color:transparent;
