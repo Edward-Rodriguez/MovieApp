@@ -189,7 +189,7 @@ public class MovieAppView {
             //	Stage stage=new Stage();
             	//stage.setScene(movieInfoScene); 
         	  //  stage.sizeToScene(); 
-        	 //   stage.show(); 
+        	 //   stage.show(); //
         	   
 
                });
