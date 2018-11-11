@@ -60,7 +60,7 @@ public class MovieDescription extends HBox {
 
         posterImage = new Image(movie.getUrlOfImage());
         
-        
+        //
       // cinema = new String(movie.getListOfCinemas());
         
        
