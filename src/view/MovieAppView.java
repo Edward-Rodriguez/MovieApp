@@ -69,10 +69,12 @@ public class MovieAppView {
     BackgroundImage backgroundImage;
     Background background;
 
-    // WINDOW BUTTONS
+    // WINDOW BUTTONS AND COMPONENTS
     Button minimizeButton;
     Button closeButton;
     HBox windowPane;
+    double xOffset;
+    double yOffset;
 
     DatabaseManager db;
 
@@ -80,6 +82,9 @@ public class MovieAppView {
         this.db = db;
         movieList = new MovieTableModel();
         movieList = db.getMovieTableModel();
+
+        xOffset = 0.0;
+        yOffset = 0.0;
     }
 
     private void initMovieListPane(){
@@ -178,12 +183,20 @@ public class MovieAppView {
     }
 
     private void initEventHandlers() {
+        // WINDOW BUTTONS
         minimizeButton.setOnMouseClicked(e -> {
             window.setIconified(true);
         });
-
         closeButton.setOnAction(e -> {
             Platform.exit();
+        });
+        windowPane.setOnMousePressed(e -> {
+                xOffset = e.getSceneX();
+                yOffset = e.getSceneY();
+        });
+        windowPane.setOnMouseDragged(e -> {
+                window.setX(e.getScreenX() - xOffset);
+                window.setY(e.getScreenY() - yOffset);
         });
 
         allCheckBox.setOnAction(e -> {
@@ -220,7 +233,7 @@ public class MovieAppView {
 
         window.setScene(primaryScene);
         window.setResizable(false);
-        primaryScene.setFill(Color.TRANSPARENT);
+        //primaryScene.setFill(Color.TRANSPARENT);
         window.initStyle(StageStyle.TRANSPARENT);
         window.show();
     }
