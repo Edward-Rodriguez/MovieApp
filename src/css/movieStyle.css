@@ -28,11 +28,12 @@
     }
 
     .movie_poster_image {
-        -fx-effect: dropshadow(three-pass-box, derive(black, -20%), 10, 0, 4, 4);
+        -fx-effect: dropshadow(three-pass-box, derive(blueviolet, -80%), 10, 0, 4, 4);
 
     }
     .filter_box {
-
+        -fx-spacing: 15px;
+        -fx-alignment: TOP_RIGHT;
     }
     .close_button {
         -fx-border-width: 0;
@@ -46,7 +47,10 @@
         }
 
     .header_pane {
-        -fx-background-color: #1A1A1D;
+        -fx-spacing: 15px;
+        -fx-alignment: CENTER;
+        /*-fx-background-color: #1A1A1D;*/
+        -fx-background-color: #000000;
     }
     .scroll_pane {
         -fx-background-color:transparent;
@@ -55,8 +59,9 @@
 */
     }
     .window_pane {
-        -fx-background-color: #1A1A1D;
-
+        /*-fx-background-color: #1A1A1D;*/
+        -fx-background-color: #000000;
+        -fx-alignment: TOP_RIGHT;
     }
     .flow_pane {
         /*-fx-background-image: url("../img/cinemaBackground.jpg");

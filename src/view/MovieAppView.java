@@ -93,7 +93,7 @@ public class MovieAppView {
         scrollPane = new ScrollPane();
 
         // SETUP BACKGROUND IMAGE
-        image = new Image("img/dark.jpeg");
+        image = new Image("img/blur-blurred-dark-1526.jpg");
         imageWidth = movieListPane.getWidth();
         imageHeight = movieListPane.getHeight();
         backgroundSize = new BackgroundSize(imageWidth, imageHeight, true, true, true, true);
@@ -108,7 +108,9 @@ public class MovieAppView {
 
     private void initTopBarPane() {
         headerPane = new VBox();
-        welcomeLabel = new Label("Welcome to MovieApp");
+        //welcomeLabel = new Label("Welcome to MovieApp");
+        Image logo = new Image("img/logo2.png");
+        ImageView logoView = new ImageView(logo);
 
         // WINDOW BUTTONS
         Image image = new Image("img/icons8-delete-50.png", 25, 25, false, false);
@@ -132,12 +134,8 @@ public class MovieAppView {
         gRatingCheckBox = new CheckBox("G");
 
         // SETUP SPACING AND STYLE CLASSES
-        filterBox.setAlignment(Pos.TOP_LEFT);
-        filterBox.setSpacing(15);
-        headerPane.setAlignment(Pos.CENTER);
-        headerPane.setSpacing(15);
         windowPane.setAlignment(Pos.TOP_RIGHT);
-        welcomeLabel.getStyleClass().add(CSS_CLASS_WELCOME_LABEL);
+        //welcomeLabel.getStyleClass().add(CSS_CLASS_WELCOME_LABEL);
         filterBox.getStyleClass().add(CSS_CLASS_FILTER_BOX);
         closeButton.getStyleClass().add(CSS_CLASS_CLOSE_BUTTON);
         headerPane.getStyleClass().add(CSS_CLASS_HEADER_PANE);
@@ -146,7 +144,7 @@ public class MovieAppView {
 
         filterBox.getChildren().addAll(filterLabel, allCheckBox, gRatingCheckBox, pgRatingCheckBox, pg13RatingCheckBox,
                                        rRatingCheckBox, nc17RatingCheckBox);
-        headerPane.getChildren().addAll(welcomeLabel, filterBox);
+        headerPane.getChildren().addAll(logoView, filterBox);
 
     }
 
@@ -204,6 +202,14 @@ public class MovieAppView {
         closeButton.setOnAction(e -> {
             Platform.exit();
         });
+
+        allCheckBox.setOnAction(e -> {
+            gRatingCheckBox.setSelected(true);
+            pg13RatingCheckBox.setSelected(true);
+            pgRatingCheckBox.setSelected(true);
+            rRatingCheckBox.setSelected(true);
+            nc17RatingCheckBox.setSelected(true);
+        });
     }
 
     private void initWindow(String windowTitle) {
@@ -219,13 +225,13 @@ public class MovieAppView {
         rootPane = new VBox();
         rootPane.getChildren().addAll(windowPane, scrollPane);
 
-        primaryScene = new Scene(rootPane, 955, 600);
+        primaryScene = new Scene(rootPane, 965, 600);
         primaryScene.getStylesheets().add("css/movieStyle.css");
 
         window.setScene(primaryScene);
         window.setResizable(false);
-        //primaryScene.setFill(Color.TRANSPARENT);
-        //window.initStyle(StageStyle.TRANSPARENT);
+        primaryScene.setFill(Color.TRANSPARENT);
+        window.initStyle(StageStyle.TRANSPARENT);
         window.show();
 
     }
