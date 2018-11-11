@@ -62,7 +62,7 @@ public class MovieDescription extends HBox {
         
         
       // cinema = new String(movie.getListOfCinemas());
-        
+        //
        
 
 
