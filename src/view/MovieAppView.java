@@ -158,6 +158,7 @@ public class MovieAppView {
     public void reloadMovieListPane() {
         for (Movie movie : movieList.getMovies()) {
             MovieView movieEditor = new MovieView(movie, movieList);
+            MovieDescription movieEditor1 = new MovieDescription(movie, movieList);
             movieListPane.getChildren().add(movieEditor);
 
             movieEditor.getImageView().setOnMouseEntered(e ->  {
@@ -166,7 +167,19 @@ public class MovieAppView {
             movieEditor.getImageView().setOnMouseExited(e -> {
                 primaryScene.setCursor(Cursor.DEFAULT);
             });
-        }
+            movieEditor.getImageView().setOnMouseClicked(e->{
+            	maPane.getChildren().clear();
+            	movieListPane = new FlowPane();
+            	movieListPane.setPrefWrapLength(945);
+            	movieListPane.getChildren().add(movieEditor1);
+            	maPane.setCenter(movieListPane);
+                primaryScene = new Scene(maPane, 955, 600);
+                window.setScene(primaryScene);
+                window.show();
+             
+
+               });
+        }   
     }
 
     private void initEventHandlers() {

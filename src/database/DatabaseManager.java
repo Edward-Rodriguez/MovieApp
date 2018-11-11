@@ -3,6 +3,9 @@ package database;
 import model.MovieTableModel;
 
 import java.util.Date;
+
+import model.MovieTableModel;
+
 import java.sql.*;
 
 public class DatabaseManager {
@@ -141,6 +144,39 @@ public class DatabaseManager {
             System.err.println(e);
         }
     }
+    
+    /*public void retrieveCinemaList(String tableName, MovieTableModel model) throws Exception{
+        try {
+            model.reset();
+            Statement stmt = conn.createStatement();
+            
+            String user = "Recipient";
+
+            String sql = "SELECT `Location` ` " +
+
+       //             "FROM " + tableName + " WHERE " + user + " = '" + currentUser + "';";
+
+            ResultSet rs = stmt.executeQuery(sql);
+
+            System.out.println("So far so good");
+            while(rs.next()){
+                movieTableModel.addMovie(
+                        rs.getInt("ID"),
+                        rs.getString("Title"),
+                        rs.getString("Description"),
+                        rs.getString("Rating"),
+                        rs.getString("ReleaseType"),
+                        rs.getString("Location"),
+                        rs.getString("urlImage")
+                );
+            }
+            rs.close();
+        }
+        catch (Exception e){
+            System.err.println(e);
+        }
+    }
+*/
 
     //retrieve data from DataBase method
 //    public void retrieveDraftMessages() throws Exception{
