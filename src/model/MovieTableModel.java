@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 public class MovieTableModel {
 
     ObservableList<Movie> movies;
+
     private Movie selectedMovie;
 
     public MovieTableModel() {

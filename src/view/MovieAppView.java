@@ -155,7 +155,7 @@ public class MovieAppView {
 
     }
 
-    private void reloadMovieListPane() {
+    public void reloadMovieListPane() {
         for (Movie movie : movieList.getMovies()) {
             MovieView movieEditor = new MovieView(movie, movieList);
             movieListPane.getChildren().add(movieEditor);
@@ -187,6 +187,13 @@ public class MovieAppView {
         });
     }
 
+    public boolean allCheckBoxIsSelected() {
+        return allCheckBox.isSelected() ? true : false;
+    }
+
+    public MovieTableModel getMovieList() {
+        return movieList;
+    }
     private void initWindow(String windowTitle) {
         window.setTitle(windowTitle);
 
