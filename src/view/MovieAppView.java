@@ -2,7 +2,6 @@ package view;
 
 import database.DatabaseManager;
 import javafx.application.Platform;
-import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,14 +12,19 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Movie;
 import model.MovieTableModel;
 
 import static model.StartupConstants.*;
-
+/**
+ * This class provides the User Interface for this application,
+ * providing controls and the entry points for creating, loading,
+ * viewing movie posters.
+ *
+ * @author Edward Rodriguez, Raymond Calapatia, Sukharam Gole, Fasih Uddin
+ */
 public class MovieAppView {
     // LIST OF MOVIES FROM DB
     MovieTableModel movieList;
@@ -34,7 +38,6 @@ public class MovieAppView {
 
     // THIS WILL GO AT THE TOP OF SCREEN
     VBox headerPane;
-    Label welcomeLabel;
     Label nowPlayingLabel;
 
     // FILTER PANE AND COMPONENTS
@@ -71,21 +74,18 @@ public class MovieAppView {
     Button closeButton;
     HBox windowPane;
 
-
     DatabaseManager db;
 
     public MovieAppView(DatabaseManager db) {
         this.db = db;
         movieList = new MovieTableModel();
         movieList = db.getMovieTableModel();
-
     }
 
     private void initMovieListPane(){
         movieListPane = new FlowPane();
         movieListPane.setPrefWrapLength(945); // preferred width = 300
         movieListPane.setPrefHeight(600);
-
         scrollPane = new ScrollPane();
 
         // SETUP BACKGROUND IMAGE
@@ -104,11 +104,10 @@ public class MovieAppView {
 
     private void initTopBarPane() {
         headerPane = new VBox();
-        //welcomeLabel = new Label("Welcome to MovieApp");
         Image logo = new Image("img/logo2.png");
         ImageView logoView = new ImageView(logo);
 
-        // WINDOW BUTTONS
+        // SETUP CUSTOM MIN/CLOSE WINDOW BUTTONS
         Image image = new Image("img/icons8-delete-50.png", 25, 25, false, false);
         closeButton = new Button();
         closeButton.setGraphic(new ImageView(image));
@@ -130,8 +129,6 @@ public class MovieAppView {
         gRatingCheckBox = new CheckBox("G");
 
         // SETUP SPACING AND STYLE CLASSES
-        windowPane.setAlignment(Pos.TOP_RIGHT);
-        //welcomeLabel.getStyleClass().add(CSS_CLASS_WELCOME_LABEL);
         filterBox.getStyleClass().add(CSS_CLASS_FILTER_BOX);
         closeButton.getStyleClass().add(CSS_CLASS_CLOSE_BUTTON);
         headerPane.getStyleClass().add(CSS_CLASS_HEADER_PANE);
@@ -176,8 +173,6 @@ public class MovieAppView {
                 primaryScene = new Scene(maPane, 955, 600);
                 window.setScene(primaryScene);
                 window.show();
-             
-
                });
         }   
     }
@@ -228,7 +223,5 @@ public class MovieAppView {
         primaryScene.setFill(Color.TRANSPARENT);
         window.initStyle(StageStyle.TRANSPARENT);
         window.show();
-
     }
-
 }
