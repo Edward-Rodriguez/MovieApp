@@ -130,10 +130,6 @@ public class MovieAppView {
         gRatingCheckBox = new CheckBox("G");
 
         // SETUP SPACING AND STYLE CLASSES
-        filterBox.setAlignment(Pos.TOP_LEFT);
-        filterBox.setSpacing(15);
-        headerPane.setAlignment(Pos.CENTER);
-        headerPane.setSpacing(15);
         windowPane.setAlignment(Pos.TOP_RIGHT);
         //welcomeLabel.getStyleClass().add(CSS_CLASS_WELCOME_LABEL);
         filterBox.getStyleClass().add(CSS_CLASS_FILTER_BOX);
@@ -180,6 +176,14 @@ public class MovieAppView {
 
         closeButton.setOnAction(e -> {
             Platform.exit();
+        });
+
+        allCheckBox.setOnAction(e -> {
+            gRatingCheckBox.setSelected(true);
+            pg13RatingCheckBox.setSelected(true);
+            pgRatingCheckBox.setSelected(true);
+            rRatingCheckBox.setSelected(true);
+            nc17RatingCheckBox.setSelected(true);
         });
     }
 
