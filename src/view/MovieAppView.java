@@ -31,6 +31,7 @@ public class MovieAppView {
 
     // WORKSPACE
     BorderPane maPane;
+    BorderPane maPane2;
 
     // THIS WILL GO AT THE TOP OF SCREEN
     VBox headerPane;
@@ -49,6 +50,7 @@ public class MovieAppView {
 
     // POSTER LISTING SPACE (CENTER)
     FlowPane movieListPane;
+    FlowPane movieListPane2;
 
     // THIS WILL ENCAPSULATE WORKSPACE TO ALLOW
     // SCROLLABILITY
@@ -56,7 +58,9 @@ public class MovieAppView {
 
     // MAIN APP UI WINDOW AND SCENE GRAPH
     Stage window;
+    Stage window2;
     Scene primaryScene;
+    Scene primaryScene2;
 
     // COMPONENTS FOR BACKGROUND IMAGE
     Image image;
@@ -160,6 +164,7 @@ public class MovieAppView {
     private void reloadMovieListPane() {
         for (Movie movie : movieList.getMovies()) {
             MovieView movieEditor = new MovieView(movie, movieList);
+            MovieDescription movieEditor1 = new MovieDescription(movie, movieList);
             movieListPane.getChildren().add(movieEditor);
 
             movieEditor.getImageView().setOnMouseEntered(e ->  {
@@ -168,7 +173,27 @@ public class MovieAppView {
             movieEditor.getImageView().setOnMouseExited(e -> {
                 primaryScene.setCursor(Cursor.DEFAULT);
             });
-        }
+            movieEditor.getImageView().setOnMouseClicked(e->{
+            	maPane.getChildren().clear();
+            	movieListPane = new FlowPane();
+            	movieListPane.setPrefWrapLength(945);
+            	movieListPane.getChildren().add(movieEditor1);
+            	scrollPane = new ScrollPane();
+                scrollPane.setContent(movieListPane);
+                maPane = new BorderPane();
+                maPane.setCenter(scrollPane);
+                primaryScene2 = new Scene(maPane, 955, 600);
+                window.setScene(primaryScene2);
+                window.show();
+              //  Scene movieInfoScene = new Scene(new Group(movieEditor1),955, 600);
+            //	Stage stage=new Stage();
+            	//stage.setScene(movieInfoScene); 
+        	  //  stage.sizeToScene(); 
+        	 //   stage.show(); 
+        	   
+
+               });
+        }   
     }
 
     private void initEventHandlers() {
