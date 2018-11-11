@@ -49,8 +49,7 @@
     .header_pane {
         -fx-spacing: 15px;
         -fx-alignment: CENTER;
-        -fx-background-color: #1A1A1D;
-*/
+        /*-fx-background-color: #1A1A1D;*/
         -fx-background-color: #000000;
     }
     .scroll_pane {
@@ -60,7 +59,8 @@
 */
     }
     .window_pane {
-        -fx-background-color: #1A1A1D;
+        /*-fx-background-color: #1A1A1D;*/
+        -fx-background-color: #000000;
         -fx-alignment: TOP_RIGHT;
     }
     .flow_pane {
