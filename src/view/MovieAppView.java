@@ -2,6 +2,7 @@ package view;
 
 import database.DatabaseManager;
 import javafx.application.Platform;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -34,11 +35,10 @@ public class MovieAppView {
     VBox rootPane;
 
     // WORKSPACE
-    BorderPane maPane;
+    VBox maPane;
 
     // THIS WILL GO AT THE TOP OF SCREEN
     VBox headerPane;
-    Label nowPlayingLabel;
 
     // FILTER PANE AND COMPONENTS
     HBox filterBox;
@@ -75,6 +75,11 @@ public class MovieAppView {
     HBox windowPane;
     double xOffset;
     double yOffset;
+
+    // PANE FOR FILTER AND NOW PLAYING LABEL
+    // WILL GO UNDER BANNER AND ABOVE POSTERS
+    VBox middlePane;
+    Label nowPlayingLabel;
 
     DatabaseManager db;
 
@@ -123,33 +128,44 @@ public class MovieAppView {
         windowPane = new HBox();
         windowPane.getChildren().addAll(minimizeButton, closeButton);
 
-        // FILTER LABEL AND CHECKBOXES
-        filterBox = new HBox();
-        filterLabel = new Label("Filter by Rating: ");
-        allCheckBox = new CheckBox("All");
-        pgRatingCheckBox = new CheckBox("PG");
-        pg13RatingCheckBox = new CheckBox("PG-13");;
-        rRatingCheckBox = new CheckBox("R");;
-        nc17RatingCheckBox = new CheckBox("NC-17");;
-        gRatingCheckBox = new CheckBox("G");
-
         // SETUP SPACING AND STYLE CLASSES
-        filterBox.getStyleClass().add(CSS_CLASS_FILTER_BOX);
         closeButton.getStyleClass().add(CSS_CLASS_CLOSE_BUTTON);
         headerPane.getStyleClass().add(CSS_CLASS_HEADER_PANE);
         minimizeButton.getStyleClass().add(CSS_CLASS_MINIMIZE_BUTTON);
         windowPane.getStyleClass().add(CSS_CLASS_WINDOW_PANE);
 
-        filterBox.getChildren().addAll(filterLabel, allCheckBox, gRatingCheckBox, pgRatingCheckBox, pg13RatingCheckBox,
-                                       rRatingCheckBox, nc17RatingCheckBox);
-        headerPane.getChildren().addAll(logoView, filterBox);
+        headerPane.getChildren().addAll(logoView);
+    }
 
+    private void initMiddlePane() {
+        middlePane = new VBox();
+        nowPlayingLabel = new Label("NOW PLAYING");
+
+        // FILTER LABEL AND CHECKBOXES
+        filterBox = new HBox();
+        filterLabel = new Label("Filter by Rating: ");
+        allCheckBox = new CheckBox("All");
+        pgRatingCheckBox = new CheckBox("PG");
+        pg13RatingCheckBox = new CheckBox("PG-13");
+        rRatingCheckBox = new CheckBox("R");;
+        nc17RatingCheckBox = new CheckBox("NC-17");
+        gRatingCheckBox = new CheckBox("G");
+
+        // SETUP SPACING AND STYLE CLASSES
+        filterBox.getStyleClass().add(CSS_CLASS_FILTER_BOX);
+        middlePane.getStyleClass().add(CSS_CLASS_MIDDLE_PANE);
+
+        middlePane.setAlignment(Pos.CENTER);
+        filterBox.getChildren().addAll(filterLabel, allCheckBox, gRatingCheckBox, pgRatingCheckBox, pg13RatingCheckBox,
+                rRatingCheckBox, nc17RatingCheckBox);
+        middlePane.getChildren().addAll(filterBox);
     }
 
     public void startUI(Stage primaryStage, String windowTitle){
 
         window = primaryStage;
         initTopBarPane();
+        initMiddlePane();
         initMovieListPane();
         initWindow(windowTitle);
         initEventHandlers();
@@ -174,8 +190,9 @@ public class MovieAppView {
             	movieListPane = new FlowPane();
             	movieListPane.setPrefWrapLength(945);
             	movieListPane.getChildren().add(movieEditor1);
-            	maPane.setCenter(movieListPane);
-                primaryScene = new Scene(maPane, 955, 600);
+//            	maPane.setCenter(movieListPane);
+            	maPane.getChildren().addAll(movieListPane);
+                primaryScene = new Scene(maPane, 960, 600);
                 window.setScene(primaryScene);
                 window.show();
                });
@@ -218,9 +235,11 @@ public class MovieAppView {
     private void initWindow(String windowTitle) {
         window.setTitle(windowTitle);
 
-        maPane = new BorderPane();
-        maPane.setTop(headerPane);
-        maPane.setCenter(movieListPane);
+        maPane = new VBox();
+        middlePane.setBackground(background);
+        maPane.getChildren().addAll(headerPane, middlePane, movieListPane);
+//        maPane.setTop(headerPane);
+//        maPane.setCenter(movieListPane);
 
         scrollPane.setContent(maPane);
         movieListPane.setBackground(background);
@@ -228,7 +247,7 @@ public class MovieAppView {
         rootPane = new VBox();
         rootPane.getChildren().addAll(windowPane, scrollPane);
 
-        primaryScene = new Scene(rootPane, 965, 600);
+        primaryScene = new Scene(rootPane, 972, 600);
         primaryScene.getStylesheets().add("css/movieStyle.css");
 
         window.setScene(primaryScene);

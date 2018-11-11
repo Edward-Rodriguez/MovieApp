@@ -8,10 +8,11 @@
 
     }
 
-    .welcome_label {
-        -fx-alignment: center;
-        -fx-font: normal bold 30px 'Arial';
+    .middle_pane {
+        -fx-alignment: TOP_RIGHT;
+        -fx-font: normal bold 14px 'Arial';
         -fx-text-fill: #950740;
+        -fx-padding:8;
     }
 
     .movie_title {
