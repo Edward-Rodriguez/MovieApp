@@ -1,7 +1,10 @@
 package view;
 
+import controller.MovieController;
 import database.DatabaseManager;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
@@ -82,11 +85,13 @@ public class MovieAppView {
     Label nowPlayingLabel;
 
     DatabaseManager db;
+    MovieController controller;
 
     public MovieAppView(DatabaseManager db) {
         this.db = db;
         movieList = new MovieTableModel();
         movieList = db.getMovieTableModel();
+        controller = new MovieController(this);
 
         xOffset = 0.0;
         yOffset = 0.0;
@@ -151,6 +156,14 @@ public class MovieAppView {
         nc17RatingCheckBox = new CheckBox("NC-17");
         gRatingCheckBox = new CheckBox("G");
 
+        // SET ALL CHECKBOXES TO DEFAULT VALUE OF TRUE
+        allCheckBox.setSelected(true);
+        gRatingCheckBox.setSelected(true);
+        pg13RatingCheckBox.setSelected(true);
+        pgRatingCheckBox.setSelected(true);
+        rRatingCheckBox.setSelected(true);
+        nc17RatingCheckBox.setSelected(true);
+
         // SETUP SPACING AND STYLE CLASSES
         filterBox.getStyleClass().add(CSS_CLASS_FILTER_BOX);
         middlePane.getStyleClass().add(CSS_CLASS_MIDDLE_PANE);
@@ -169,14 +182,16 @@ public class MovieAppView {
         initMovieListPane();
         initWindow(windowTitle);
         initEventHandlers();
-        reloadMovieListPane();
+        initCheckboxListeners();
+        reloadMovieListPane(movieList);
 
     }
 
-    public void reloadMovieListPane() {
+    public void reloadMovieListPane(MovieTableModel movieList) {
+        movieListPane.getChildren().clear();
         for (Movie movie : movieList.getMovies()) {
             MovieView movieEditor = new MovieView(movie, movieList);
-            MovieDescription movieEditor1 = new MovieDescription(movie, movieList);
+            //MovieDescription movieEditor1 = new MovieDescription(movie, movieList);
             movieListPane.getChildren().add(movieEditor);
 
             movieEditor.getImageView().setOnMouseEntered(e ->  {
@@ -185,17 +200,17 @@ public class MovieAppView {
             movieEditor.getImageView().setOnMouseExited(e -> {
                 primaryScene.setCursor(Cursor.DEFAULT);
             });
-            movieEditor.getImageView().setOnMouseClicked(e->{
-            	maPane.getChildren().clear();
-            	movieListPane = new FlowPane();
-            	movieListPane.setPrefWrapLength(945);
-            	movieListPane.getChildren().add(movieEditor1);
-//            	maPane.setCenter(movieListPane);
-            	maPane.getChildren().addAll(movieListPane);
-                primaryScene = new Scene(maPane, 960, 600);
-                window.setScene(primaryScene);
-                window.show();
-               });
+//            movieEditor.getImageView().setOnMouseClicked(e->{
+//            	maPane.getChildren().clear();
+//            	movieListPane = new FlowPane();
+//            	movieListPane.setPrefWrapLength(945);
+//            	movieListPane.getChildren().add(movieEditor1);
+////            	maPane.setCenter(movieListPane);
+//            	maPane.getChildren().addAll(movieListPane);
+//                primaryScene = new Scene(maPane, 960, 600);
+//                window.setScene(primaryScene);
+//                window.show();
+//               });
         }   
     }
 
@@ -215,16 +230,49 @@ public class MovieAppView {
                 window.setX(e.getScreenX() - xOffset);
                 window.setY(e.getScreenY() - yOffset);
         });
-
-        allCheckBox.setOnAction(e -> {
-            gRatingCheckBox.setSelected(true);
-            pg13RatingCheckBox.setSelected(true);
-            pgRatingCheckBox.setSelected(true);
-            rRatingCheckBox.setSelected(true);
-            nc17RatingCheckBox.setSelected(true);
-        });
     }
 
+    // ADD LISTENERS TO EACH CHECKBOX AND HANDLE EACH EVENT
+    private void initCheckboxListeners() {
+        allCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(newValue){
+                    gRatingCheckBox.setSelected(true);
+                    pg13RatingCheckBox.setSelected(true);
+                    pgRatingCheckBox.setSelected(true);
+                    rRatingCheckBox.setSelected(true);
+                    nc17RatingCheckBox.setSelected(true);
+                }else{
+                    // your checkbox has been unticked. do stuff...
+                    // clear the config file
+                }
+            }
+        });
+        gRatingCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(newValue){
+                    controller.processGCheckBox();
+                }else{
+                    // your checkbox has been unticked. do stuff...
+                    // clear the config file
+                }
+            }
+        });
+        pgRatingCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(newValue){
+                    controller.processPGCheckBox();
+                }else{
+                    reloadMovieListPane(movieList);
+                    //movieListPane.getChildren().clear();
+                }
+            }
+        });
+
+    }
     public boolean allCheckBoxIsSelected() {
         return allCheckBox.isSelected() ? true : false;
     }
