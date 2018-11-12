@@ -63,6 +63,8 @@ public class MovieAppView {
     // MAIN APP UI WINDOW AND SCENE GRAPH
     Stage window;
     Scene primaryScene;
+    Scene oldScene;
+    Scene newScene;
 
     // COMPONENTS FOR BACKGROUND IMAGE
     Image image;
@@ -191,7 +193,7 @@ public class MovieAppView {
         movieListPane.getChildren().clear();
         for (Movie movie : movieList.getMovies()) {
             MovieView movieEditor = new MovieView(movie, movieList);
-            //MovieDescription movieEditor1 = new MovieDescription(movie, movieList);
+            MovieDescription movieEditor1 = new MovieDescription(movie, movieList);
             movieListPane.getChildren().add(movieEditor);
 
             movieEditor.getImageView().setOnMouseEntered(e ->  {
@@ -200,18 +202,24 @@ public class MovieAppView {
             movieEditor.getImageView().setOnMouseExited(e -> {
                 primaryScene.setCursor(Cursor.DEFAULT);
             });
-//            movieEditor.getImageView().setOnMouseClicked(e->{
-//            	maPane.getChildren().clear();
-//            	movieListPane = new FlowPane();
-//            	movieListPane.setPrefWrapLength(945);
-//            	movieListPane.getChildren().add(movieEditor1);
-////            	maPane.setCenter(movieListPane);
-//            	maPane.getChildren().addAll(movieListPane);
-//                primaryScene = new Scene(maPane, 960, 600);
-//                window.setScene(primaryScene);
-//                window.show();
-//               });
-        }   
+            movieEditor.getImageView().setOnMouseClicked(e->{
+                oldScene = window.getScene();
+
+                VBox movieDescriptionPane = new VBox();
+                movieListPane = new FlowPane();
+                movieListPane.setPrefWrapLength(945);
+                movieListPane.getChildren().add(movieEditor1);
+//            	maPane.setCenter(movieListPane);
+                windowPane.getStyleClass().add(CSS_CLASS_WINDOW_PANE);
+                movieDescriptionPane.getChildren().addAll(windowPane, headerPane, movieListPane);
+
+                movieListPane.setBackground(background);
+                newScene = new Scene(movieDescriptionPane, 960, 600);
+                newScene.getStylesheets().add("css/movieStyle.css");
+                window.setScene(newScene);
+                window.show();
+            });
+        }
     }
 
     private void initEventHandlers() {
