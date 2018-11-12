@@ -8,10 +8,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -205,16 +202,33 @@ public class MovieAppView {
             movieEditor.getImageView().setOnMouseClicked(e->{
                 oldScene = window.getScene();
 
+                ScrollPane scroll = new ScrollPane();
+                scroll.getStyleClass().add("edge-to-edge");
+                Button backButton = new Button("Back");
+
+                Separator lineSeparator = new Separator();
+
+                VBox rootPane2 = new VBox();
                 VBox movieDescriptionPane = new VBox();
+
                 movieListPane = new FlowPane();
                 movieListPane.setPrefWrapLength(945);
                 movieListPane.getChildren().add(movieEditor1);
+
 //            	maPane.setCenter(movieListPane);
                 windowPane.getStyleClass().add(CSS_CLASS_WINDOW_PANE);
-                movieDescriptionPane.getChildren().addAll(windowPane, headerPane, movieListPane);
+                movieDescriptionPane.getChildren().addAll(headerPane, backButton, movieListPane);
 
                 movieListPane.setBackground(background);
-                newScene = new Scene(movieDescriptionPane, 960, 600);
+                scroll.setContent(movieDescriptionPane);
+
+                rootPane2.getChildren().addAll(windowPane, scroll);
+
+                backButton.setOnAction(event -> {
+                    window.setScene(primaryScene);
+                });
+
+                newScene = new Scene(rootPane2, 960, 600);
                 newScene.getStylesheets().add("css/movieStyle.css");
                 window.setScene(newScene);
                 window.show();

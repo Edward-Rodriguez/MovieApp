@@ -28,4 +28,5 @@ public class StartupConstants {
     public static String    CSS_CLASS_CLOSE_BUTTON= "close_button";
     public static String    CSS_CLASS_MINIMIZE_BUTTON= "minimize_button";
 
+    // CSS FOR DESCRIPTION SCREEN
 }

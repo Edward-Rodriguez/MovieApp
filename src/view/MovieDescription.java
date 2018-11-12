@@ -1,22 +1,14 @@
 package view;
 
 import javafx.collections.FXCollections;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Separator;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import model.Movie;
@@ -24,8 +16,11 @@ import model.MovieTableModel;
 import static model.StartupConstants.*;
 
 
-public class MovieDescription extends HBox {
-	
+public class MovieDescription extends VBox {
+
+    // PANE FOR POSTER, MOVIE DESC., SHOWTIMES
+    HBox movieInfoPane;
+
 	VBox  dT;
 	VBox vbox2;
     Movie movie;
@@ -45,10 +40,17 @@ public class MovieDescription extends HBox {
     //String cinema;
     
     Label releaseTypeLabel;
-    
+
+    // Movie summary
+    Label movieSummary;
+
     Text Description;
-    
-    
+
+    // THIS WILL GO AT THE BOTTOM
+    // CINEMA LIST PANE
+    Label nowPlayingAt;
+
+
 
     public MovieDescription(Movie movie, MovieTableModel model) {
     	VBox vbox= new VBox();
@@ -62,17 +64,11 @@ public class MovieDescription extends HBox {
         
         //
       // cinema = new String(movie.getListOfCinemas());
-        
-       
-
-
         titleLabel.getStyleClass().add(CSS_CLASS_POSTER_TITLE);
         ratingLabel.getStyleClass().add(CSS_CLASS_POSTER_RATING);
         Description = new Text(movie.getDescription());
         releaseTypeLabel = new Label(movie.getReleaseType());
-        
-      
-        
+
         imageView = new ImageView();
         imageView.setImage(posterImage);
         imageView.setFitHeight(195);
@@ -85,51 +81,42 @@ public class MovieDescription extends HBox {
 
         vbox.getChildren().addAll(titleLabel, imageView, ratingLabel,Description,releaseTypeLabel);
         dT=new VBox();
-       
-     
-        Separator separator1 = new Separator();
-        final Text text = new Text ("Showtimes");
-        
-       
-       
-        Button button1 = new Button("7:00");
-        Button button2 = new Button("9:00");
-        Button button3 = new Button("10:30");
-        Button button4 = new Button("12:30");
-        Button button5 = new Button("1:30");
-        Button button6 = new Button("4:20");
-        button1.getPrefWidth();
-        button2.getPrefWidth();
-        button3.getPrefWidth();
-        button4.getPrefWidth();
-        button5.getPrefWidth();
-        button6.getPrefWidth();
-        
 
-        GridPane gridPane = new GridPane();
-        gridPane.setHgap(10); //horizontal gap in pixels => that's what you are asking for
-        gridPane.setVgap(10); //vertical gap in pixels
-        gridPane.setPadding(new Insets(10, 10, 10, 10));
-        gridPane.add(button1, 0, 0, 1, 1);
-        gridPane.add(button2, 1, 0, 1, 1);
-        gridPane.add(button3, 2, 0, 1, 1);
-        gridPane.add(button4, 0, 1, 1, 1);
-        gridPane.add(button5, 1, 1, 1, 1);
-        gridPane.add(button6, 2, 1, 1, 1);
-        
-        gridPane.setAlignment(Pos.CENTER);
-        
-        
-     
-        
-        
-        dT.setAlignment(Pos.CENTER);
-        dT.getChildren().addAll(separator1,text,gridPane);
-        
-    
-        
-       
-        this.getChildren().addAll(vbox,dT);
+        Region space = new Region();
+        VBox.setVgrow(space, Priority.ALWAYS);
+        space.setMaxHeight(40);
+
+        Separator lineSeparator = new Separator();
+        lineSeparator.setHalignment(HPos.CENTER);
+        lineSeparator.setPrefWidth(900);
+        lineSeparator.setPadding(new Insets(0,0,0, 40));
+        nowPlayingAt = new Label("NOW PLAYING AT:");
+        nowPlayingAt.setStyle("-fx-alignment: center;\n" +
+                "        -fx-font: normal bold 20px 'Arial';\n" +
+                "        -fx-text-fill: #000000;\n" +
+                "        -fx-padding:4;");
+
+        movieSummary = new Label();
+        movieSummary.setMaxWidth(400);
+        movieSummary.setWrapText(true);
+        movieSummary.setText(movie.getMovieSummary());
+        movieSummary.setStyle("-fx-alignment: center;\n" +
+                "        -fx-font: normal bold 13px 'Arial';\n" +
+                "        -fx-text-fill: #000000;\n" +
+                "        -fx-padding:4;");
+
+        dT.setAlignment(Pos.TOP_CENTER);
+        dT.getChildren().addAll(space, movieSummary);
+
+        movieInfoPane = new HBox();
+        movieInfoPane.getChildren().addAll(vbox, dT);
+
+        CinemaView cinemaView = new CinemaView(movie);
+//        VBox vbox2 = new VBox();
+//        vbox2.getChildren().addAll()
+
+
+        this.getChildren().addAll(movieInfoPane, nowPlayingAt, lineSeparator, cinemaView);
         this.setAlignment(Pos.CENTER);
     }
     

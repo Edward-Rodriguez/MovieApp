@@ -1,5 +1,8 @@
 package database;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import model.Movie;
 import model.MovieTableModel;
 
 import java.util.Date;
@@ -57,15 +60,16 @@ public class DatabaseManager {
                                  String rating,
                                  String releaseType,
                                  String location,
-                                 String imageURL ) throws Exception{
+                                 String imageURL,
+                                 String summary) throws Exception{
 
         description = description.replaceAll("'", "''");
         try{
             PreparedStatement stmt = this.conn.prepareStatement(
                     "INSERT INTO `CS370email`.`" + "MovieList" + "` (`ID`, `Title`, `Description`, `Rating`, " +
-                            "`ReleaseType`, `Location`, `urlImage`) VALUES ('" + id + "','" + movieTitle + "','" +
+                            "`ReleaseType`, `Location`, `urlImage`, `Summary`) VALUES ('" + id + "','" + movieTitle + "','" +
                             description + "','" + rating + "','" + releaseType + "','" + location + "','" +
-                            imageURL + "');");
+                            imageURL + "','" + summary + "');");
             //POST NEW ENTRY
             stmt.executeUpdate();
         }catch (Exception e){
@@ -123,7 +127,7 @@ public class DatabaseManager {
             Statement stmt = conn.createStatement();
 
             String sql = "SELECT `ID`, `Title`, " +
-                    "`Description`, `Rating`, `ReleaseType`, `Location`, `urlImage` FROM MovieList";
+                    "`Description`, `Rating`, `ReleaseType`, `Location`, `urlImage`, `Summary` FROM MovieList";
             ResultSet rs = stmt.executeQuery(sql);
 
             //System.out.println("So far so good");
@@ -135,7 +139,8 @@ public class DatabaseManager {
                         rs.getString("Rating"),
                         rs.getString("ReleaseType"),
                         rs.getString("Location"),
-                        rs.getString("urlImage")
+                        rs.getString("urlImage"),
+                        rs.getString("Summary")
                 );
             }
             rs.close();
@@ -145,38 +150,27 @@ public class DatabaseManager {
         }
     }
     
-    /*public void retrieveCinemaList(String tableName, MovieTableModel model) throws Exception{
+    public void retrieveCinemaList(String movieTitle, Movie movie) throws Exception{
         try {
-            model.reset();
+            ObservableList<String> listOfCinemas = FXCollections.observableArrayList();
+
             Statement stmt = conn.createStatement();
-            
-            String user = "Recipient";
-
-            String sql = "SELECT `Location` ` " +
-
-       //             "FROM " + tableName + " WHERE " + user + " = '" + currentUser + "';";
-
+            String sql = "SELECT `Location` FROM MovieList WHERE `Title` = '" + movieTitle + "';";
             ResultSet rs = stmt.executeQuery(sql);
 
-            System.out.println("So far so good");
             while(rs.next()){
-                movieTableModel.addMovie(
-                        rs.getInt("ID"),
-                        rs.getString("Title"),
-                        rs.getString("Description"),
-                        rs.getString("Rating"),
-                        rs.getString("ReleaseType"),
-                        rs.getString("Location"),
-                        rs.getString("urlImage")
+                listOfCinemas.add(
+                        rs.getString("Location")
                 );
             }
             rs.close();
+            movie.setListOfCinemas(listOfCinemas);
         }
         catch (Exception e){
             System.err.println(e);
         }
     }
-*/
+
 
     //retrieve data from DataBase method
 //    public void retrieveDraftMessages() throws Exception{

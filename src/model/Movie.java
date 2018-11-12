@@ -1,4 +1,5 @@
 package model;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,11 +16,20 @@ public class Movie {
     private int id;
     private String releaseType;
     private String urlOfImage;
+    private String movieSummary;
+
+    public String getCinemaPlaying() {
+        return cinemaPlaying;
+    }
+
+    public void setCinemaPlaying(String cinemaPlaying) {
+        this.cinemaPlaying = cinemaPlaying;
+    }
+
     private String cinemaPlaying;
     private ObservableList<String> listOfCinemas;
 
-
-    public Movie(int ID, String movieTitle, String description, String rating, String releaseType, String cinemaPlaying, String urlOfImage) {
+    public Movie(int ID, String movieTitle, String description, String rating, String releaseType, String cinemaPlaying, String urlOfImage, String movieSummary) {
         this.id = ID;
         this.movieTitle = movieTitle;
         this.description = description;
@@ -27,6 +37,8 @@ public class Movie {
         this.releaseType = releaseType;
         this.cinemaPlaying = cinemaPlaying;
         this.urlOfImage = urlOfImage;
+        this.movieSummary = movieSummary;
+        listOfCinemas = FXCollections.observableArrayList();
     }
 
     public String getRating() {
@@ -76,6 +88,14 @@ public class Movie {
 
     public void setRating(String rating) {
         this.rating = rating;
+    }
+
+    public String getMovieSummary() {
+        return movieSummary;
+    }
+
+    public void setMovieSummary(String movieSummary) {
+        this.movieSummary = movieSummary;
     }
 
 }
