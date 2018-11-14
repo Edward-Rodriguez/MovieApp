@@ -12,7 +12,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Movie;
@@ -91,8 +90,13 @@ public class MovieAppView {
     // WILL CONTAIN ADMIN BUTTON AND OTHER INFO
     HBox footerPane;
 
+    // ADMIN PANE
+    AdminLoginScreen adminLoginScreen;
+    private String adminPassword = "admin";
+
     DatabaseManager db;
     MovieController controller;
+    private static final String cssPath = "css/movieStyle.css";
 
     public MovieAppView(DatabaseManager db) {
         this.db = db;
@@ -222,7 +226,6 @@ public class MovieAppView {
                 primaryScene.setCursor(Cursor.DEFAULT);
             });
             movieEditor.getImageView().setOnMouseClicked(e->{
-                oldScene = window.getScene();
 
                 ScrollPane scroll = new ScrollPane();
                 scroll.getStyleClass().add("edge-to-edge");
@@ -247,7 +250,7 @@ public class MovieAppView {
                 rootPane2.getChildren().addAll(windowPane, scroll);
 
                 backButton.setOnAction(event -> {
-                    window.setScene(primaryScene);
+                    window.setScene(oldScene);
                 });
 
                 newScene = new Scene(rootPane2, 960, 600);
@@ -279,6 +282,16 @@ public class MovieAppView {
         });
         adminLoginButton.setOnMouseExited(e -> {
             primaryScene.setCursor(Cursor.DEFAULT);
+        });
+        adminLoginButton.setOnAction(e -> {
+            adminLoginScreen = new AdminLoginScreen();
+            Scene scene = new Scene(adminLoginScreen, 972, 600);
+            scene.getStylesheets().add(cssPath);
+            window.setScene(scene);
+
+            adminLoginScreen.getCancelButton().setOnAction(event -> {
+                window.setScene(oldScene);
+            });
         });
     }
 
@@ -346,7 +359,8 @@ public class MovieAppView {
         rootPane.getChildren().addAll(windowPane, scrollPane);
 
         primaryScene = new Scene(rootPane, 972, 600);
-        primaryScene.getStylesheets().add("css/movieStyle.css");
+        primaryScene.getStylesheets().add(cssPath);
+        oldScene = primaryScene;
 
         window.setScene(primaryScene);
         window.setResizable(false);

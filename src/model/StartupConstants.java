@@ -31,4 +31,15 @@ public class StartupConstants {
     public static String    CSS_CLASS_ADMIN_BUTTON= "admin_button";
 
     // CSS FOR DESCRIPTION SCREEN
+
+    // CSS FOR ADMIN SCREEN
+    public static String    CSS_CLASS_ADMIN_PASSWORD_LABEL= "admin_password_label";
+    public static String    CSS_CLASS_ADMIN_LOGIN_LABEL= "admin_login_label";
+    public static String    CSS_CLASS_WARNING_LABEL= "admin_warning_label";
+    public static String    CSS_CLASS_ADMIN_PASSWORD_FIELD= "admin_password_field";
+    public static String    CSS_CLASS_ADMIN_SUBMIT_BUTTON= "admin_submit_button";
+    public static String    CSS_CLASS_ADMIN_CANCEL_BUTTON= "admin_cancel_button";
+    public static String    CSS_CLASS_ADMIN_LOGIN_PANE= "admin_login_pane";
+
+
 }
