@@ -83,6 +83,14 @@ public class MovieAppView {
     VBox middlePane;
     Label nowPlayingLabel;
 
+    // BUTTON FOR ADMIN LOGIN
+    // WILL REDIRECT TO ADMIN PAGE
+    Button adminLoginButton;
+
+    // PANE FOR FOOTER
+    // WILL CONTAIN ADMIN BUTTON AND OTHER INFO
+    HBox footerPane;
+
     DatabaseManager db;
     MovieController controller;
 
@@ -173,15 +181,29 @@ public class MovieAppView {
         middlePane.getChildren().addAll(filterBox);
     }
 
+    private void initFooterPane() {
+        footerPane = new HBox();
+        footerPane.setMinHeight(40);
+
+        adminLoginButton = new Button("Admin");
+        Image image = new Image("img/icons8-admin.png", 25, 25, false, false);
+        adminLoginButton.setGraphic(new ImageView(image));
+        adminLoginButton.getStyleClass().add(CSS_CLASS_ADMIN_BUTTON);
+        footerPane.getStyleClass().add(CSS_CLASS_FOOTER_PANE);
+        footerPane.getChildren().add(adminLoginButton);
+        footerPane.setAlignment(Pos.BASELINE_RIGHT);
+    }
+
     public void startUI(Stage primaryStage, String windowTitle){
 
         window = primaryStage;
         initTopBarPane();
         initMiddlePane();
         initMovieListPane();
-        initWindow(windowTitle);
+        initFooterPane();
         initEventHandlers();
         initCheckboxListeners();
+        initWindow(windowTitle);
         reloadMovieListPane(movieList);
 
     }
@@ -252,6 +274,12 @@ public class MovieAppView {
                 window.setX(e.getScreenX() - xOffset);
                 window.setY(e.getScreenY() - yOffset);
         });
+        adminLoginButton.setOnMouseEntered(e ->  {
+            primaryScene.setCursor(Cursor.HAND);
+        });
+        adminLoginButton.setOnMouseExited(e -> {
+            primaryScene.setCursor(Cursor.DEFAULT);
+        });
     }
 
     // ADD LISTENERS TO EACH CHECKBOX AND HANDLE EACH EVENT
@@ -307,7 +335,7 @@ public class MovieAppView {
 
         maPane = new VBox();
         middlePane.setBackground(background);
-        maPane.getChildren().addAll(headerPane, middlePane, movieListPane);
+        maPane.getChildren().addAll(headerPane, middlePane, movieListPane, footerPane);
 //        maPane.setTop(headerPane);
 //        maPane.setCenter(movieListPane);
 

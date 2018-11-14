@@ -17,6 +17,7 @@ public class StartupConstants {
     // CSS - FOR THE STARTUP SCREEN
     public static String    CSS_CLASS_NOW_PLAYING_LABEL = "now_playing_label";
     public static String    CSS_CLASS_MIDDLE_PANE = "middle_pane";
+    public static String    CSS_CLASS_FOOTER_PANE = "footer_pane";
     public static String    CSS_CLASS_POSTER_TITLE = "movie_title";
     public static String    CSS_CLASS_POSTER_RATING = "movie_rating";
     public static String    CSS_CLASS_POSTER_IMAGE = "movie_poster_image";
@@ -27,6 +28,7 @@ public class StartupConstants {
     public static String    CSS_CLASS_WINDOW_PANE= "window_pane";
     public static String    CSS_CLASS_CLOSE_BUTTON= "close_button";
     public static String    CSS_CLASS_MINIMIZE_BUTTON= "minimize_button";
+    public static String    CSS_CLASS_ADMIN_BUTTON= "admin_button";
 
     // CSS FOR DESCRIPTION SCREEN
 }
