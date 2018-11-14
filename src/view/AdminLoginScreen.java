@@ -1,8 +1,12 @@
 package view;
 
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -19,6 +23,12 @@ public class AdminLoginScreen extends VBox {
     TextField passwordField;
     Button submitButton;
     Button cancelButton;
+
+    // WINDOW MIN/CLOSE BUTTONS AND PANE
+    VBox headerPane;
+    HBox windowPane;
+    Button minimizeButton;
+    Button closeButton;
 
     public AdminLoginScreen() {
 
@@ -40,6 +50,7 @@ public class AdminLoginScreen extends VBox {
         cancelButton.getStyleClass().addAll(CSS_CLASS_ADMIN_CANCEL_BUTTON);
 
         this.getChildren().addAll(adminLabel, passwordField, adminPasswordLabel, submitButton, cancelButton, warningLabel);
+        initWindowPane();
         initEventHandlers();
     }
 
@@ -47,14 +58,49 @@ public class AdminLoginScreen extends VBox {
         return cancelButton;
     }
 
-    private void initEventHandlers() {
+    public void initEventHandlers() {
         submitButton.setOnAction(e -> {
             String password = passwordField.getText();
             if (password.equals(adminPassword)) {
-                System.out.println("success");
+                VBox layout = new VBox();
+
+                Stage window = new Stage();
+                window = (Stage) this.getScene().getWindow();
+
+                AdminPage adminPage = new AdminPage();
+                layout.getChildren().addAll(headerPane, adminPage);
+
+                Scene scene = new Scene(layout, 972, 600);
+                window.setScene(scene);
+                window.show();
             } else
                 warningLabel.setVisible(true);
         });
+    }
+
+    private void initWindowPane() {
+        headerPane = new VBox();
+        Image logo = new Image("img/logo2.png");
+        ImageView logoView = new ImageView(logo);
+
+        // SETUP CUSTOM MIN/CLOSE WINDOW BUTTONS
+        Image image = new Image("img/icons8-delete-50.png", 25, 25, false, false);
+        closeButton = new Button();
+        closeButton.setGraphic(new ImageView(image));
+        closeButton.setStyle("-fx-border-color: transparent ");
+        Image image2 = new Image("img/icons8-subtract-50.png", 25, 25, false, false);
+        minimizeButton = new Button();
+        minimizeButton.setGraphic(new ImageView(image2));
+        windowPane = new HBox();
+        windowPane.getChildren().addAll(minimizeButton, closeButton);
+
+        // SETUP SPACING AND STYLE CLASSES
+        closeButton.getStyleClass().add(CSS_CLASS_CLOSE_BUTTON);
+        headerPane.getStyleClass().add(CSS_CLASS_HEADER_PANE);
+        minimizeButton.getStyleClass().add(CSS_CLASS_MINIMIZE_BUTTON);
+        windowPane.getStyleClass().add(CSS_CLASS_WINDOW_PANE);
+
+        headerPane.getChildren().addAll(logoView);
     }
 
     private void initAdminConfigPage() {
