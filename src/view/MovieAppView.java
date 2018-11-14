@@ -284,7 +284,7 @@ public class MovieAppView {
             primaryScene.setCursor(Cursor.DEFAULT);
         });
         adminLoginButton.setOnAction(e -> {
-            adminLoginScreen = new AdminLoginScreen();
+            adminLoginScreen = new AdminLoginScreen(db);
             Scene scene = new Scene(adminLoginScreen, 972, 600);
             scene.getStylesheets().add(cssPath);
             window.setScene(scene);

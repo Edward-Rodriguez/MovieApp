@@ -4,6 +4,7 @@ import database.DatabaseManager;
 import javafx.animation.PauseTransition;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -15,6 +16,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import model.Cinema;
+import model.CinemaTableModel;
 import model.Movie;
 
 public class AdminPage extends GridPane {
@@ -48,7 +50,7 @@ public class AdminPage extends GridPane {
     // LIST OF CINEMAS PANE AND COMPONENTS
     VBox cinemasList;
     Label cinemasPlayingAtLabel;
-    ChoiceBox<String> showtimesChoiceBox;
+    ComboBox<String> showtimesChoiceBox;
 
     // CINEMA TO ADD AND COMPONENTS
     Cinema cinemaToAdd;
@@ -57,13 +59,22 @@ public class AdminPage extends GridPane {
     Button addCinemaButton;
 
     DatabaseManager db;
+    CinemaTableModel cinemaTableModel;
+    ObservableList<String> cinemaNameList;
 
     // STATIC VARIABLES
     private static final String[] ratingsList = {"G", "PG", "PG-13", "R", "NC-17", "Not Rated"};
     private static final String[] releaseTypeList = {"General", "Limited"};
+    ObservableList <String> showtimesList;
+    private ComboBox showtimesComboBox;
+    private ComboBox showtimesComboBox2;
+    private ComboBox showtimesComboBox3;
 
-    public AdminPage(){
-        db = new DatabaseManager();
+    public AdminPage(DatabaseManager db){
+        this.db = db;
+        cinemaTableModel = db.getCinemaTableModel();
+        getListOfCinemaNames();
+
 
         this.setHgap(10);
         this.setVgap(5);
@@ -95,6 +106,7 @@ public class AdminPage extends GridPane {
         releaseTypeChoiceBox = new ChoiceBox<String>(FXCollections.observableArrayList(
                 releaseTypeList
         ));
+        releaseTypeChoiceBox.setPrefWidth(70);
         releaseTypeChoiceBox.getSelectionModel().selectFirst();
         this.add(releaseTypeChoiceBox,1,3);
 
@@ -111,6 +123,19 @@ public class AdminPage extends GridPane {
         synopsisTextArea = new TextArea();
         synopsisTextArea.setPromptText("Optional");
         this.add(synopsisTextArea, 1, 5);
+
+        // CINEMA & SHOWTIMES SELECTION
+        cinemasPlayingAtLabel = new Label("Select Cinemas and Showtimes:");
+        this.add(cinemasPlayingAtLabel, 0, 6, 2, 1);
+
+        cinemasList = new VBox(5);
+        createCinemaListCheckboxes();
+        this.add(cinemasList, 0, 7, 6, 4);
+
+//        //ADD MOVIE BUTTON
+//        addMovieButton = new Button("Add Movie");
+//        this.add(addMovieButton, 1, 6, 2, 1);
+//        addMovieButton.setStyle("-fx-background-color: #7BCC70;");
 
 //        userNameWarningLabel = new Label();
 //        userNameWarningLabel.setFont(new Font("Arial", 11));
@@ -162,6 +187,45 @@ public class AdminPage extends GridPane {
 
         // INITIALIZE EVENT HANDLERS
 //        initEventHandlers();
+    }
+
+    private void createCinemaListCheckboxes() {
+        for (Cinema cinema : cinemaTableModel.getCinemas()) {
+            showtimesList = FXCollections.observableArrayList();
+            showtimesList.addAll("9:00am", "9:30am", "10:00am", "10:30am",
+                    "11:00am", "11:30am", "12:00pm", "12:30pm",
+                    "1:00pm", "1:30pm", "2:00pm", "2:30pm",
+                    "3:00pm", "3:30pm", "4:00pm", "4:30pm",
+                    "5:00pm", "5:30pm", "6:00pm", "6:30pm",
+                    "7:00pm", "7:30pm", "8:00pm", "8:30pm",
+                    "9:00pm", "9:30pm", "10:00pm", "10:30pm",
+                    "11:00pm", "11:30pm", "12:00am");
+            showtimesComboBox  = new ComboBox(showtimesList);
+            showtimesComboBox2  = new ComboBox(showtimesList);
+            showtimesComboBox3  = new ComboBox(showtimesList);
+            HBox cinemaShowtimeBox = new HBox();
+            CheckBox cinemaOption = new CheckBox(cinema.getCinemaName());
+            cinemaOption.setMinWidth(150);
+            ComboBox tempBox = new ComboBox();
+            tempBox = showtimesComboBox;
+            ComboBox tempBox2 = new ComboBox();
+            tempBox2 = showtimesComboBox2;
+            ComboBox tempBox3 = new ComboBox();
+            tempBox3 = showtimesComboBox3;
+
+            cinemaShowtimeBox.setMinWidth(200);
+
+            cinemaShowtimeBox.getChildren().addAll(cinemaOption, tempBox, tempBox2, tempBox3);
+            cinemasList.getChildren().add(cinemaShowtimeBox);
+        }
+    }
+
+    private void getListOfCinemaNames() {
+        cinemaNameList = FXCollections.observableArrayList();
+
+        for (Cinema cinema : cinemaTableModel.getCinemas()) {
+            cinemaNameList.add(cinema.getCinemaName());
+        }
     }
 
 //    private void initEventHandlers() {

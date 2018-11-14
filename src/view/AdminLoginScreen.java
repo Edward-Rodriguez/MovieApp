@@ -1,11 +1,14 @@
 package view;
 
+import database.DatabaseManager;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -30,7 +33,10 @@ public class AdminLoginScreen extends VBox {
     Button minimizeButton;
     Button closeButton;
 
-    public AdminLoginScreen() {
+    DatabaseManager db;
+
+    public AdminLoginScreen(DatabaseManager db) {
+        this.db = db;
 
         adminLabel = new Label("Admin Login");
         adminPasswordLabel = new Label("Password");
@@ -60,22 +66,36 @@ public class AdminLoginScreen extends VBox {
 
     public void initEventHandlers() {
         submitButton.setOnAction(e -> {
-            String password = passwordField.getText();
-            if (password.equals(adminPassword)) {
-                VBox layout = new VBox();
-
-                Stage window = new Stage();
-                window = (Stage) this.getScene().getWindow();
-
-                AdminPage adminPage = new AdminPage();
-                layout.getChildren().addAll(headerPane, adminPage);
-
-                Scene scene = new Scene(layout, 972, 600);
-                window.setScene(scene);
-                window.show();
-            } else
-                warningLabel.setVisible(true);
+            auhenticate();
         });
+        passwordField.setOnKeyPressed(e -> {
+            if (e.getCode().equals(KeyCode.ENTER))
+            {
+                auhenticate();
+            }
+        });
+    }
+
+    private void auhenticate() {
+        String password = passwordField.getText();
+        if (password.equals(adminPassword)) {
+            VBox layout = new VBox();
+            ScrollPane scroll = new ScrollPane();
+
+            Stage window = new Stage();
+            window = (Stage) this.getScene().getWindow();
+
+            AdminPage adminPage = new AdminPage(db);
+            windowPane.getStyleClass().addAll(CSS_CLASS_WINDOW_PANE);
+            layout.getChildren().addAll(headerPane, adminPage);
+            scroll.setContent(layout);
+            scroll.getStyleClass().add("edge-to-edge");
+
+            Scene scene = new Scene(scroll, 972, 600);
+            window.setScene(scene);
+            window.show();
+        } else
+            warningLabel.setVisible(true);
     }
 
     private void initWindowPane() {

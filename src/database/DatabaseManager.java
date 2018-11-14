@@ -2,6 +2,7 @@ package database;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import model.CinemaTableModel;
 import model.Movie;
 import model.MovieTableModel;
 
@@ -15,10 +16,11 @@ public class DatabaseManager {
 
     private static Connection conn;
     private MovieTableModel movieTableModel;
+    private CinemaTableModel cinemaTableModel;
 
     public DatabaseManager(){
         movieTableModel = new MovieTableModel();
-
+        cinemaTableModel = new CinemaTableModel();
     }
 
     //ESTABLISHES CONNECTION TO DATABASE
@@ -37,6 +39,7 @@ public class DatabaseManager {
         } catch(Exception e) {
             System.out.println(e); }
             retrieveMovies();
+            retrieveCinemas();
     }
 
     public void createTable() throws Exception{
@@ -149,27 +152,53 @@ public class DatabaseManager {
             System.err.println(e);
         }
     }
-    
-    public void retrieveCinemaList(String movieTitle, Movie movie) throws Exception{
-        try {
-            ObservableList<String> listOfCinemas = FXCollections.observableArrayList();
 
+    //retrieve data from DataBase method
+    public void retrieveCinemas() throws Exception{
+        try {
+            cinemaTableModel.reset();
             Statement stmt = conn.createStatement();
-            String sql = "SELECT `Location` FROM MovieList WHERE `Title` = '" + movieTitle + "';";
+
+            String sql = "SELECT `cinemaID`, `cinemaName`, `Address` FROM Cinemas";
             ResultSet rs = stmt.executeQuery(sql);
 
+            //System.out.println("So far so good");
             while(rs.next()){
-                listOfCinemas.add(
-                        rs.getString("Location")
+                cinemaTableModel.addCinema(
+                        rs.getInt("cinemaID"),
+                        rs.getString("cinemaName"),
+                        rs.getString("Address")
                 );
             }
             rs.close();
-            movie.setListOfCinemas(listOfCinemas);
         }
         catch (Exception e){
             System.err.println(e);
         }
     }
+    
+//    public void retrieveCinemas() throws Exception{
+//        try {
+//            ObservableList<String> listOfCinemas = FXCollections.observableArrayList();
+//
+//            Statement stmt = conn.createStatement();
+////            String sql = "SELECT `Location` FROM Cinemas WHERE `Title` = '" + movieTitle + "';";
+//            String sql = "SELECT `cinemaName` FROM Cinemas WHERE `Title` = '" + movieTitle + "';";
+//
+//            ResultSet rs = stmt.executeQuery(sql);
+//
+//            while(rs.next()){
+//                listOfCinemas.add(
+//                        rs.getString("Location")
+//                );
+//            }
+//            rs.close();
+//            movie.setListOfCinemas(listOfCinemas);
+//        }
+//        catch (Exception e){
+//            System.err.println(e);
+//        }
+//    }
 
 
     //retrieve data from DataBase method
@@ -282,6 +311,10 @@ public class DatabaseManager {
 //
     public MovieTableModel getMovieTableModel() {
         return movieTableModel; }
+
+    public CinemaTableModel getCinemaTableModel() {
+        return cinemaTableModel;
+    }
 //
 //    public MessageTableModel getDraftMessageList() {
 //        return draftMessageList;
