@@ -130,7 +130,7 @@ public class DatabaseManager {
             Statement stmt = conn.createStatement();
 
             String sql = "SELECT `ID`, `Title`, " +
-                    "`Description`, `Rating`, `ReleaseType`, `Location`, `urlImage`, `Summary` FROM MovieList";
+                    "`Rating`, `ReleaseType`, `urlImage`, `Summary` FROM MovieList";
             ResultSet rs = stmt.executeQuery(sql);
 
             //System.out.println("So far so good");
@@ -138,10 +138,8 @@ public class DatabaseManager {
                 movieTableModel.addMovie(
                         rs.getInt("ID"),
                         rs.getString("Title"),
-                        rs.getString("Description"),
                         rs.getString("Rating"),
                         rs.getString("ReleaseType"),
-                        rs.getString("Location"),
                         rs.getString("urlImage"),
                         rs.getString("Summary")
                 );
@@ -159,13 +157,13 @@ public class DatabaseManager {
             cinemaTableModel.reset();
             Statement stmt = conn.createStatement();
 
-            String sql = "SELECT `cinemaID`, `cinemaName`, `Address` FROM Cinemas";
+            String sql = "SELECT `ID`, `cinemaName`, `Address` FROM Cinemas";
             ResultSet rs = stmt.executeQuery(sql);
 
             //System.out.println("So far so good");
             while(rs.next()){
                 cinemaTableModel.addCinema(
-                        rs.getInt("cinemaID"),
+                        rs.getInt("ID"),
                         rs.getString("cinemaName"),
                         rs.getString("Address")
                 );
@@ -232,27 +230,26 @@ public class DatabaseManager {
 //    }
 
 
-    // CHECK IF USER EXISTS AFTER SIGN-IN ATTEMPT AND IF CREDENTIALS ARE CORRECT
-    // RETURN O OTHERWISE
-//    public boolean Authenticate(String username, String password){
-//        int success;
-//        try{
-//            String sql = "SELECT EXISTS(SELECT 1 FROM login WHERE username = '" + username +
-//                    "' AND password = '" + password + "');";
-//            Statement stmt = conn.createStatement();
-//            ResultSet rs = stmt.executeQuery(sql);
-//            rs.next();
-//            success = rs.getInt(1);
-//            if (success == 1) {
-//                setCurrentUser(username);
-//                retrieveMessages("Inbox", messageTableModel);
-//                return true;
-//            }
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
-//        return false;
-//    }
+//     CHECK IF MOVIE TITLE EXISTS AFTER ADDING MOVIE
+//     RETURN O OTHERWISE
+    public boolean Authenticate(String movieTitle){
+        int success;
+        try{
+            String sql = "SELECT EXISTS(SELECT 1 FROM MovieList WHERE Title = '" + movieTitle + "');";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            rs.next();
+            success = rs.getInt(1);
+            if (success == 1) {
+                setCurrentUser(username);
+                retrieveMessages("Inbox", messageTableModel);
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
 
     public boolean checkIfUserNameExists(String username){
         int success;

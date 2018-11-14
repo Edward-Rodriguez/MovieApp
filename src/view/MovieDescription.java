@@ -66,7 +66,6 @@ public class MovieDescription extends VBox {
       // cinema = new String(movie.getListOfCinemas());
         titleLabel.getStyleClass().add(CSS_CLASS_POSTER_TITLE);
         ratingLabel.getStyleClass().add(CSS_CLASS_POSTER_RATING);
-        Description = new Text(movie.getDescription());
         releaseTypeLabel = new Label(movie.getReleaseType());
 
         imageView = new ImageView();

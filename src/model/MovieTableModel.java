@@ -67,9 +67,9 @@ public class MovieTableModel {
         this.movies.add(movie);
     }
 
-    public void addMovie( int ID, String movieTitle, String description, String rating, String releaseType, String cinemaPlaying, String urlOfImage, String summary) {
+    public void addMovie( int ID, String movieTitle, String rating, String releaseType, String urlOfImage, String summary) {
 
-        Movie movie = new Movie(ID, movieTitle, description, rating, releaseType, cinemaPlaying, urlOfImage, summary );
+        Movie movie = new Movie(ID, movieTitle, rating, releaseType, urlOfImage, summary);
         movies.add(0, movie);
     }
     /**

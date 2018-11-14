@@ -31,7 +31,7 @@ public class CinemaView extends HBox {
         showtimesPane.setPadding(new Insets(10, 10, 10, 10));
         showtimesPane.setMaxWidth(250);
 
-        cinemaName = new Label(movie.getCinemaPlaying());
+        cinemaName = new Label("testing");
         cinemaName.setStyle("-fx-alignment: center; -fx-font: normal bold 20px 'Arial'; -fx-text-fill: #000000");
         cinemaName.setMinWidth(200);
         cinemaName.setAlignment(Pos.CENTER_LEFT);

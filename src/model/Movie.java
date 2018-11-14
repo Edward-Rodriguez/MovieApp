@@ -9,33 +9,18 @@ import java.util.Observable;
 public class Movie {
 
     private String movieTitle;
-    private String description;
-
-
     private String rating;
     private int id;
     private String releaseType;
     private String urlOfImage;
     private String movieSummary;
 
-    public String getCinemaPlaying() {
-        return cinemaPlaying;
-    }
-
-    public void setCinemaPlaying(String cinemaPlaying) {
-        this.cinemaPlaying = cinemaPlaying;
-    }
-
-    private String cinemaPlaying;
     private ObservableList<String> listOfCinemas;
 
-    public Movie(int ID, String movieTitle, String description, String rating, String releaseType, String cinemaPlaying, String urlOfImage, String movieSummary) {
-        this.id = ID;
+    public Movie(String movieTitle, String rating, String releaseType, String urlOfImage, String movieSummary) {
         this.movieTitle = movieTitle;
-        this.description = description;
         this.rating = rating;
         this.releaseType = releaseType;
-        this.cinemaPlaying = cinemaPlaying;
         this.urlOfImage = urlOfImage;
         this.movieSummary = movieSummary;
         listOfCinemas = FXCollections.observableArrayList();
@@ -51,14 +36,6 @@ public class Movie {
 
     public void setMovieTitle(String movieTitle) {
         this.movieTitle = movieTitle;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getReleaseType() {
