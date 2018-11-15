@@ -6,6 +6,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
 
+import java.util.Iterator;
+
 public class CinemaShowtimesSelectionBox extends HBox {
 
     private CheckBox cinemaCheckBox;
@@ -26,12 +28,24 @@ public class CinemaShowtimesSelectionBox extends HBox {
                 "9:00pm", "9:30pm", "10:00pm", "10:30pm",
                 "11:00pm", "11:30pm", "12:00am");
 
+        for (Iterator i = showtimesList.iterator(); i.hasNext();)
+            if (i.next().equals("Corn")) {
+                i.remove();
+            }
+
+
         cinemaCheckBox = new CheckBox(cinemaName);
         cinemaCheckBox.setMinWidth(150);
 
         showtimesBox1 = new ComboBox(showtimesList);
         showtimesBox2 = new ComboBox(showtimesList);
         showtimesBox3 = new ComboBox(showtimesList);
+
+        ConnectedComboBox<String> connectedComboBox = new ConnectedComboBox<>(showtimesList);
+        connectedComboBox.addComboBox(showtimesBox1);
+        connectedComboBox.addComboBox(showtimesBox2);
+        connectedComboBox.addComboBox(showtimesBox3);
+
         this.setMinWidth(200);
 
         this.getChildren().addAll(cinemaCheckBox, showtimesBox1, showtimesBox2, showtimesBox3);

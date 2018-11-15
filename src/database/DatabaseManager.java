@@ -57,22 +57,47 @@ public class DatabaseManager {
         }
     }
 
-    public void createNewMovie(  int id,
+    public void createNewMovie(
                                  String movieTitle,
-                                 String description,
                                  String rating,
                                  String releaseType,
-                                 String location,
                                  String imageURL,
                                  String summary) throws Exception{
 
-        description = description.replaceAll("'", "''");
+        summary = summary.replaceAll("'", "''");
         try{
             PreparedStatement stmt = this.conn.prepareStatement(
-                    "INSERT INTO `CS370email`.`" + "MovieList" + "` (`ID`, `Title`, `Description`, `Rating`, " +
-                            "`ReleaseType`, `Location`, `urlImage`, `Summary`) VALUES ('" + id + "','" + movieTitle + "','" +
-                            description + "','" + rating + "','" + releaseType + "','" + location + "','" +
-                            imageURL + "','" + summary + "');");
+                    "INSERT INTO `CS370email`.`" + "MovieList" + "` (`Title`, `Rating`, " +
+                            "`ReleaseType`, `urlImage`, `Summary`) VALUES ('" + movieTitle + "','" + rating + "','" +
+                            releaseType + "','" + imageURL + "','" + summary + "');");
+            //POST NEW ENTRY
+            stmt.executeUpdate();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    public void createNewCinema(
+            String cinemaName,
+            String address) throws Exception{
+
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement(
+                    "INSERT INTO `CS370email`.`" + "Cinemas" + "` (`cinemaName`, `Address`) VALUES ('" + cinemaName +
+                            "','" + address + "');");
+            //POST NEW ENTRY
+            stmt.executeUpdate();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    public void addMovieToCinema( String movieTitle, String cinemaName, String showtime) throws Exception{
+
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement(
+                    "INSERT INTO `CS370email`.`" + "movies-cinema" + "` (`movieID`, `cinemaID`, `showTimes`) VALUES ('" + movieTitle +
+                            "','" + cinemaName +  "','" + showtime + "');");
             //POST NEW ENTRY
             stmt.executeUpdate();
         }catch (Exception e){
@@ -129,14 +154,13 @@ public class DatabaseManager {
             movieTableModel.reset();
             Statement stmt = conn.createStatement();
 
-            String sql = "SELECT `ID`, `Title`, " +
+            String sql = "SELECT `Title`, " +
                     "`Rating`, `ReleaseType`, `urlImage`, `Summary` FROM MovieList";
             ResultSet rs = stmt.executeQuery(sql);
 
             //System.out.println("So far so good");
             while(rs.next()){
                 movieTableModel.addMovie(
-                        rs.getInt("ID"),
                         rs.getString("Title"),
                         rs.getString("Rating"),
                         rs.getString("ReleaseType"),
@@ -157,13 +181,12 @@ public class DatabaseManager {
             cinemaTableModel.reset();
             Statement stmt = conn.createStatement();
 
-            String sql = "SELECT `ID`, `cinemaName`, `Address` FROM Cinemas";
+            String sql = "SELECT `cinemaName`, `Address` FROM Cinemas";
             ResultSet rs = stmt.executeQuery(sql);
 
             //System.out.println("So far so good");
             while(rs.next()){
                 cinemaTableModel.addCinema(
-                        rs.getInt("ID"),
                         rs.getString("cinemaName"),
                         rs.getString("Address")
                 );
@@ -232,29 +255,29 @@ public class DatabaseManager {
 
 //     CHECK IF MOVIE TITLE EXISTS AFTER ADDING MOVIE
 //     RETURN O OTHERWISE
-    public boolean Authenticate(String movieTitle){
+//    public boolean Authenticate(String movieTitle){
+//        int success;
+//        try{
+//            String sql = "SELECT EXISTS(SELECT 1 FROM MovieList WHERE Title = '" + movieTitle + "');";
+//            Statement stmt = conn.createStatement();
+//            ResultSet rs = stmt.executeQuery(sql);
+//            rs.next();
+//            success = rs.getInt(1);
+//            if (success == 1) {
+//                setCurrentUser(username);
+//                retrieveMessages("Inbox", messageTableModel);
+//                return true;
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+//        return false;
+//    }
+
+    public boolean checkIfMovieTitleExists(String movieTitle){
         int success;
         try{
             String sql = "SELECT EXISTS(SELECT 1 FROM MovieList WHERE Title = '" + movieTitle + "');";
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            rs.next();
-            success = rs.getInt(1);
-            if (success == 1) {
-                setCurrentUser(username);
-                retrieveMessages("Inbox", messageTableModel);
-                return true;
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return false;
-    }
-
-    public boolean checkIfUserNameExists(String username){
-        int success;
-        try{
-            String sql = "SELECT EXISTS(SELECT 1 FROM login WHERE username = '" + username + "');";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             rs.next();

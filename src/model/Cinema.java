@@ -6,8 +6,7 @@ public class Cinema {
     private String address;
     private int id;
 
-    public Cinema(int id, String cinemaName, String address) {
-        this.id = id;
+    public Cinema(String cinemaName, String address) {
         this.cinemaName = cinemaName;
         this.address = address;
     }
@@ -28,11 +27,4 @@ public class Cinema {
         this.address = address;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 }

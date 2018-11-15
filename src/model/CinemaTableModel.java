@@ -43,8 +43,8 @@ public class CinemaTableModel {
         this.cinemas.add(cinema);
     }
 
-    public void addCinema(int id, String cinemaName, String address) {
-        Cinema cinema = new Cinema(id, cinemaName, address);
+    public void addCinema(String cinemaName, String address) {
+        Cinema cinema = new Cinema(cinemaName, address);
         this.cinemas.add(cinema);
     }
 

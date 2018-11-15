@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -145,59 +146,14 @@ public class AdminPage extends GridPane {
         //ADD MOVIE BUTTON
         addMovieButton = new Button("Add Movie");
         this.add(addMovieButton, 1, 8, 2, 1);
-        addMovieButton.setStyle("-fx-background-color: #7BCC70;");
+        addMovieButton.setStyle("-fx-background-color: #7BCC70; -fx-padding:10;");
 
+        warningLabel = new Label("Movie Title Already Exists!");
+        this.add(warningLabel, 8, 3);
+        warningLabel.setTextFill(Color.rgb(210, 17, 14));
+        warningLabel.setVisible(false);
 
-//        userNameWarningLabel = new Label();
-//        userNameWarningLabel.setFont(new Font("Arial", 11));
-//        this.add(userNameWarningLabel, 0,2, 2,1 );
-//
-//        nickName = new Label("Nick Name (Optional):");
-//        this.add(nickName, 0, 3);
-//
-//        nickNameTextField = new TextField();
-//        this.add(nickNameTextField, 1, 3);
-//
-//        invalidNicknameWarningLabel = new Label();
-//        invalidNicknameWarningLabel.setText("Nickname must be less than 21 characters");
-//        invalidNicknameWarningLabel.setFont(new Font("Arial", 11));
-//        invalidNicknameWarningLabel.setTextFill(Color.rgb(210, 17, 14));
-//        invalidNicknameWarningLabel.setVisible(false);
-//        this.add(invalidNicknameWarningLabel, 0, 4,2,1);
-//
-//        pw = new Label("Password:");
-//        this.add(pw, 0, 5);
-//
-//        pwBox = new PasswordField();
-//        this.add(pwBox, 1, 5);
-//
-//        pwWarningLabel = new Label();
-//        pwWarningLabel.setFont(new Font("Arial", 11));
-//        this.add(pwWarningLabel, 0, 6, 2, 1);
-//
-//        rpw = new Label ("Re-enter Password:");
-//        this.add(rpw, 0, 7);
-//
-//        rpwBox = new PasswordField();
-//        this.add(rpwBox, 1, 7);
-//
-//        registerButton = new Button("Register");
-//        cancelButton = new Button("Cancel");
-//        HBox hbox = new HBox(10);
-//        hbox.getChildren().addAll(registerButton, cancelButton);
-//        this.add(hbox, 1, 9);
-//
-//        incorrectLoginWarningLabel = new Label();
-//        incorrectLoginWarningLabel.setVisible(false);
-//        this.add(incorrectLoginWarningLabel, 0, 10, 2 ,1);
-//        incorrectLoginWarningLabel.setTextFill(Color.rgb(210, 17, 14));
-//
-//        nonMatchWarningLabel = new Label();
-//        nonMatchWarningLabel.setFont(new Font("Arial", 11));
-//        this.add(nonMatchWarningLabel, 0, 8, 2, 1);
-
-        // INITIALIZE EVENT HANDLERS
-//        initEventHandlers();
+        initEventHandlers();
     }
 
     private void addMovie() {
@@ -207,10 +163,37 @@ public class AdminPage extends GridPane {
         urlImageOfPoster = urlField.getText();
         sypnosis = synopsisTextArea.getText();
 
+
+
         if (movieTitle != null && movieRating != null && movieReleaseType != null) {
 
-            movieToAdd = new Movie(movieTitle, movieRating, movieReleaseType, urlImageOfPoster, sypnosis);
+            if (!db.checkIfMovieTitleExists(movieTitle)) {
+                try {
+                    db.createNewMovie(movieTitle, movieRating, movieReleaseType, urlImageOfPoster, sypnosis);
+                    for (int i = 0; i < numOfCinemas; ++i) {
+                        if(cinemaArray[i].getCinemaCheckBox().isSelected()) {
+                            db.addMovieToCinema(movieTitle, listOfCinemaNames[i], cinemaArray[i].getShowtimesBox1().getValue().toString());
+                            db.addMovieToCinema(movieTitle, listOfCinemaNames[i], cinemaArray[i].getShowtimesBox2().getValue().toString());
+                            db.addMovieToCinema(movieTitle, listOfCinemaNames[i], cinemaArray[i].getShowtimesBox3().getValue().toString());
+                            System.out.println("SUCCESS");
+                        }
+                    }
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
+            } else {
+                warningLabel.setVisible(true);
+            }
+        } else {
+            warningLabel.setText("Error check fields!");
+            warningLabel.setVisible(true);
         }
+    }
+
+    private void initEventHandlers() {
+        addMovieButton.setOnAction(e -> {
+            addMovie();
+        });
     }
 
     private void createCinemaListCheckboxes() {

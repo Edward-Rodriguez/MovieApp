@@ -78,7 +78,7 @@ public class MovieDescription extends VBox {
         vbox.setPadding(new Insets(15, 15, 15, 22));
         
 
-        vbox.getChildren().addAll(titleLabel, imageView, ratingLabel,Description,releaseTypeLabel);
+        vbox.getChildren().addAll(titleLabel, imageView, ratingLabel, releaseTypeLabel);
         dT=new VBox();
 
         Region space = new Region();
