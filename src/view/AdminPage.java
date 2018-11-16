@@ -187,39 +187,40 @@ public class AdminPage extends GridPane {
         cinemaNameField = new TextField();
         this.add(cinemaNameField, 5, 1);
 
-        // CINEMA NAME LABEL & FIELD
-        cinemaNameLabel = new Label("Cinema Name:");
-        this.add(cinemaNameLabel, 4, 1);
-        cinemaNameField = new TextField();
-        this.add(cinemaNameField, 5, 1, 2, 1);
+        // CINEMA ADDRESS LABEL & FIELD
+        addressLabel = new Label("Address:");
+        this.add(addressLabel, 4, 2);
+        addressField = new TextField();
+        addressField.setPromptText("x,y");
+        this.add(addressField, 5, 2);
 
         // CINEMA MOVIE TYPES
         movieTypesPlayingAtCinema = new Label("Movie Types:");
-        this.add(movieTypesPlayingAtCinema, 4, 2);
+        this.add(movieTypesPlayingAtCinema, 4, 3);
         generalReleaseCheckbox = new CheckBox("General");
-        this.add(generalReleaseCheckbox, 5, 2);
+        this.add(generalReleaseCheckbox, 5, 3);
         limitedReleaseCheckbox = new CheckBox("Limited");
-        this.add(limitedReleaseCheckbox, 6, 2);
+        this.add(limitedReleaseCheckbox, 6, 3);
         gCheckbox = new CheckBox("G");
-        this.add(gCheckbox, 5, 3);
+        this.add(gCheckbox, 5, 4);
         pgCheckbox = new CheckBox("PG");
-        this.add(pgCheckbox, 6, 3);
+        this.add(pgCheckbox, 6, 4);
         pg13Checkbox = new CheckBox("PG-13");
-        this.add(pg13Checkbox, 5, 4);
+        this.add(pg13Checkbox, 5, 5);
         rCheckbox = new CheckBox("R");
-        this.add(rCheckbox, 6, 4);
+        this.add(rCheckbox, 6, 5);
         nc17Checkbox = new CheckBox("NC-17");
-        this.add(nc17Checkbox, 5, 5);
+        this.add(nc17Checkbox, 5, 6);
         notRatedCheckbox = new CheckBox("Not Rated");
-        this.add(notRatedCheckbox, 6, 5);
+        this.add(notRatedCheckbox, 6, 6);
 
         //ADD CINEMA BUTTON
         addCinemaButton = new Button("Add Cinema");
-        this.add(addCinemaButton, 5, 6);
+        this.add(addCinemaButton, 5, 7);
         addCinemaButton.setStyle("-fx-background-color: #7BCC70; -fx-padding:10;");
 
         cinemaWarningLabel = new Label("Cinema Already Exists!");
-        this.add(cinemaWarningLabel, 6, 6);
+        this.add(cinemaWarningLabel, 6, 7);
         cinemaWarningLabel.setTextFill(Color.rgb(210, 17, 14));
         cinemaWarningLabel.setVisible(false);
 

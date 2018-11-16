@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MovieAppProject/database/DatabaseManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MovieAppProject/database/DatabaseManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MovieApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MovieApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/AdminLoginScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AdminLoginScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/AdminPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AdminPage.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
@@ -84,13 +80,13 @@
         <counts>
           <entry key="css" value="209" />
           <entry key="dummy" value="11" />
-          <entry key="java" value="9067" />
+          <entry key="java" value="9155" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="209" />
-          <entry key="JAVA" value="9067" />
+          <entry key="JAVA" value="9155" />
           <entry key="PLAIN_TEXT" value="11" />
         </counts>
       </usages-collector>
@@ -137,8 +133,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/view/AdminPage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="490">
-              <caret line="322" column="69" selection-start-line="322" selection-start-column="69" selection-end-line="322" selection-end-column="69" />
+            <state relative-caret-position="76">
+              <caret line="194" column="35" selection-start-line="194" selection-start-column="35" selection-end-line="194" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -339,7 +335,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="OverrideImplement.combined" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542393084218" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542393651624" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="C:/Program Files (x86)/MySQL/Connector J 8.0/mysql-connector-java-8.0.12.jar!/" />
     <property name="project.structure.last.edited" value="Project" />
@@ -564,19 +560,19 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/view/AdminPage.java</url>
-          <line>292</line>
+          <line>293</line>
           <properties />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/view/AdminPage.java</url>
-          <line>277</line>
+          <line>278</line>
           <properties />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/view/AdminPage.java</url>
-          <line>248</line>
+          <line>249</line>
           <properties />
           <option name="timeStamp" value="4" />
         </line-breakpoint>
@@ -756,8 +752,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/AdminPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="490">
-          <caret line="322" column="69" selection-start-line="322" selection-start-column="69" selection-end-line="322" selection-end-column="69" />
+        <state relative-caret-position="76">
+          <caret line="194" column="35" selection-start-line="194" selection-start-column="35" selection-end-line="194" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
