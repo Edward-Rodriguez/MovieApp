@@ -1,6 +1,7 @@
 package view;
 
 import database.DatabaseManager;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -32,6 +33,9 @@ public class AdminLoginScreen extends VBox {
     HBox windowPane;
     Button minimizeButton;
     Button closeButton;
+    double xOffset;
+    double yOffset;
+    Stage window;
 
     DatabaseManager db;
 
@@ -74,24 +78,42 @@ public class AdminLoginScreen extends VBox {
                 auhenticate();
             }
         });
+        // WINDOW BUTTONS
+        minimizeButton.setOnMouseClicked(e -> {
+            window.setIconified(true);
+        });
+        closeButton.setOnAction(e -> {
+            Platform.exit();
+        });
+        windowPane.setOnMousePressed(e -> {
+            xOffset = e.getSceneX();
+            yOffset = e.getSceneY();
+        });
+        windowPane.setOnMouseDragged(e -> {
+            window.setX(e.getScreenX() - xOffset);
+            window.setY(e.getScreenY() - yOffset);
+        });
     }
 
     private void auhenticate() {
         String password = passwordField.getText();
         if (password.equals(adminPassword)) {
             VBox layout = new VBox();
+            VBox rootPane = new VBox();
             ScrollPane scroll = new ScrollPane();
 
-            Stage window = new Stage();
+            window = new Stage();
             window = (Stage) this.getScene().getWindow();
 
             AdminPage adminPage = new AdminPage(db);
             windowPane.getStyleClass().addAll(CSS_CLASS_WINDOW_PANE);
             layout.getChildren().addAll(headerPane, adminPage);
             scroll.setContent(layout);
+            rootPane.getChildren().addAll(windowPane, scroll);
             scroll.getStyleClass().add("edge-to-edge");
 
-            Scene scene = new Scene(scroll, 972, 600);
+            Scene scene = new Scene(rootPane, 972, 600);
+            scene.getStylesheets().add("css/movieStyle.css");
             window.setScene(scene);
             window.show();
         } else
@@ -100,7 +122,7 @@ public class AdminLoginScreen extends VBox {
 
     private void initWindowPane() {
         headerPane = new VBox();
-        Image logo = new Image("img/logo2.png");
+        Image logo = new Image("img/logo3.png");
         ImageView logoView = new ImageView(logo);
 
         // SETUP CUSTOM MIN/CLOSE WINDOW BUTTONS

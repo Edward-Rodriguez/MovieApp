@@ -6,7 +6,9 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -18,6 +20,8 @@ import model.Cinema;
 import model.CinemaTableModel;
 import model.Movie;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Hashtable;
 
 public class AdminPage extends GridPane {
@@ -57,7 +61,25 @@ public class AdminPage extends GridPane {
     Cinema cinemaToAdd;
     String cinemaAddress;
     String cinemaName;
+
+    // CINEMA LABELS AND COMPONENTS
+    Label cinemaHeader;
+    Label cinemaNameLabel;
+    TextField cinemaNameField;
+    Label addressLabel;
+    TextField addressField;
     Button addCinemaButton;
+    Label movieTypesPlayingAtCinema;
+    VBox movieTypesCheckboxPane;
+    CheckBox generalReleaseCheckbox;
+    CheckBox limitedReleaseCheckbox;
+    CheckBox gCheckbox;
+    CheckBox pgCheckbox;
+    CheckBox pg13Checkbox;
+    CheckBox rCheckbox;
+    CheckBox nc17Checkbox;
+    CheckBox notRatedCheckbox;
+    Label cinemaWarningLabel;
 
     DatabaseManager db;
     CinemaTableModel cinemaTableModel;
@@ -69,13 +91,8 @@ public class AdminPage extends GridPane {
     // STATIC VARIABLES
     private static final String[] ratingsList = {"G", "PG", "PG-13", "R", "NC-17", "Not Rated"};
     private static final String[] releaseTypeList = {"General", "Limited"};
-    private ComboBox showtimesComboBox;
-    private ComboBox showtimesComboBox2;
-    private ComboBox showtimesComboBox3;
 
     CinemaShowtimesSelectionBox[] cinemaArray;
-
-    Hashtable<String, String> ratingDescriptionTable = new Hashtable<String, String>();
 
 
     public AdminPage(DatabaseManager db){
@@ -90,6 +107,7 @@ public class AdminPage extends GridPane {
         this.setHgap(10);
         this.setVgap(5);
         this.setPadding(new Insets(25, 25, 25, 25));
+        setGridpaneConstraints();
 
         // HEADING 'MOVIES'
         movieLabel = new Label("Add Movies");
@@ -131,8 +149,11 @@ public class AdminPage extends GridPane {
         // SYNOPSIS LABEL & FIELD
         synopsisLabel = new Label("Synopsis:");
         this.add(synopsisLabel, 0, 5);
+        synopsisLabel.setAlignment(Pos.TOP_LEFT);
         synopsisTextArea = new TextArea();
         synopsisTextArea.setPromptText("Optional");
+        synopsisTextArea.setWrapText(true);
+        synopsisTextArea.setPrefRowCount(3);
         this.add(synopsisTextArea, 1, 5);
 
         // CINEMA & SHOWTIMES SELECTION
@@ -145,13 +166,62 @@ public class AdminPage extends GridPane {
 
         //ADD MOVIE BUTTON
         addMovieButton = new Button("Add Movie");
-        this.add(addMovieButton, 1, 8, 2, 1);
+        this.add(addMovieButton, 0, 8, 1, 1);
         addMovieButton.setStyle("-fx-background-color: #7BCC70; -fx-padding:10;");
+        addMovieButton.setPadding(new Insets(0,0,0,100));
 
         warningLabel = new Label("Movie Title Already Exists!");
         this.add(warningLabel, 8, 3);
         warningLabel.setTextFill(Color.rgb(210, 17, 14));
         warningLabel.setVisible(false);
+
+        /**********************CINEMA CONFIGURATION BELOW*******************/
+        // HEADING 'CINEMAS'
+        cinemaHeader = new Label("Add Cinemas");
+        cinemaHeader.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+        this.add(cinemaHeader, 4, 0, 2, 1);
+
+        // CINEMA NAME LABEL & FIELD
+        cinemaNameLabel = new Label("Cinema Name:");
+        this.add(cinemaNameLabel, 4, 1);
+        cinemaNameField = new TextField();
+        this.add(cinemaNameField, 5, 1);
+
+        // CINEMA NAME LABEL & FIELD
+        cinemaNameLabel = new Label("Cinema Name:");
+        this.add(cinemaNameLabel, 4, 1);
+        cinemaNameField = new TextField();
+        this.add(cinemaNameField, 5, 1, 2, 1);
+
+        // CINEMA MOVIE TYPES
+        movieTypesPlayingAtCinema = new Label("Movie Types:");
+        this.add(movieTypesPlayingAtCinema, 4, 2);
+        generalReleaseCheckbox = new CheckBox("General");
+        this.add(generalReleaseCheckbox, 5, 2);
+        limitedReleaseCheckbox = new CheckBox("Limited");
+        this.add(limitedReleaseCheckbox, 6, 2);
+        gCheckbox = new CheckBox("G");
+        this.add(gCheckbox, 5, 3);
+        pgCheckbox = new CheckBox("PG");
+        this.add(pgCheckbox, 6, 3);
+        pg13Checkbox = new CheckBox("PG-13");
+        this.add(pg13Checkbox, 5, 4);
+        rCheckbox = new CheckBox("R");
+        this.add(rCheckbox, 6, 4);
+        nc17Checkbox = new CheckBox("NC-17");
+        this.add(nc17Checkbox, 5, 5);
+        notRatedCheckbox = new CheckBox("Not Rated");
+        this.add(notRatedCheckbox, 6, 5);
+
+        //ADD CINEMA BUTTON
+        addCinemaButton = new Button("Add Cinema");
+        this.add(addCinemaButton, 5, 6);
+        addCinemaButton.setStyle("-fx-background-color: #7BCC70; -fx-padding:10;");
+
+        cinemaWarningLabel = new Label("Cinema Already Exists!");
+        this.add(cinemaWarningLabel, 6, 6);
+        cinemaWarningLabel.setTextFill(Color.rgb(210, 17, 14));
+        cinemaWarningLabel.setVisible(false);
 
         initEventHandlers();
     }
@@ -160,9 +230,13 @@ public class AdminPage extends GridPane {
         movieTitle = movieTitleField.getText();
         movieRating = ratingChoiceBox.getValue();
         movieReleaseType = releaseTypeChoiceBox.getValue();
-        urlImageOfPoster = urlField.getText();
-        sypnosis = synopsisTextArea.getText();
 
+        sypnosis = synopsisTextArea.getText();
+        urlImageOfPoster = urlField.getText();
+        if (urlImageOfPoster.isEmpty() || checkIfURLExists(urlImageOfPoster) == false) {
+            // then set to default picture
+            urlImageOfPoster = "img/posterNA.jpg";
+        }
 
 
         if (movieTitle != null && movieRating != null && movieReleaseType != null) {
@@ -176,12 +250,16 @@ public class AdminPage extends GridPane {
                             db.addMovieToCinema(movieTitle, listOfCinemaNames[i], cinemaArray[i].getShowtimesBox2().getValue().toString());
                             db.addMovieToCinema(movieTitle, listOfCinemaNames[i], cinemaArray[i].getShowtimesBox3().getValue().toString());
                             System.out.println("SUCCESS");
+                            warningLabel.setText("Movie added successfully!");
+                            warningLabel.setTextFill(Color.LIGHTGREEN);
+                            warningLabel.setVisible(true);
                         }
                     }
                 } catch (Exception e) {
                     System.err.println(e);
                 }
             } else {
+                warningLabel.setText("Movie Title already exists!");
                 warningLabel.setVisible(true);
             }
         } else {
@@ -216,118 +294,32 @@ public class AdminPage extends GridPane {
         }
     }
 
+    // CHECK IF URL EXISTS
+    private boolean checkIfURLExists(String urlString) {
+        try {
+            URL url = new URL(urlString);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            int rc = conn.getResponseCode();
+            conn.disconnect();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
-
-//    private void initEventHandlers() {
-//        registerButton.setOnAction(v ->{
-//            if (validPassword != null && validUsername != null &&
-//                    validPassword.equals(reEnteredPassword) && nickNameisValid) {
-//                try {
-//                    db.CreateNewUser(validUsername, validPassword, validNickName);
-//                    incorrectLoginWarningLabel.setText("Account Created Successfully! " +
-//                            "You may now Login \nWindow closing in 3 seconds...");
-//                    registerButton.setDisable(true);
-//                    cancelButton.setDisable(true);
-//                    incorrectLoginWarningLabel.setTextFill(Color.rgb(0, 117, 0));
-//                    incorrectLoginWarningLabel.setVisible(true);
-//                    delay.setOnFinished(e -> this.close());
-//                    delay.play();
-//                } catch (Exception e) {
-//                    System.err.println(e);
-//                }
-//            } else
-//            {
-//                incorrectLoginWarningLabel.setText("Account Creation Unsuccesful! \nCheck Username/Password");
-//                incorrectLoginWarningLabel.setTextFill(Color.rgb(210, 17, 14));
-//                incorrectLoginWarningLabel.setVisible(true);
-//            }
-//        });
-//
-//        cancelButton.setOnAction(n->{
-//            this.close();
-//        });
-//
-//        cb.getSelectionModel().selectedItemProperty().addListener
-//                ( (ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-//                    tempDomainName = "@" + newValue;
-//
-//                    // NEXT FEW LINES ARE TO 'REFRESH' TEXTFIELD AFTER CHOOSING FROM DROP DOWN
-//                    String oldUsername = userNameTextField.getText();
-//                    userNameTextField.setText( oldUsername + " ");
-//                    userNameTextField.setText(  oldUsername );
-//                });
-//
-//        userNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-//            tempDomainName = "@" + cb.getValue();
-//
-//            if(newValue.contains(" ")) {
-//                userNameWarningLabel.setText("Sorry no spaces allowed!");
-//                userNameWarningLabel.setTextFill(Color.rgb(210, 17, 14));
-//                validUsername = null;
-//            } else if(!newValue.matches("^(?!\\.)(?!.*\\.$)(?!.*?\\.\\.)[a-zA-Z0-9_.]+$")) {
-//                userNameWarningLabel.setText("Invalid characters");
-//                userNameWarningLabel.setTextFill(Color.rgb(210, 17, 14));
-//                validUsername = null;
-//            } else if(newValue.length() > 20 ) {
-//                userNameWarningLabel.setText("Username must be a maximum of 20 characters");
-//                userNameWarningLabel.setTextFill(Color.rgb(210, 17, 14));
-//                validUsername = null;
-//            } else if (!db.isCorrectFormat(newValue + tempDomainName)) {
-//                userNameWarningLabel.setText("Username must contain a valid domain name");
-//                userNameWarningLabel.setTextFill(Color.rgb(210, 17, 14));
-//                validUsername = null;
-//            } else if (db.checkIfUserNameExists(newValue + tempDomainName)) {
-//                userNameWarningLabel.setText("Username already exists");
-//                userNameWarningLabel.setTextFill(Color.rgb(210, 17, 14));
-//                validUsername = null;
-//            } else {
-//                userNameWarningLabel.setText("Username available");
-//                userNameWarningLabel.setTextFill(Color.rgb(0, 117, 0));
-//                validUsername = newValue + tempDomainName;
-//            }
-//        });
-//
-//
-//        nickNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-//            if (newValue.length() > 20) {
-//                invalidNicknameWarningLabel.setVisible(true);
-//                validNickName = null;
-//                nickNameisValid = false;
-//            } else {
-//                invalidNicknameWarningLabel.setVisible(false);
-//                validNickName = newValue;
-//                nickNameisValid = true;
-//            }
-//        });
-//
-//        pwBox.textProperty().addListener((observable, oldValue, newValue) -> {
-//            if(newValue.contains(" ")) {
-//                pwWarningLabel.setText("Oops nice try! No spaces allowed!");
-//                pwWarningLabel.setTextFill(Color.rgb(210, 17, 14));
-//            } else if(newValue.length() < 4 ) {
-//                pwWarningLabel.setText("Password must have at least 4 characters");
-//                pwWarningLabel.setTextFill(Color.rgb(210, 17, 14));
-//            } else if (newValue.length() > 12){
-//                pwWarningLabel.setText("Password must be less than 13 characters");
-//                pwWarningLabel.setTextFill(Color.rgb(210, 17, 14));
-//            }
-//            else {
-//                pwWarningLabel.setText("Password meets criteria");
-//                pwWarningLabel.setTextFill(Color.rgb(0, 117, 0));
-//                validPassword = newValue;
-//            }
-//        });
-//
-//        rpwBox.textProperty().addListener((observable, oldValue, newValue) -> {
-//            if (!newValue.equals(pwBox.getText())) {
-//                nonMatchWarningLabel.setText("Passwords do not match");
-//                nonMatchWarningLabel.setTextFill(Color.rgb(210, 17, 14));
-//                reEnteredPassword = null;
-//            } else {
-//                reEnteredPassword = newValue;
-//                nonMatchWarningLabel.setText("Passwords match");
-//                nonMatchWarningLabel.setTextFill(Color.rgb(0, 117, 14));
-//            }
-//        });
-//    }
+    // SET WIDTH TO EACH COLUMN OF THIS PANE
+    private void setGridpaneConstraints() {
+        GridPane gridpane = new GridPane();
+        ColumnConstraints col1 = new ColumnConstraints();
+        col1.setMaxWidth(160);
+        ColumnConstraints col2 = new ColumnConstraints();
+        col2.setMaxWidth(300);
+        ColumnConstraints col3 = new ColumnConstraints();
+        col3.setMaxWidth(130);
+        ColumnConstraints col4 = new ColumnConstraints();
+        col4.setMaxWidth(200);
+        ColumnConstraints col5 = new ColumnConstraints();
+        col5.setMaxWidth(100);
+        this.getColumnConstraints().addAll(col1,col2,col3,col4,col5);
+    }
 }
