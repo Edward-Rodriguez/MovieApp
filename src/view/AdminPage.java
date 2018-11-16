@@ -2,6 +2,7 @@ package view;
 
 import database.DatabaseManager;
 import javafx.animation.PauseTransition;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -61,6 +62,8 @@ public class AdminPage extends GridPane {
     Cinema cinemaToAdd;
     String cinemaAddress;
     String cinemaName;
+    int xCoord;
+    int yCoord;
 
     // CINEMA LABELS AND COMPONENTS
     Label cinemaHeader;
@@ -87,6 +90,8 @@ public class AdminPage extends GridPane {
 
     private int numOfCinemas;
     private String[] listOfCinemaNames;
+    TextField xCoordField;
+    TextField yCoordField;
 
     // STATIC VARIABLES
     private static final String[] ratingsList = {"G", "PG", "PG-13", "R", "NC-17", "Not Rated"};
@@ -187,12 +192,23 @@ public class AdminPage extends GridPane {
         cinemaNameField = new TextField();
         this.add(cinemaNameField, 5, 1);
 
-        // CINEMA ADDRESS LABEL & FIELD
+        // CINEMA ADDRESS LABEL & SPINNERS FOR COORDINATES
         addressLabel = new Label("Address:");
         this.add(addressLabel, 4, 2);
-        addressField = new TextField();
-        addressField.setPromptText("x,y");
-        this.add(addressField, 5, 2);
+
+        Label xLabel = new Label("X:");
+        Label yLabel = new Label("Y:");
+        xCoordField = new TextField();
+        yCoordField = new TextField();
+        xCoordField.setPromptText("0-100");
+        yCoordField.setPromptText("0-100");
+        xCoordField.setPrefWidth(50);
+        yCoordField.setPrefWidth(50);
+
+        HBox xyCoordinateBox = new HBox(5);
+        xyCoordinateBox.getChildren().addAll(xLabel,xCoordField, yLabel,yCoordField);
+
+        this.add(xyCoordinateBox, 5, 2);
 
         // CINEMA MOVIE TYPES
         movieTypesPlayingAtCinema = new Label("Movie Types:");
@@ -269,9 +285,63 @@ public class AdminPage extends GridPane {
         }
     }
 
+    private void addCinema() {
+        cinemaName = cinemaNameField.getText();
+        yCoord = Integer.parseInt(yCoordField.getText());
+
+        if (!xCoordField.getText().isEmpty() && !yCoordField.getText().isEmpty() && !cinemaName.isEmpty()) {
+            xCoord = Integer.parseInt(xCoordField.getText());
+            yCoord = Integer.parseInt(yCoordField.getText());
+            String cineAddress = "(" + xCoord + "," + yCoord + ")";
+            if ((xCoord >= 0 && xCoord <= 100) && (yCoord >= 0 && yCoord <= 100)) {
+                if (!db.checkIfCinemaExists(cinemaName)) {
+                    try {
+                        db.createNewCinema(cinemaName, cineAddress);
+                        cinemaWarningLabel.setText("Added Cinema Successfully!");
+                        cinemaWarningLabel.setTextFill(Color.rgb(17, 210, 14));
+                        cinemaWarningLabel.setVisible(true);
+                    } catch (Exception e) {
+                        System.err.println(e);
+                    }
+                }
+            } else {
+                cinemaWarningLabel.setText("Choose Coordinates b/w 0-100!");
+                cinemaWarningLabel.setTextFill(Color.rgb(210, 17, 14));
+                cinemaWarningLabel.setVisible(true);
+            }
+        } else {
+            cinemaWarningLabel.setText("Enter correct value!");
+            cinemaWarningLabel.setTextFill(Color.rgb(210, 17, 14));
+            cinemaWarningLabel.setVisible(true);
+        }
+
+    }
+
     private void initEventHandlers() {
+        // force the coordinates field to be numeric only
+        xCoordField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("(100)|(0*\\d{1,2})")) {
+                    xCoordField.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+        yCoordField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("(100)|(0*\\d{1,2})")) {
+                    yCoordField.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
         addMovieButton.setOnAction(e -> {
             addMovie();
+        });
+        addCinemaButton.setOnAction(e -> {
+            addCinema();
         });
     }
 

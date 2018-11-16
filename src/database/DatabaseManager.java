@@ -80,7 +80,6 @@ public class DatabaseManager {
     public void createNewCinema(
             String cinemaName,
             String address) throws Exception{
-
         try{
             PreparedStatement stmt = this.conn.prepareStatement(
                     "INSERT INTO `CS370email`.`" + "Cinemas" + "` (`cinemaName`, `Address`) VALUES ('" + cinemaName +
@@ -93,7 +92,6 @@ public class DatabaseManager {
     }
 
     public void addMovieToCinema( String movieTitle, String cinemaName, String showtime) throws Exception{
-
         try{
             PreparedStatement stmt = this.conn.prepareStatement(
                     "INSERT INTO `CS370email`.`" + "movies-cinema" + "` (`movieID`, `cinemaID`, `showTimes`) VALUES ('" + movieTitle +
@@ -278,6 +276,23 @@ public class DatabaseManager {
         int success;
         try{
             String sql = "SELECT EXISTS(SELECT 1 FROM MovieList WHERE Title = '" + movieTitle + "');";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            rs.next();
+            success = rs.getInt(1);
+            if (success == 1) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    public boolean checkIfCinemaExists(String cinemaName){
+        int success;
+        try{
+            String sql = "SELECT EXISTS(SELECT 1 FROM Cinemas WHERE cinemaName = '" + cinemaName + "');";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             rs.next();
