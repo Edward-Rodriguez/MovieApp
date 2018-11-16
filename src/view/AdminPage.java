@@ -94,8 +94,17 @@ public class AdminPage extends GridPane {
     TextField yCoordField;
 
     // STATIC VARIABLES
-    private static final String[] ratingsList = {"G", "PG", "PG-13", "R", "NC-17", "Not Rated"};
-    private static final String[] releaseTypeList = {"General", "Limited"};
+    private static final String G = "G";
+    private static final String PG = "PG";
+    private static final String PG13 = "PG-13";
+    private static final String R = "R";
+    private static final String NC17 = "NC-17";
+    private static final String NOT_RATED = "Not Rated";
+    private static final String GENERAL = "General";
+    private static final String LIMITED = "Limited";
+    private static final String[] ratingsList = {G, PG, PG13, R, NC17, NOT_RATED};
+    private static final String[] releaseTypeList = {GENERAL, LIMITED};
+    ObservableList<String> cinemaRatings;
 
     CinemaShowtimesSelectionBox[] cinemaArray;
 
@@ -108,6 +117,7 @@ public class AdminPage extends GridPane {
         listOfCinemaNames = new String[numOfCinemas];
         getNamesOfCinemas();
         cinemaArray = new CinemaShowtimesSelectionBox[numOfCinemas];
+        cinemaRatings = FXCollections.observableArrayList();
 
         this.setHgap(10);
         this.setVgap(5);
@@ -213,21 +223,21 @@ public class AdminPage extends GridPane {
         // CINEMA MOVIE TYPES
         movieTypesPlayingAtCinema = new Label("Movie Types:");
         this.add(movieTypesPlayingAtCinema, 4, 3);
-        generalReleaseCheckbox = new CheckBox("General");
+        generalReleaseCheckbox = new CheckBox(GENERAL);
         this.add(generalReleaseCheckbox, 5, 3);
-        limitedReleaseCheckbox = new CheckBox("Limited");
+        limitedReleaseCheckbox = new CheckBox(LIMITED);
         this.add(limitedReleaseCheckbox, 6, 3);
-        gCheckbox = new CheckBox("G");
+        gCheckbox = new CheckBox(G);
         this.add(gCheckbox, 5, 4);
-        pgCheckbox = new CheckBox("PG");
+        pgCheckbox = new CheckBox(PG);
         this.add(pgCheckbox, 6, 4);
-        pg13Checkbox = new CheckBox("PG-13");
+        pg13Checkbox = new CheckBox(PG13);
         this.add(pg13Checkbox, 5, 5);
-        rCheckbox = new CheckBox("R");
+        rCheckbox = new CheckBox(R);
         this.add(rCheckbox, 6, 5);
-        nc17Checkbox = new CheckBox("NC-17");
+        nc17Checkbox = new CheckBox(NC17);
         this.add(nc17Checkbox, 5, 6);
-        notRatedCheckbox = new CheckBox("Not Rated");
+        notRatedCheckbox = new CheckBox(NOT_RATED);
         this.add(notRatedCheckbox, 6, 6);
 
         //ADD CINEMA BUTTON
@@ -287,7 +297,6 @@ public class AdminPage extends GridPane {
 
     private void addCinema() {
         cinemaName = cinemaNameField.getText();
-        yCoord = Integer.parseInt(yCoordField.getText());
 
         if (!xCoordField.getText().isEmpty() && !yCoordField.getText().isEmpty() && !cinemaName.isEmpty()) {
             xCoord = Integer.parseInt(xCoordField.getText());
@@ -295,26 +304,48 @@ public class AdminPage extends GridPane {
             String cineAddress = "(" + xCoord + "," + yCoord + ")";
             if ((xCoord >= 0 && xCoord <= 100) && (yCoord >= 0 && yCoord <= 100)) {
                 if (!db.checkIfCinemaExists(cinemaName)) {
-                    try {
-                        db.createNewCinema(cinemaName, cineAddress);
-                        cinemaWarningLabel.setText("Added Cinema Successfully!");
-                        cinemaWarningLabel.setTextFill(Color.rgb(17, 210, 14));
-                        cinemaWarningLabel.setVisible(true);
-                    } catch (Exception e) {
-                        System.err.println(e);
+                    if (emptyCheckedRatingBoxes())setFailureWarningMessage("Choose Movie Type/Rating!");
+                    else {
+                        try {
+                            db.createNewCinema(cinemaName, cineAddress);
+                            for (String rating : cinemaRatings) {
+                                db.addCinemaMovieTypeAndRatings(rating, cinemaName);
+                            }
+                            setSuccessWarningMessage("Added Cinema Successfully!");
+                        } catch (Exception e) {
+                            System.err.println(e);
+                        }
                     }
-                }
-            } else {
-                cinemaWarningLabel.setText("Choose Coordinates b/w 0-100!");
-                cinemaWarningLabel.setTextFill(Color.rgb(210, 17, 14));
-                cinemaWarningLabel.setVisible(true);
-            }
-        } else {
-            cinemaWarningLabel.setText("Enter correct value!");
-            cinemaWarningLabel.setTextFill(Color.rgb(210, 17, 14));
-            cinemaWarningLabel.setVisible(true);
-        }
+                } else setFailureWarningMessage("Cinema name taken!");
+            } else setFailureWarningMessage("Choose Coordinates b/w 0-100!");
+        } else setFailureWarningMessage("Enter correct value!");
+    }
 
+    // RETURN TRUE IF NON OF THE CHECKBOXES WERE SELECTED
+    private boolean emptyCheckedRatingBoxes() {
+        cinemaRatings.clear();
+        boolean nonSelected = true;
+        if (generalReleaseCheckbox.isSelected()) { cinemaRatings.add(GENERAL); nonSelected = false; }
+        if (limitedReleaseCheckbox.isSelected()) { cinemaRatings.add(LIMITED); nonSelected = false; }
+        if (gCheckbox.isSelected()) { cinemaRatings.add(G); nonSelected = false; }
+        if (pgCheckbox.isSelected()) { cinemaRatings.add(PG); nonSelected = false; }
+        if (pg13Checkbox.isSelected()) { cinemaRatings.add(PG13); nonSelected = false; }
+        if (rCheckbox.isSelected()) { cinemaRatings.add(R); nonSelected = false; }
+        if (nc17Checkbox.isSelected()) { cinemaRatings.add(NC17); nonSelected = false; }
+        if (notRatedCheckbox.isSelected()) { cinemaRatings.add(NOT_RATED); nonSelected = false; }
+        return nonSelected;
+    }
+
+    private void setFailureWarningMessage(String message) {
+        cinemaWarningLabel.setText(message);
+        cinemaWarningLabel.setTextFill(Color.rgb(210, 17, 14));
+        cinemaWarningLabel.setVisible(true);
+    }
+
+    private void setSuccessWarningMessage(String message) {
+        cinemaWarningLabel.setText(message);
+        cinemaWarningLabel.setTextFill(Color.rgb(17, 210, 14));
+        cinemaWarningLabel.setVisible(true);
     }
 
     private void initEventHandlers() {

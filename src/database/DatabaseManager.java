@@ -103,6 +103,18 @@ public class DatabaseManager {
         }
     }
 
+    public void addCinemaMovieTypeAndRatings( String movieType, String cinemaName) throws Exception{
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement(
+                    "INSERT INTO `CS370email`.`" + "CinemasMovieTypes" + "` (`MovieType`,`cinemaID`) VALUES ('" + movieType +
+                            "','" + cinemaName + "');");
+            //POST NEW ENTRY
+            stmt.executeUpdate();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
     public void updateDraftMessage(String message,
                                    String recipient,
                                    String sender,
