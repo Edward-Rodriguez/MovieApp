@@ -262,8 +262,16 @@ public class AdminPage extends GridPane {
         cinemaWarningLabel.setVisible(false);
 
         movieListPane = new VBox();
+        Separator lineSeparator = new Separator();
+        lineSeparator.setPadding(new Insets(20, 0 , 0 , 0));
+        Label movieListLabel = new Label("Current Movies:");
+        movieListLabel.setUnderline(true);
+        movieListLabel.setPadding(new Insets(5, 0, 15, 0));
+        movieListLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         reloadMovieListPane();
-        this.add(movieListPane, 0, 9, 3, 1);
+        this.add(lineSeparator, 0, 9, 3, 1);
+        this.add(movieListLabel, 1, 10, 3, 1);
+        this.add(movieListPane, 0, 11, 3, 1);
         initEventHandlers();
     }
 
@@ -278,8 +286,6 @@ public class AdminPage extends GridPane {
             // then set to default picture
             urlImageOfPoster = "img/posterNA.jpg";
         }
-
-
         if (movieTitle != null && movieRating != null && movieReleaseType != null) {
 
             if (!db.checkIfMovieTitleExists(movieTitle)) {
@@ -294,6 +300,7 @@ public class AdminPage extends GridPane {
                             warningLabel.setText("Movie added successfully!");
                             warningLabel.setTextFill(Color.LIGHTGREEN);
                             warningLabel.setVisible(true);
+                            reloadMovieListPane();
                         }
                     }
                 } catch (Exception e) {
