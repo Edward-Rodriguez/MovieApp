@@ -1,5 +1,6 @@
 package view;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -58,12 +59,12 @@ public class ConnectedComboBox<T> implements ChangeListener<T> {
                 comboBox.setValue(selectedValue);
             }
         }
-
         updating = false;
     }
 
     @Override
     public void changed(ObservableValue<? extends T> observable, T oldValue, T newValue) {
-        updateSelection();
+        Platform.runLater(() -> updateSelection() );
+        //updateSelection();
     }
 }

@@ -197,7 +197,7 @@ public class AdminPage extends GridPane {
         addMovieButton.setPadding(new Insets(0,0,0,100));
 
         warningLabel = new Label("Movie Title Already Exists!");
-        this.add(warningLabel, 8, 3);
+        this.add(warningLabel, 1, 8);
         warningLabel.setTextFill(Color.rgb(210, 17, 14));
         warningLabel.setVisible(false);
 
@@ -279,39 +279,47 @@ public class AdminPage extends GridPane {
         movieTitle = movieTitleField.getText();
         movieRating = ratingChoiceBox.getValue();
         movieReleaseType = releaseTypeChoiceBox.getValue();
-
         sypnosis = synopsisTextArea.getText();
         urlImageOfPoster = urlField.getText();
+
         if (urlImageOfPoster.isEmpty() || checkIfURLExists(urlImageOfPoster) == false) {
             // then set to default picture
             urlImageOfPoster = "img/posterNA.jpg";
         }
         if (movieTitle != null && movieRating != null && movieReleaseType != null) {
-
             if (!db.checkIfMovieTitleExists(movieTitle)) {
                 try {
+                    Movie tempMovie = new Movie(movieTitle, movieRating, movieReleaseType, urlImageOfPoster, sypnosis);
                     db.createNewMovie(movieTitle, movieRating, movieReleaseType, urlImageOfPoster, sypnosis);
-                    for (int i = 0; i < numOfCinemas; ++i) {
-                        if(cinemaArray[i].getCinemaCheckBox().isSelected()) {
-                            db.addMovieToCinema(movieTitle, listOfCinemaNames[i], cinemaArray[i].getShowtimesBox1().getValue().toString());
-                            db.addMovieToCinema(movieTitle, listOfCinemaNames[i], cinemaArray[i].getShowtimesBox2().getValue().toString());
-                            db.addMovieToCinema(movieTitle, listOfCinemaNames[i], cinemaArray[i].getShowtimesBox3().getValue().toString());
-                            System.out.println("SUCCESS");
-                            warningLabel.setText("Movie added successfully!");
-                            warningLabel.setTextFill(Color.LIGHTGREEN);
-                            warningLabel.setVisible(true);
-                            reloadMovieListPane();
-                        }
+                    if (validShowtimeSelections(movieTitle)) {
+                        for (int i = 0; i < numOfCinemas; ++i) {
+                            if (cinemaArray[i].getCinemaCheckBox().isSelected()) {
+                                if (cinemaArray[i].getShowtimesBox1().getValue() != null)
+                                db.addMovieToCinema(movieTitle, listOfCinemaNames[i], cinemaArray[i].getShowtimesBox1().getValue().toString());
+                                if (cinemaArray[i].getShowtimesBox2().getValue() != null)
+                                db.addMovieToCinema(movieTitle, listOfCinemaNames[i], cinemaArray[i].getShowtimesBox2().getValue().toString());
+                                if (cinemaArray[i].getShowtimesBox3().getValue() != null)
+                                db.addMovieToCinema(movieTitle, listOfCinemaNames[i], cinemaArray[i].getShowtimesBox3().getValue().toString());
+                                System.out.println("SUCCESS");
+                                warningLabel.setText("Movie added successfully!");
+                                warningLabel.setTextFill(Color.LIGHTGREEN);
+                                warningLabel.setVisible(true);
+                                reloadMovieListPane();
+                                }
+                            }
+                        } else db.deleteMovie(tempMovie);
+                    } catch (Exception e) {
+                        System.err.println(e);
                     }
-                } catch (Exception e) {
-                    System.err.println(e);
-                }
+
             } else {
                 warningLabel.setText("Movie Title already exists!");
+                warningLabel.setTextFill(Color.RED);
                 warningLabel.setVisible(true);
             }
         } else {
             warningLabel.setText("Error check fields!");
+            warningLabel.setTextFill(Color.RED);
             warningLabel.setVisible(true);
         }
     }
@@ -339,7 +347,7 @@ public class AdminPage extends GridPane {
                     }
                 } else setFailureWarningMessage("Cinema name taken!");
             } else setFailureWarningMessage("Choose Coordinates b/w 0-100!");
-        } else setFailureWarningMessage("Enter correct value!");
+        } else setFailureWarningMessage("Error check fields!");
     }
 
     // RETURN TRUE IF NON OF THE CHECKBOXES WERE SELECTED
@@ -355,6 +363,53 @@ public class AdminPage extends GridPane {
         if (nc17Checkbox.isSelected()) { cinemaRatings.add(NC17); nonSelected = false; }
         if (notRatedCheckbox.isSelected()) { cinemaRatings.add(NOT_RATED); nonSelected = false; }
         return nonSelected;
+    }
+
+    // CHECK IF MOVIE CHECKBOXES ARE CHECKED AND SHOWTIME ARE NOT ALREADY IN DB
+    private boolean validShowtimeSelections(String movieName) {
+       boolean isValid = false;
+
+       // FIRST CHECK IF CINEMA CHECKBOXES ARE CHECKED
+        for (int i = 0; i < numOfCinemas; ++i) {
+            if(cinemaArray[i].getCinemaCheckBox().isSelected()) {
+                if (cinemaArray[i].getShowtimesBox1().getValue() == null &&
+                    cinemaArray[i].getShowtimesBox2().getValue() == null &&
+                    cinemaArray[i].getShowtimesBox3().getValue() == null)
+                {
+                    warningLabel.setText("Select 1 or more showtimes!");
+                    warningLabel.setTextFill(Color.RED);
+                    warningLabel.setVisible(true);
+                    return false;
+                } else {
+                    if(cinemaArray[i].getShowtimesBox1().getValue() != null) {
+                        if (db.checkIfMovieShowtimeExists(listOfCinemaNames[i], movieName, cinemaArray[i].getShowtimesBox1().getValue().toString())) { ;
+                            warningLabel.setText("One or more showtimes already exists!");
+                            warningLabel.setTextFill(Color.RED);
+                            warningLabel.setVisible(true);
+                            return false;
+                        }  else isValid = true;
+                    }
+                    if(cinemaArray[i].getShowtimesBox2().getValue() != null) {
+                        if(db.checkIfMovieShowtimeExists(listOfCinemaNames[i], movieName, cinemaArray[i].getShowtimesBox2().getValue().toString()))  {
+                            warningLabel.setText("One or more showtimes already exists!");
+                            warningLabel.setTextFill(Color.RED);
+                            warningLabel.setVisible(true);
+                            return false;
+                        } else isValid = true;
+                    }
+                    if(cinemaArray[i].getShowtimesBox3().getValue() != null) {
+                        if(db.checkIfMovieShowtimeExists(listOfCinemaNames[i], movieName, cinemaArray[i].getShowtimesBox3().getValue().toString()))  {
+                            warningLabel.setText("One or more showtimes already exists!");
+                            warningLabel.setTextFill(Color.RED);
+                            warningLabel.setVisible(true);
+                            return false;
+                        } else isValid = true;
+                    }
+                }
+            }
+
+        }
+        return isValid;
     }
 
     private void setFailureWarningMessage(String message) {

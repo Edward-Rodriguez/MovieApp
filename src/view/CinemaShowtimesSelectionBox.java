@@ -14,10 +14,14 @@ public class CinemaShowtimesSelectionBox extends HBox {
     private ComboBox showtimesBox1;
     private ComboBox showtimesBox2;
     private ComboBox showtimesBox3;
+    private String cinemaName;
+    private boolean checkboxTicked;
     ObservableList<String> showtimesList;
 
 
     public CinemaShowtimesSelectionBox(String cinemaName) {
+        checkboxTicked = false;
+        this.cinemaName = cinemaName;
         showtimesList = FXCollections.observableArrayList();
         showtimesList.addAll("9:00am", "9:30am", "10:00am", "10:30am",
                 "11:00am", "11:30am", "12:00pm", "12:30pm",
@@ -34,17 +38,32 @@ public class CinemaShowtimesSelectionBox extends HBox {
             }
 
 
-        cinemaCheckBox = new CheckBox(cinemaName);
+        cinemaCheckBox = new CheckBox(this.cinemaName);
         cinemaCheckBox.setMinWidth(150);
 
         showtimesBox1 = new ComboBox(showtimesList);
         showtimesBox2 = new ComboBox(showtimesList);
         showtimesBox3 = new ComboBox(showtimesList);
+        showtimesBox1.setDisable(true);
+        showtimesBox2.setDisable(true);
+        showtimesBox3.setDisable(true);
 
         ConnectedComboBox<String> connectedComboBox = new ConnectedComboBox<>(showtimesList);
         connectedComboBox.addComboBox(showtimesBox1);
         connectedComboBox.addComboBox(showtimesBox2);
         connectedComboBox.addComboBox(showtimesBox3);
+
+        cinemaCheckBox.setOnAction(e -> {
+            if (checkboxTicked) {
+                showtimesBox1.setDisable(true);
+                showtimesBox2.setDisable(true);
+                showtimesBox3.setDisable(true);
+            } else {
+                showtimesBox1.setDisable(false);
+                showtimesBox2.setDisable(false);
+                showtimesBox3.setDisable(false);
+            }
+        });
 
         this.setMinWidth(200);
 
@@ -83,5 +102,11 @@ public class CinemaShowtimesSelectionBox extends HBox {
         this.showtimesBox3 = showtimesBox3;
     }
 
+    public String getCinemaName() {
+        return cinemaName;
+    }
 
+    public void setCinemaName(String cinemaName) {
+        this.cinemaName = cinemaName;
+    }
 }

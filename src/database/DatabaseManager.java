@@ -94,7 +94,7 @@ public class DatabaseManager {
     public void addMovieToCinema( String movieTitle, String cinemaName, String showtime) throws Exception{
         try{
             PreparedStatement stmt = this.conn.prepareStatement(
-                    "INSERT INTO `CS370email`.`" + "movies-cinema" + "` (`movieID`, `cinemaID`, `showTimes`) VALUES ('" + movieTitle +
+                    "INSERT INTO `CS370email`.`" + "movies-cinema" + "` (`movieNameID`, `cinemaNameID`, `showTimes`) VALUES ('" + movieTitle +
                             "','" + cinemaName +  "','" + showtime + "');");
             //POST NEW ENTRY
             stmt.executeUpdate();
@@ -207,82 +207,6 @@ public class DatabaseManager {
             System.err.println(e);
         }
     }
-    
-//    public void retrieveCinemas() throws Exception{
-//        try {
-//            ObservableList<String> listOfCinemas = FXCollections.observableArrayList();
-//
-//            Statement stmt = conn.createStatement();
-////            String sql = "SELECT `Location` FROM Cinemas WHERE `Title` = '" + movieTitle + "';";
-//            String sql = "SELECT `cinemaName` FROM Cinemas WHERE `Title` = '" + movieTitle + "';";
-//
-//            ResultSet rs = stmt.executeQuery(sql);
-//
-//            while(rs.next()){
-//                listOfCinemas.add(
-//                        rs.getString("Location")
-//                );
-//            }
-//            rs.close();
-//            movie.setListOfCinemas(listOfCinemas);
-//        }
-//        catch (Exception e){
-//            System.err.println(e);
-//        }
-//    }
-
-
-    //retrieve data from DataBase method
-//    public void retrieveDraftMessages() throws Exception{
-//        try {
-//            draftMessageList.reset();
-//            Statement stmt = conn.createStatement();
-//
-//            String sql = "SELECT DATE_FORMAT(Timestamp, '%a %b %e %l:%i %p') As Time_stamp, `Sender`, `Recipient`, " +
-//                    "`Subject`, `Message`, `ID` FROM DraftTable WHERE Sender = '" + currentUser + "' " +
-//                    "ORDER BY `Timestamp`;";
-//            ResultSet rs = stmt.executeQuery(sql);
-//
-//            //System.out.println("So far so good");
-//            while(rs.next()){
-//                draftMessageList.addMessage(
-//                        rs.getString("Sender"),
-//                        rs.getString("Recipient"),
-//                        rs.getString("Subject"),
-//                        rs.getString("Time_stamp"),
-//                        rs.getString("Message"),
-//                        rs.getInt("ID")
-//                );
-//            }
-//            draftMessageList.setDraftMessage(true);
-//            rs.close();
-//        }
-//        catch (Exception e){
-//            System.err.println(e);
-//        }
-//    }
-
-
-//     CHECK IF MOVIE TITLE EXISTS AFTER ADDING MOVIE
-//     RETURN O OTHERWISE
-//    public boolean Authenticate(String movieTitle){
-//        int success;
-//        try{
-//            String sql = "SELECT EXISTS(SELECT 1 FROM MovieList WHERE Title = '" + movieTitle + "');";
-//            Statement stmt = conn.createStatement();
-//            ResultSet rs = stmt.executeQuery(sql);
-//            rs.next();
-//            success = rs.getInt(1);
-//            if (success == 1) {
-//                setCurrentUser(username);
-//                retrieveMessages("Inbox", messageTableModel);
-//                return true;
-//            }
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
-//        return false;
-//    }
 
     public boolean checkIfMovieTitleExists(String movieTitle){
         int success;
@@ -305,6 +229,24 @@ public class DatabaseManager {
         int success;
         try{
             String sql = "SELECT EXISTS(SELECT 1 FROM Cinemas WHERE cinemaName = '" + cinemaName + "');";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            rs.next();
+            success = rs.getInt(1);
+            if (success == 1) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    public boolean checkIfMovieShowtimeExists(String cinemaName, String movieTitle, String showTime){
+        int success;
+        try{
+            String sql = "SELECT EXISTS(SELECT 1 FROM `movies-cinema` WHERE showTimes = '" + showTime +
+                    "' AND cinemaNameID = '" + cinemaName + "' and movieNameID = '" + movieTitle + "');";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             rs.next();
