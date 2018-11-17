@@ -6,9 +6,14 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -17,9 +22,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import model.Cinema;
 import model.CinemaTableModel;
 import model.Movie;
+import model.MovieTableModel;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -86,12 +93,17 @@ public class AdminPage extends GridPane {
 
     DatabaseManager db;
     CinemaTableModel cinemaTableModel;
+    MovieTableModel movieTableModel;
     ObservableList<String> cinemaNameList;
+    Stage window;
 
     private int numOfCinemas;
     private String[] listOfCinemaNames;
     TextField xCoordField;
     TextField yCoordField;
+
+    // MOVIELIST PANE, WILL GO AT BOTTOM
+    VBox movieListPane = new VBox();
 
     // STATIC VARIABLES
     private static final String G = "G";
@@ -105,13 +117,12 @@ public class AdminPage extends GridPane {
     private static final String[] ratingsList = {G, PG, PG13, R, NC17, NOT_RATED};
     private static final String[] releaseTypeList = {GENERAL, LIMITED};
     ObservableList<String> cinemaRatings;
-
     CinemaShowtimesSelectionBox[] cinemaArray;
-
 
     public AdminPage(DatabaseManager db){
         this.db = db;
         cinemaTableModel = db.getCinemaTableModel();
+        movieTableModel = db.getMovieTableModel();
         numOfCinemas = 0;
         getNumOfCinemas();
         listOfCinemaNames = new String[numOfCinemas];
@@ -250,6 +261,9 @@ public class AdminPage extends GridPane {
         cinemaWarningLabel.setTextFill(Color.rgb(210, 17, 14));
         cinemaWarningLabel.setVisible(false);
 
+        movieListPane = new VBox();
+        reloadMovieListPane();
+        this.add(movieListPane, 0, 9, 3, 1);
         initEventHandlers();
     }
 
@@ -406,6 +420,38 @@ public class AdminPage extends GridPane {
             return true;
         } catch (Exception e) {
             return false;
+        }
+    }
+
+    // CREATE LIST OF MOVIES WITH DELETE OPTION
+    private void reloadMovieListPane() {
+        movieListPane.getChildren().clear();
+        for (Movie movie : movieTableModel.getMovies()) {
+            SingleMovieContainerView movieListEditor = new SingleMovieContainerView(movie);
+            if(movieTableModel.isSelectedMovie(movie)) {
+                movieListEditor.getDeleteButton().setVisible(true);
+            }
+            movieListPane.getChildren().add(movieListEditor);
+
+            // EVENT HANDLERS
+            movieListEditor.setOnMouseClicked(e -> {
+                movieTableModel.setSelectedMovie(movie);
+            });
+            movieListEditor.setOnMouseEntered(e -> {
+                movieListEditor.getDeleteButton().setVisible(true);
+            });
+            movieListEditor.setOnMouseExited(e -> {
+                movieListEditor.getDeleteButton().setVisible(false);
+            });
+            movieListEditor.getDeleteButton().setOnAction(e -> {
+                try{
+                    db.deleteMovie(movie);
+                    reloadMovieListPane();
+                } catch (Exception event) {
+                    System.err.println(event);
+                }
+            });
+
         }
     }
 

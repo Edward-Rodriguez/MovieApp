@@ -121,6 +121,21 @@
         -fx-pref-width:200px;
         -fx-pref-height:300px;
     }
+
+     .delete_button{
+         -fx-graphic: url("../img/trash.png");
+         -fx-border-color: transparent;
+         -fx-padding: 0px 5px 0px 12x;
+         -fx-border-width: 0;
+         -fx-background-radius: 0;
+         -fx-background-color: transparent;
+         -fx-font-family:"Segoe UI", Helvetica, Arial, sans-serif;
+         -fx-font-size: 1em; /* 12 */
+         -fx-text-fill: #828282;
+     }
+     .delete_button:hover{
+          -fx-graphic: url("../img/trash-red.png");
+      }
 /* CREDIT FOR IMAGES:
     https://www.freepik.com/free-vector/dark-pixels-background_800591.htm">Designed by Freepik
 

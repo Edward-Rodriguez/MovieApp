@@ -134,17 +134,17 @@ public class DatabaseManager {
         }
     }
 
-//    public void deleteDraftMessage(Message message) throws Exception{
-//        try{
-//            PreparedStatement stmt = this.conn.prepareStatement(
-//                    "DELETE FROM `CS370email`.`DraftTable` WHERE (`ID` = '" + message.getID() + "');");
-//            //POST NEW ENTRY
-//            stmt.executeUpdate();
-//            draftMessageList.removeMessage(message);
-//        }catch (Exception e){
-//            System.out.println(e);
-//        }
-//    }
+    public void deleteMovie(Movie movie) throws Exception{
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement(
+                    "DELETE FROM `CS370email`.`MovieList` WHERE (`Title` = '" + movie.getMovieTitle() + "');");
+            //POST NEW ENTRY
+            stmt.executeUpdate();
+            movieTableModel.removeMovie(movie);
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
 //
 //    public void deleteMessage(Message message, String table, MessageTableModel model) throws Exception{
 //        try{

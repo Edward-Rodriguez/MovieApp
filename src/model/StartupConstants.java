@@ -40,6 +40,7 @@ public class StartupConstants {
     public static String    CSS_CLASS_ADMIN_SUBMIT_BUTTON= "admin_submit_button";
     public static String    CSS_CLASS_ADMIN_CANCEL_BUTTON= "admin_cancel_button";
     public static String    CSS_CLASS_ADMIN_LOGIN_PANE= "admin_login_pane";
+    public static String    CSS_CLASS_ADMIN_DELETE_BUTTON= "delete_button";
 
 
 }
