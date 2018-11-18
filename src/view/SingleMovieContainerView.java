@@ -38,7 +38,7 @@ public class SingleMovieContainerView extends HBox {
         Region spacer = new Region();
 
         HBox.setHgrow(spacer, Priority.ALWAYS);
-        spacer.setMaxWidth(145);
+        spacer.setMaxWidth(150);
 
         deleteButton.getStyleClass().add(CSS_CLASS_ADMIN_DELETE_BUTTON);
 

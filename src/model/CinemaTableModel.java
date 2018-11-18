@@ -17,6 +17,10 @@ public class CinemaTableModel {
     public boolean isCinemaSelected() {
         return (selectedCinema != null) ? true : false;
     }
+    public boolean isSelectedCinema(Cinema tempCinema) {
+        return selectedCinema == tempCinema;
+    }
+
 
     public ObservableList<Cinema> getCinemas() {
         return cinemas;
@@ -54,5 +58,10 @@ public class CinemaTableModel {
             selectedCinema = null;
         }
     }
+
+    public void removeCinema(Cinema cinema) {
+        cinemas.remove(cinema);
+    }
+
 
 }

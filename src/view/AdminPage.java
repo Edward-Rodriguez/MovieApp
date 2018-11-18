@@ -13,11 +13,10 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -31,6 +30,8 @@ import model.MovieTableModel;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Hashtable;
+
+import static model.StartupConstants.CSS_CLASS_ADMIN_DELETE_BUTTON;
 
 public class AdminPage extends GridPane {
 
@@ -102,6 +103,7 @@ public class AdminPage extends GridPane {
     private String movieSelection;
     private String cinemaSelection;
     Label showtimeWarningLabel;
+    HBox movieCinemaDropdownPane;
 
     DatabaseManager db;
     CinemaTableModel cinemaTableModel;
@@ -117,7 +119,10 @@ public class AdminPage extends GridPane {
     TextField yCoordField;
 
     // MOVIELIST PANE, WILL GO AT BOTTOM
-    VBox movieListPane = new VBox();
+    VBox movieListPane;
+
+    // MOVIELIST PANE, WILL GO AT BOTTOM
+    VBox cinemaListPane;
 
     // STATIC VARIABLES
     private static final String G = "G";
@@ -137,11 +142,6 @@ public class AdminPage extends GridPane {
         this.db = db;
         cinemaTableModel = db.getCinemaTableModel();
         movieTableModel = db.getMovieTableModel();
-        numOfCinemas = 0;
-        getNumOfCinemas();
-        getNumOfMovis();
-        listOfCinemaNames = new String[numOfCinemas];
-        listOfMovieTitles = new String[numOfMovies];
         getNamesOfCinemas();
         getTitlesOfMovies();
         cinemaArray = new CinemaShowtimesSelectionBox[numOfCinemas];
@@ -223,7 +223,7 @@ public class AdminPage extends GridPane {
 
         /**********************ADD SHOWTIMES PANE BELOW*******************/
         VBox addshowTimesPane = new VBox(10);
-        HBox movieCinemaDropdownPane = new HBox();
+        movieCinemaDropdownPane = new HBox();
         addShowtimesLabel = new Label("Add Showtimes");
         addShowtimesLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         addShowtimesLabel.setPadding(new Insets(10, 0, 5, 0));
@@ -319,6 +319,7 @@ public class AdminPage extends GridPane {
         cinemaWarningLabel.setVisible(false);
 
 
+        /***********************MOVIE LIST (DELETABLE)**********************/
         movieListPane = new VBox();
         Label movieListLabel = new Label("Current Movies:");
         movieListLabel.setUnderline(true);
@@ -328,6 +329,21 @@ public class AdminPage extends GridPane {
         this.add(lineSeparator, 0, 10, 3, 1);
         this.add(movieListLabel, 1, 11, 3, 1);
         this.add(movieListPane, 0, 12, 3, 1);
+
+
+        /***********************CINEMA LIST (DELETABLE)**********************/
+        cinemaListPane = new VBox();
+        Label cinemaListLabel = new Label("Current Cinemas:");
+        cinemaListLabel.setUnderline(true);
+        cinemaListLabel.setPadding(new Insets(5, 0, 15, 0));
+        cinemaListLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+        reloadCinemaListPane();
+        Separator sep3 = new Separator();
+        sep3.setPadding(new Insets(20, 0 , 0 , 0));
+        this.add(sep3, 4, 10, 3, 1);
+        this.add(cinemaListLabel, 5, 11, 3, 1);
+        this.add(cinemaListPane, 4, 12, 3, 1);
+
         initEventHandlers();
     }
 
@@ -360,7 +376,7 @@ public class AdminPage extends GridPane {
                                 warningLabel.setText("Movie added successfully!");
                                 warningLabel.setTextFill(Color.LIGHTGREEN);
                                 warningLabel.setVisible(true);
-                                reloadMovieListPane();
+                                updateMovieUIComponents();
                                 }
                             }
                         } else db.deleteMovie(tempMovie);
@@ -397,6 +413,7 @@ public class AdminPage extends GridPane {
                                 db.addCinemaMovieTypeAndRatings(rating, cinemaName);
                             }
                             setSuccessWarningMessage("Added Cinema Successfully!");
+                            updateCinemaUIComponents();
                         } catch (Exception e) {
                             System.err.println(e);
                         }
@@ -404,6 +421,39 @@ public class AdminPage extends GridPane {
                 } else setFailureWarningMessage("Cinema name taken!");
             } else setFailureWarningMessage("Choose Coordinates b/w 0-100!");
         } else setFailureWarningMessage("Error check fields!");
+    }
+
+    private void updateCinemaUIComponents() {
+        try {
+            db.retrieveCinemas();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        cinemaTableModel = db.getCinemaTableModel();
+        cinemasList.getChildren().clear();
+        createCinemaListCheckboxes();
+        reloadCinemaListPane();
+        cinemaListChoiceBox = new ChoiceBox<String>(FXCollections.observableArrayList(
+                listOfCinemaNames));
+        cinemaListChoiceBox.getSelectionModel().selectFirst();
+        movieCinemaDropdownPane.getChildren().clear();
+        movieCinemaDropdownPane.getChildren().addAll(movieListChoiceBox, cinemaListChoiceBox, timeListComboBox);
+    }
+
+    private void updateMovieUIComponents() {
+        try {
+            db.retrieveMovies();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        movieTableModel = db.getMovieTableModel();
+        reloadMovieListPane();
+        getTitlesOfMovies();
+        movieListChoiceBox = new ChoiceBox<String>(FXCollections.observableArrayList(
+                listOfMovieTitles));
+        movieListChoiceBox.getSelectionModel().selectFirst();
+        movieCinemaDropdownPane.getChildren().clear();
+        movieCinemaDropdownPane.getChildren().addAll(movieListChoiceBox, cinemaListChoiceBox, timeListComboBox);
     }
 
     private void addShowtime() {
@@ -533,6 +583,8 @@ public class AdminPage extends GridPane {
     }
 
     private void createCinemaListCheckboxes() {
+        getNamesOfCinemas();
+        cinemaArray = new CinemaShowtimesSelectionBox[numOfCinemas];
         for (int i = 0; i < numOfCinemas; ++i) {
             cinemaArray[i] = new CinemaShowtimesSelectionBox(listOfCinemaNames[i]);
             cinemasList.getChildren().add(cinemaArray[i]);
@@ -540,18 +592,22 @@ public class AdminPage extends GridPane {
     }
 
     private void getNumOfCinemas() {
+        numOfCinemas = 0;
         for (Cinema cinema : cinemaTableModel.getCinemas()) {
                 numOfCinemas++;
         }
     }
 
-    private void getNumOfMovis() {
+    private void getNumOfMovies() {
+        numOfMovies = 0;
         for (Movie movie : movieTableModel.getMovies()) {
             numOfMovies++;
         }
     }
 
     private void getNamesOfCinemas() {
+        getNumOfCinemas();
+        listOfCinemaNames = new String[numOfCinemas];
         int i = 0;
         for (Cinema cinema : cinemaTableModel.getCinemas()) {
                 listOfCinemaNames[i++] = cinema.getCinemaName();
@@ -559,7 +615,9 @@ public class AdminPage extends GridPane {
     }
 
     private void getTitlesOfMovies() {
+        getNumOfMovies();
         int i = 0;
+        listOfMovieTitles = new String[numOfMovies];
         for (Movie movie : movieTableModel.getMovies()) {
             listOfMovieTitles[i++] = movie.getMovieTitle();
         }
@@ -601,12 +659,42 @@ public class AdminPage extends GridPane {
             movieListEditor.getDeleteButton().setOnAction(e -> {
                 try{
                     db.deleteMovie(movie);
-                    reloadMovieListPane();
+                    updateMovieUIComponents();
                 } catch (Exception event) {
                     System.err.println(event);
                 }
             });
+        }
+    }
 
+    // CREATE LIST OF MOVIES WITH DELETE OPTION
+    private void reloadCinemaListPane() {
+        cinemaListPane.getChildren().clear();
+        for (Cinema cinema : cinemaTableModel.getCinemas()) {
+            SingleCinemaContainerView cinemaListEditor = new SingleCinemaContainerView(cinema);
+            if(cinemaTableModel.isSelectedCinema(cinema)) {
+                cinemaListEditor.getDeleteButton().setVisible(true);
+            }
+            cinemaListPane.getChildren().add(cinemaListEditor);
+
+            // EVENT HANDLERS
+            cinemaListEditor.setOnMouseClicked(e -> {
+                cinemaTableModel.setSelectedCinema(cinema);
+            });
+            cinemaListEditor.setOnMouseEntered(e -> {
+                cinemaListEditor.getDeleteButton().setVisible(true);
+            });
+            cinemaListEditor.setOnMouseExited(e -> {
+                cinemaListEditor.getDeleteButton().setVisible(false);
+            });
+            cinemaListEditor.getDeleteButton().setOnAction(e -> {
+                try{
+                    db.deleteCinema(cinema);
+                    updateCinemaUIComponents();
+                } catch (Exception event) {
+                    System.err.println(event);
+                }
+            });
         }
     }
 
@@ -624,5 +712,44 @@ public class AdminPage extends GridPane {
         ColumnConstraints col5 = new ColumnConstraints();
         col5.setMaxWidth(100);
         this.getColumnConstraints().addAll(col1,col2,col3,col4,col5);
+    }
+
+    // INER CLASS FOR MOVIE LIST VIEW
+    private class SingleCinemaContainerView extends HBox{
+        private Cinema cinema;
+        private Button deleteButton;
+        private Image imageDelete;
+        private Label cinemaName;
+
+        public SingleCinemaContainerView(Cinema cinema) {
+            this.cinema = cinema;
+
+            // CINEMA NAME
+            cinemaName = new Label(this.cinema.getCinemaName());
+            cinemaName.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+            cinemaName.setPrefWidth(200);
+
+            imageDelete = new Image(getClass().getResourceAsStream("../img/trash.png"));
+            deleteButton = new Button();
+            deleteButton.setPadding(Insets.EMPTY);
+            deleteButton.setGraphic(new ImageView(imageDelete));
+            deleteButton.setVisible(false);
+
+            Region spacer = new Region();
+
+            HBox.setHgrow(spacer, Priority.ALWAYS);
+            spacer.setMaxWidth(150);
+
+            deleteButton.getStyleClass().add(CSS_CLASS_ADMIN_DELETE_BUTTON);
+
+            getChildren().addAll(cinemaName, spacer, deleteButton);
+            this.setStyle("-fx-border-style: solid inside;"
+                    + "-fx-border-width: 2;" + "-fx-border-insets: 5;"
+                    + "-fx-border-radius: 5;" + "-fx-border-color: #D1EEEE;");
+        }
+
+        public Button getDeleteButton() {
+            return deleteButton;
+        }
     }
 }

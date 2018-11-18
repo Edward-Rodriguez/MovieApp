@@ -15,11 +15,11 @@ public class MovieApp extends Application {
 
         try{
             this.db.getConnection();
-//            ui.startUI(primaryStage, "MovieApp");
-            AdminPage admin= new AdminPage(this.db);
-            Scene scene = new Scene(admin, 972, 600);
-            primaryStage.setScene(scene);
-            primaryStage.show();
+            ui.startUI(primaryStage, "MovieApp");
+//            AdminPage admin= new AdminPage(this.db);
+//            Scene scene = new Scene(admin, 972, 600);
+//            primaryStage.setScene(scene);
+//            primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }

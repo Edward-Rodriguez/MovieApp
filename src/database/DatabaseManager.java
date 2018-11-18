@@ -2,9 +2,7 @@ package database;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.CinemaTableModel;
-import model.Movie;
-import model.MovieTableModel;
+import model.*;
 
 import java.util.Date;
 
@@ -141,6 +139,18 @@ public class DatabaseManager {
             //POST NEW ENTRY
             stmt.executeUpdate();
             movieTableModel.removeMovie(movie);
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    public void deleteCinema(Cinema cinema) throws Exception{
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement(
+                    "DELETE FROM `CS370email`.`Cinemas` WHERE (`cinemaName` = '" + cinema.getCinemaName() + "');");
+            //POST NEW ENTRY
+            stmt.executeUpdate();
+            cinemaTableModel.removeCinema(cinema);
         }catch (Exception e){
             System.out.println(e);
         }
