@@ -32,12 +32,6 @@ public class CinemaShowtimesSelectionBox extends HBox {
                 "9:00pm", "9:30pm", "10:00pm", "10:30pm",
                 "11:00pm", "11:30pm", "12:00am");
 
-        for (Iterator i = showtimesList.iterator(); i.hasNext();)
-            if (i.next().equals("Corn")) {
-                i.remove();
-            }
-
-
         cinemaCheckBox = new CheckBox(this.cinemaName);
         cinemaCheckBox.setMinWidth(150);
 
@@ -55,10 +49,12 @@ public class CinemaShowtimesSelectionBox extends HBox {
 
         cinemaCheckBox.setOnAction(e -> {
             if (checkboxTicked) {
+                checkboxTicked = false;
                 showtimesBox1.setDisable(true);
                 showtimesBox2.setDisable(true);
                 showtimesBox3.setDisable(true);
             } else {
+                checkboxTicked = true;
                 showtimesBox1.setDisable(false);
                 showtimesBox2.setDisable(false);
                 showtimesBox3.setDisable(false);

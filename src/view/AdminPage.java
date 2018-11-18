@@ -91,6 +91,18 @@ public class AdminPage extends GridPane {
     CheckBox notRatedCheckbox;
     Label cinemaWarningLabel;
 
+    // ADD SHOWTIMES LABELS/DROPDOWNS/PANE
+    Label addShowtimesLabel;
+    ChoiceBox<String> movieListChoiceBox;
+    ChoiceBox<String> cinemaListChoiceBox;
+    ComboBox<String> timeListComboBox;
+    ObservableList<String> showtimeList;
+    Button addShowtimeButton;
+    private String showtime;
+    private String movieSelection;
+    private String cinemaSelection;
+    Label showtimeWarningLabel;
+
     DatabaseManager db;
     CinemaTableModel cinemaTableModel;
     MovieTableModel movieTableModel;
@@ -98,7 +110,9 @@ public class AdminPage extends GridPane {
     Stage window;
 
     private int numOfCinemas;
+    private int numOfMovies;
     private String[] listOfCinemaNames;
+    private String[] listOfMovieTitles;
     TextField xCoordField;
     TextField yCoordField;
 
@@ -125,10 +139,15 @@ public class AdminPage extends GridPane {
         movieTableModel = db.getMovieTableModel();
         numOfCinemas = 0;
         getNumOfCinemas();
+        getNumOfMovis();
         listOfCinemaNames = new String[numOfCinemas];
+        listOfMovieTitles = new String[numOfMovies];
         getNamesOfCinemas();
+        getTitlesOfMovies();
         cinemaArray = new CinemaShowtimesSelectionBox[numOfCinemas];
         cinemaRatings = FXCollections.observableArrayList();
+        Separator lineSeparator = new Separator();
+        lineSeparator.setPadding(new Insets(20, 0 , 0 , 0));
 
         this.setHgap(10);
         this.setVgap(5);
@@ -194,12 +213,50 @@ public class AdminPage extends GridPane {
         addMovieButton = new Button("Add Movie");
         this.add(addMovieButton, 0, 8, 1, 1);
         addMovieButton.setStyle("-fx-background-color: #7BCC70; -fx-padding:10;");
-        addMovieButton.setPadding(new Insets(0,0,0,100));
+        addMovieButton.setPadding(new Insets(0,0,20,100));
 
         warningLabel = new Label("Movie Title Already Exists!");
         this.add(warningLabel, 1, 8);
         warningLabel.setTextFill(Color.rgb(210, 17, 14));
         warningLabel.setVisible(false);
+
+
+        /**********************ADD SHOWTIMES PANE BELOW*******************/
+        VBox addshowTimesPane = new VBox(10);
+        HBox movieCinemaDropdownPane = new HBox();
+        addShowtimesLabel = new Label("Add Showtimes");
+        addShowtimesLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+        addShowtimesLabel.setPadding(new Insets(10, 0, 5, 0));
+
+        movieListChoiceBox = new ChoiceBox<String>(FXCollections.observableArrayList(
+                listOfMovieTitles));
+        movieListChoiceBox.getSelectionModel().selectFirst();
+        cinemaListChoiceBox = new ChoiceBox<String>(FXCollections.observableArrayList(
+                listOfCinemaNames));
+        cinemaListChoiceBox.getSelectionModel().selectFirst();
+        showtimeList = FXCollections.observableArrayList();
+        showtimeList.addAll("9:00am", "9:30am", "10:00am", "10:30am",
+                "11:00am", "11:30am", "12:00pm", "12:30pm",
+                "1:00pm", "1:30pm", "2:00pm", "2:30pm",
+                "3:00pm", "3:30pm", "4:00pm", "4:30pm",
+                "5:00pm", "5:30pm", "6:00pm", "6:30pm",
+                "7:00pm", "7:30pm", "8:00pm", "8:30pm",
+                "9:00pm", "9:30pm", "10:00pm", "10:30pm",
+                "11:00pm", "11:30pm", "12:00am");
+        timeListComboBox = new ComboBox<>(showtimeList);
+        timeListComboBox.getSelectionModel().selectFirst();
+        addShowtimeButton = new Button("Add Showtime");
+        addShowtimeButton.setStyle("-fx-background-color: #7BCC70; -fx-padding:10;");
+        showtimeWarningLabel = new Label();
+        showtimeWarningLabel.setVisible(false);
+        Separator sep = new Separator();
+        sep.setPadding(new Insets(20, 0 , 0 , 0));
+        movieCinemaDropdownPane.getChildren().addAll(movieListChoiceBox, cinemaListChoiceBox, timeListComboBox);
+        HBox buttonPane = new HBox(10);
+        buttonPane.getChildren().addAll(addShowtimeButton, showtimeWarningLabel);
+        addshowTimesPane.getChildren().addAll(sep,addShowtimesLabel, movieCinemaDropdownPane, buttonPane);
+        this.add(addshowTimesPane, 0,9,2,1);
+
 
         /**********************CINEMA CONFIGURATION BELOW*******************/
         // HEADING 'CINEMAS'
@@ -261,17 +318,16 @@ public class AdminPage extends GridPane {
         cinemaWarningLabel.setTextFill(Color.rgb(210, 17, 14));
         cinemaWarningLabel.setVisible(false);
 
+
         movieListPane = new VBox();
-        Separator lineSeparator = new Separator();
-        lineSeparator.setPadding(new Insets(20, 0 , 0 , 0));
         Label movieListLabel = new Label("Current Movies:");
         movieListLabel.setUnderline(true);
         movieListLabel.setPadding(new Insets(5, 0, 15, 0));
         movieListLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         reloadMovieListPane();
-        this.add(lineSeparator, 0, 9, 3, 1);
-        this.add(movieListLabel, 1, 10, 3, 1);
-        this.add(movieListPane, 0, 11, 3, 1);
+        this.add(lineSeparator, 0, 10, 3, 1);
+        this.add(movieListLabel, 1, 11, 3, 1);
+        this.add(movieListPane, 0, 12, 3, 1);
         initEventHandlers();
     }
 
@@ -348,6 +404,27 @@ public class AdminPage extends GridPane {
                 } else setFailureWarningMessage("Cinema name taken!");
             } else setFailureWarningMessage("Choose Coordinates b/w 0-100!");
         } else setFailureWarningMessage("Error check fields!");
+    }
+
+    private void addShowtime() {
+        movieSelection = movieListChoiceBox.getValue();
+        cinemaSelection = cinemaListChoiceBox.getValue();
+        showtime = timeListComboBox.getValue();
+
+        if (!db.checkIfMovieShowtimeExists(cinemaSelection, movieSelection, showtime)) {
+            try {
+                db.addMovieToCinema(movieSelection, cinemaSelection, showtime);
+                showtimeWarningLabel.setText("Showtime added!");
+                showtimeWarningLabel.setTextFill(Color.DARKGREEN);
+                showtimeWarningLabel.setVisible(true);
+            } catch (Exception e) {
+                System.err.println(e);
+            }
+        } else {
+            showtimeWarningLabel.setText("Showtime already exists!");
+            showtimeWarningLabel.setTextFill(Color.RED);
+            showtimeWarningLabel.setVisible(true);
+        }
     }
 
     // RETURN TRUE IF NON OF THE CHECKBOXES WERE SELECTED
@@ -450,6 +527,9 @@ public class AdminPage extends GridPane {
         addCinemaButton.setOnAction(e -> {
             addCinema();
         });
+        addShowtimeButton.setOnAction(e -> {
+            addShowtime();
+        });
     }
 
     private void createCinemaListCheckboxes() {
@@ -465,10 +545,23 @@ public class AdminPage extends GridPane {
         }
     }
 
+    private void getNumOfMovis() {
+        for (Movie movie : movieTableModel.getMovies()) {
+            numOfMovies++;
+        }
+    }
+
     private void getNamesOfCinemas() {
         int i = 0;
         for (Cinema cinema : cinemaTableModel.getCinemas()) {
                 listOfCinemaNames[i++] = cinema.getCinemaName();
+        }
+    }
+
+    private void getTitlesOfMovies() {
+        int i = 0;
+        for (Movie movie : movieTableModel.getMovies()) {
+            listOfMovieTitles[i++] = movie.getMovieTitle();
         }
     }
 
