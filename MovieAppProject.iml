@@ -25,7 +25,5 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="com.jfoenix:jfoenix:9.0.6" level="project" />
-    <orderEntry type="library" name="com.jfoenix:jfoenix:8.0.7" level="project" />
   </component>
 </module>

@@ -1,14 +1,10 @@
 package view;
 
-import com.jfoenix.controls.JFXButton;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -19,7 +15,6 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import model.Cinema;
 import model.CinemaTableModel;
-import model.Movie;
 
 import java.util.*;
 

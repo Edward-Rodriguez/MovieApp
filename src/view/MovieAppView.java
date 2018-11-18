@@ -1,6 +1,5 @@
 package view;
 
-import com.jfoenix.controls.JFXTabPane;
 import controller.MovieController;
 import database.DatabaseManager;
 import javafx.application.Platform;
