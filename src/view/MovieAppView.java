@@ -332,7 +332,7 @@ public class MovieAppView {
             scroll.getStyleClass().add("edge-to-edge");
 
             Separator lineSeparator = new Separator();
-            CinemaListView cinemaListView = new CinemaListView(cinemaTableModel);
+            CinemaListView cinemaListView = new CinemaListView(cinemaTableModel, window);
 
             VBox rootPane2 = new VBox();
             VBox movieDescriptionPane = new VBox();
@@ -358,6 +358,7 @@ public class MovieAppView {
             window.setScene(newScene);
             window.show();
         });
+
     }
 
     // ADD LISTENERS TO EACH CHECKBOX AND HANDLE EACH EVENT
