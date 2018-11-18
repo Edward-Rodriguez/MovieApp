@@ -1,6 +1,5 @@
 package view;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
 import controller.MovieController;
 import database.DatabaseManager;
@@ -103,8 +102,8 @@ public class MovieAppView {
     MovieController controller;
     private static final String cssPath = "css/movieStyle.css";
 
-    JFXButton movieListButton;
-    JFXButton cinemaListButton;
+    Button movieListButton;
+    Button cinemaListButton;
 
     //CINEMALIST COMPONENTS
 
@@ -168,8 +167,16 @@ public class MovieAppView {
     private void initButtonPane() {
         buttonPane = new HBox();
         buttonPane.setStyle("-fx-background-color: black;");
-        movieListButton = new JFXButton("Movies");
-        cinemaListButton = new JFXButton("Cinemas");
+        movieListButton = new Button("Movies");
+        cinemaListButton = new Button("Cinemas");
+        movieListButton.setStyle("-fx-background-color: black;\n" +
+                "/*     -fx-text-fill: #6E2DBD;*/\n" +
+                "     -fx-text-fill: #D8D8D8;\n" +
+                "     -fx-font: normal bold 20px 'Arial';");
+        cinemaListButton.setStyle("-fx-background-color: black;\n" +
+                "/*     -fx-text-fill: #6E2DBD;*/\n" +
+                "     -fx-text-fill: #D8D8D8;\n" +
+                "     -fx-font: normal bold 20px 'Arial';");
         movieListButton.setFocusTraversable(true);
         cinemaListButton.setFocusTraversable(true);
         HBox.setHgrow(movieListButton, Priority.ALWAYS);

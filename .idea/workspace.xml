@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieAppProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MovieAppProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MovieAppProject/view/MovieAppView$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MovieAppProject/view/MovieAppView$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MovieAppProject/view/MovieAppView$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MovieAppProject/view/MovieAppView$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MovieAppProject/view/MovieAppView$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MovieAppProject/view/MovieAppView$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MovieAppProject/view/MovieAppView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MovieAppProject/view/MovieAppView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/css/movieStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/movieStyle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/CinemaListView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CinemaListView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/MovieAppView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MovieAppView.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
@@ -87,13 +81,13 @@
         <counts>
           <entry key="css" value="249" />
           <entry key="dummy" value="11" />
-          <entry key="java" value="17433" />
+          <entry key="java" value="17739" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="249" />
-          <entry key="JAVA" value="17433" />
+          <entry key="JAVA" value="17739" />
           <entry key="PLAIN_TEXT" value="11" />
         </counts>
       </usages-collector>
@@ -104,11 +98,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/view/MovieAppView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="337" column="66" selection-start-line="337" selection-start-column="66" selection-end-line="337" selection-end-column="66" />
+            <state relative-caret-position="347">
+              <caret line="178" column="57" selection-start-line="178" selection-start-column="57" selection-end-line="178" selection-end-column="57" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -125,14 +119,15 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/view/CinemaListView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="53" column="35" selection-start-line="53" selection-start-column="35" selection-end-line="53" selection-end-column="35" />
+            <state relative-caret-position="128">
+              <caret line="39" column="28" selection-start-line="39" selection-start-column="28" selection-end-line="39" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1748#1749#0" expanded="true" />
+                <element signature="e#2989#2990#0" expanded="true" />
+                <element signature="e#3022#3023#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -153,8 +148,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/view/AdminPage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="158" column="8" selection-start-line="158" selection-start-column="8" selection-end-line="158" selection-end-column="71" />
+            <state relative-caret-position="369">
+              <caret line="753" column="5" selection-start-line="716" selection-start-column="3" selection-end-line="753" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#28431#28432#0" expanded="true" />
@@ -176,8 +171,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/view/SingleMovieContainerView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="40" column="30" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
+            <state relative-caret-position="468">
+              <caret line="48" column="5" selection-start-line="27" selection-start-column="7" selection-end-line="48" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -188,8 +183,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/css/movieStyle.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="138" column="21" lean-forward="true" selection-start-line="138" selection-start-column="21" selection-end-line="138" selection-end-column="21" />
+            <state relative-caret-position="348">
+              <caret line="154" column="5" selection-start-line="154" selection-start-column="5" selection-end-line="154" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -244,9 +239,10 @@
       <find>movieID</find>
       <find>middle</find>
       <find>movieListPane</find>
-      <find>ba</find>
       <find>update</find>
       <find>logo</find>
+      <find>JFX</find>
+      <find>ba</find>
     </findStrings>
     <replaceStrings>
       <replace>rootPane</replace>
@@ -292,8 +288,8 @@
         <option value="$PROJECT_DIR$/src/view/SingleMovieContainerView.java" />
         <option value="$PROJECT_DIR$/src/view/AdminPage.java" />
         <option value="$PROJECT_DIR$/src/css/movieStyle.css" />
-        <option value="$PROJECT_DIR$/src/view/CinemaListView.java" />
         <option value="$PROJECT_DIR$/src/view/MovieAppView.java" />
+        <option value="$PROJECT_DIR$/src/view/CinemaListView.java" />
       </list>
     </option>
   </component>
@@ -355,6 +351,10 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="view" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="MovieApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -364,7 +364,8 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Downloaded.Files.Path" value="~\MovieApp\lib" />
+    <property name="Downloaded.Files.Path.Enabled" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="GoToFile.includeJavaFiles" value="false" />
@@ -375,7 +376,7 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542565551311" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542567235308" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="C:/Program Files (x86)/MySQL/Connector J 8.0/mysql-connector-java-8.0.12.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -494,7 +495,7 @@
     <frame x="290" y="45" width="1263" height="812" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.19005613" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.19005613" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="Designer" order="3" />
@@ -504,7 +505,7 @@
       <window_info id="Learn" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3283582" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6904762" visible="true" weight="0.26285714" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.6904762" visible="true" weight="0.26285714" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49924472" weight="0.34" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -582,7 +583,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/view/MovieAppView.java</url>
-          <line>398</line>
+          <line>405</line>
           <properties />
           <option name="timeStamp" value="14" />
         </line-breakpoint>
@@ -856,16 +857,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/SingleMovieContainerView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="40" column="30" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/Cinema.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -903,13 +894,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/css/movieStyle.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="138" column="21" lean-forward="true" selection-start-line="138" selection-start-column="21" selection-end-line="138" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/view/MovieDescription.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="903">
@@ -919,8 +903,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/AdminPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="158" column="8" selection-start-line="158" selection-start-column="8" selection-end-line="158" selection-end-column="71" />
+        <state relative-caret-position="369">
+          <caret line="753" column="5" selection-start-line="716" selection-start-column="3" selection-end-line="753" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#28431#28432#0" expanded="true" />
@@ -929,23 +913,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/CinemaListView.java">
+    <entry file="file://$PROJECT_DIR$/src/view/SingleMovieContainerView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="53" column="35" selection-start-line="53" selection-start-column="35" selection-end-line="53" selection-end-column="35" />
+        <state relative-caret-position="468">
+          <caret line="48" column="5" selection-start-line="27" selection-start-column="7" selection-end-line="48" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1748#1749#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/MovieAppView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="337" column="66" selection-start-line="337" selection-start-column="66" selection-end-line="337" selection-end-column="66" />
+        <state relative-caret-position="347">
+          <caret line="178" column="57" selection-start-line="178" selection-start-column="57" selection-end-line="178" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/css/movieStyle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="154" column="5" selection-start-line="154" selection-start-column="5" selection-end-line="154" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/CinemaListView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="39" column="28" selection-start-line="39" selection-start-column="28" selection-end-line="39" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2989#2990#0" expanded="true" />
+            <element signature="e#3022#3023#0" expanded="true" />
           </folding>
         </state>
       </provider>
