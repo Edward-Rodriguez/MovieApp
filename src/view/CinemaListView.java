@@ -112,7 +112,6 @@ public class CinemaListView extends VBox {
          private Cinema cinema;
          private Label cinemaNameLabel;
          private HashMap<String, ArrayList<String>> movieShowtimeMap;
-         private HashMap<String, ArrayList<String>> TempmovieShowtimeMap;
 
         public CinemaViewer(Cinema cinema) {
             this.cinema = cinema;
@@ -120,27 +119,6 @@ public class CinemaListView extends VBox {
             this.setSpacing(10);
             backButton = new Button("Go Back");
 //            container = new HBox(10);
-
-            /************
-             TESTING MAP
-             */
-            ArrayList<String> showtimeList = new ArrayList<String>(){
-                {
-                    add("9:30am");
-                    add("9:30pm");
-                    add("9:00am");
-                }
-            };
-            ArrayList<String> showtimeList2 = new ArrayList<String>(){
-                {
-                    add("9:00am");
-                    add("10:30pm");
-                    add("11:00am");
-                }
-            };
-            TempmovieShowtimeMap = new HashMap<String, ArrayList<String>>();
-            TempmovieShowtimeMap.put("Venom", showtimeList);
-            TempmovieShowtimeMap.put("Halloween", showtimeList);
 
             cinemaNameLabel = new Label(this.cinema.getCinemaName());
             cinemaNameLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 30));
@@ -150,7 +128,7 @@ public class CinemaListView extends VBox {
         }
 
         private void generateShowtimes() {
-                for (Map.Entry<String, ArrayList<String>> entry : TempmovieShowtimeMap.entrySet()) {
+                for (Map.Entry<String, ArrayList<String>> entry : movieShowtimeMap.entrySet()) {
                     String key = entry.getKey();
                     ArrayList<String> value = entry.getValue();
 
@@ -164,6 +142,8 @@ public class CinemaListView extends VBox {
 
                     for(String aString : value){
                         Button tempShowtimeButton = new Button(aString);
+                        tempShowtimeButton.setMinWidth(60);
+                        tempShowtimeButton.setMinHeight(28);
                         container.getChildren().add(tempShowtimeButton);
                         tempShowtimeButton.setPadding(new Insets(0,5,0,5));
                         System.out.println("key : " + key + " value : " + aString);

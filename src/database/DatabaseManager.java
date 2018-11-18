@@ -4,11 +4,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import model.MovieTableModel;
 
 import java.sql.*;
+import java.util.HashMap;
 
 public class DatabaseManager {
 
@@ -38,6 +40,9 @@ public class DatabaseManager {
             System.out.println(e); }
             retrieveMovies();
             retrieveCinemas();
+        for (Cinema cinema : cinemaTableModel.getCinemas()) {
+            cinema = retrieveCinemaShowtimesMovie(cinema);
+        }
     }
 
     public void createTable() throws Exception{
@@ -155,18 +160,27 @@ public class DatabaseManager {
             System.out.println(e);
         }
     }
-//
-//    public void deleteMessage(Message message, String table, MessageTableModel model) throws Exception{
-//        try{
-//            PreparedStatement stmt = this.conn.prepareStatement(
-//                    "DELETE FROM `CS370email`.`" + table + "` WHERE (`ID` = '" + message.getID() + "');");
-//            //POST NEW ENTRY
-//            stmt.executeUpdate();
-//            model.removeMessage(message);
-//        }catch (Exception e){
-//            System.out.println(e);
-//        }
-//    }
+
+    public Cinema retrieveCinemaShowtimesMovie(Cinema cinema) {
+        Cinema tempCinema = cinema;
+
+        try {
+            Statement stmt = this.conn.createStatement();
+
+            String sql = "SELECT `showTimes`, `movieNameID` FROM `movies-cinema` WHERE (`cinemaNameID` = '" + cinema.getCinemaName() + "');";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                tempCinema.addMovieShowtimesToMap(
+                        rs.getString("movieNameID"),
+                        rs.getString("showTimes")
+                );
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return tempCinema;
+    }
 
     //retrieve data from DataBase method
     public void retrieveMovies() throws Exception{
