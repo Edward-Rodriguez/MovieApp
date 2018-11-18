@@ -9,12 +9,12 @@ public class Cinema {
     private String cinemaName;
     private String address;
     private int id;
-    private HashMap<String, List<String>> movieShowtimesMap;
+    private HashMap<String, ArrayList<String>> movieShowtimesMap;
 
     public Cinema(String cinemaName, String address) {
         this.cinemaName = cinemaName;
         this.address = address;
-        movieShowtimesMap = new HashMap<String, List<String>>();
+        movieShowtimesMap = new HashMap<String, ArrayList<String>>();
     }
 
     public String getCinemaName() {
@@ -40,11 +40,11 @@ public class Cinema {
             movieShowtimesMap.computeIfAbsent(movie, k -> new ArrayList<>()).add(showtime);
     }
 
-    public HashMap<String, List<String>> getMovieShowtimesMap() {
+    public HashMap<String, ArrayList<String>> getMovieShowtimesMap() {
         return movieShowtimesMap;
     }
 
-    public void setMovieShowtimesMap(HashMap<String, List<String>> movieShowtimesMap) {
+    public void setMovieShowtimesMap(HashMap<String, ArrayList<String>> movieShowtimesMap) {
         this.movieShowtimesMap = movieShowtimesMap;
     }
 }

@@ -90,8 +90,13 @@ public class CinemaListView extends VBox {
                     "-fx-background-color: white;");
             singleContainer.setOnMouseClicked(e -> {
                 if (e.getButton().equals(MouseButton.PRIMARY) && e.getClickCount() == 2) {
+                    Scene oldScene = this.stage.getScene();
                     CinemaViewer cinemaViewer = new CinemaViewer(cinema);
                     Scene scene = new Scene(cinemaViewer, 972, 600);
+
+                    cinemaViewer.getBackButton().setOnAction(event -> {
+                        this.stage.setScene(oldScene);
+                    });
                     this.stage.setScene(scene);
                 }
             });
@@ -103,15 +108,17 @@ public class CinemaListView extends VBox {
     }
 
     class CinemaViewer extends VBox {
-    private Cinema cinema;
-    private Label cinemaNameLabel;
-    private HashMap<String, List<String>> movieShowtimeMap;
-    private HashMap<String, List<String>> TempmovieShowtimeMap;
+        private Button backButton;
+         private Cinema cinema;
+         private Label cinemaNameLabel;
+         private HashMap<String, ArrayList<String>> movieShowtimeMap;
+         private HashMap<String, ArrayList<String>> TempmovieShowtimeMap;
 
         public CinemaViewer(Cinema cinema) {
             this.cinema = cinema;
             this.movieShowtimeMap = cinema.getMovieShowtimesMap();
             this.setSpacing(10);
+            backButton = new Button("Go Back");
 //            container = new HBox(10);
 
             /************
@@ -131,35 +138,44 @@ public class CinemaListView extends VBox {
                     add("11:00am");
                 }
             };
-            TempmovieShowtimeMap = new HashMap<String, List<String>>();
+            TempmovieShowtimeMap = new HashMap<String, ArrayList<String>>();
             TempmovieShowtimeMap.put("Venom", showtimeList);
             TempmovieShowtimeMap.put("Halloween", showtimeList);
 
             cinemaNameLabel = new Label(this.cinema.getCinemaName());
             cinemaNameLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 30));
             cinemaNameLabel.setPrefWidth(300);
-            this.getChildren().add(cinemaNameLabel);
+            this.getChildren().addAll(backButton, cinemaNameLabel);
             generateShowtimes();
         }
 
         private void generateShowtimes() {
-            Iterator it = TempmovieShowtimeMap.entrySet().iterator();
-            while (it.hasNext()) {
-                Region spacer = new Region();
-                spacer.setMinWidth(100);
-                HBox container = new HBox();
-                Map.Entry pair = (Map.Entry)it.next();
-                Label movieName = new Label(pair.getKey().toString());
-                container.getChildren().addAll(movieName, spacer);
+                for (Map.Entry<String, ArrayList<String>> entry : TempmovieShowtimeMap.entrySet()) {
+                    String key = entry.getKey();
+                    ArrayList<String> value = entry.getValue();
 
-                for (int i =0; i < TempmovieShowtimeMap.size(); ++i){
-                    Button tempShowtimeButton = new Button(pair.getValue().toString());
-                    container.getChildren().add(tempShowtimeButton);
+                    Region spacer = new Region();
+                    spacer.setMinWidth(50);
+                    HBox container = new HBox(10);
+                    Label movieName = new Label(entry.getKey());
+                    movieName.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+                    movieName.setMinWidth(150);
+                    container.getChildren().addAll(movieName, spacer);
+
+                    for(String aString : value){
+                        Button tempShowtimeButton = new Button(aString);
+                        container.getChildren().add(tempShowtimeButton);
+                        tempShowtimeButton.setPadding(new Insets(0,5,0,5));
+                        System.out.println("key : " + key + " value : " + aString);
+                    }
+                    System.out.println(entry.getKey() + " = " + value);
+                    this.getChildren().add(container);
                 }
-                System.out.println(pair.getKey() + " = " + pair.getValue());
-                it.remove(); // avoids a ConcurrentModificationException
-                this.getChildren().add(container);
-            }
+
         }
+        public Button getBackButton() {
+            return backButton;
+        }
+
     }
 }
