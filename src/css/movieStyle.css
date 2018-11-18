@@ -140,3 +140,19 @@
     https://www.freepik.com/free-vector/dark-pixels-background_800591.htm">Designed by Freepik
 
 */
+/*Flat button example */
+.jfx-button {
+     -jfx-button-type: FLAT;
+     -fx-background-color: black;
+/*     -fx-text-fill: #6E2DBD;*/
+     -fx-text-fill: #D8D8D8;
+     -fx-font: normal bold 20px 'Arial';
+}
+
+/*Raised button example
+.jfx-button {
+     -jfx-button-type: RAISED;
+     -fx-background-color: blue;
+     -fx-text-fill: white;
+}
+*/

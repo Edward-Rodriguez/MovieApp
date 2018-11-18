@@ -1,5 +1,7 @@
 package view;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTabPane;
 import controller.MovieController;
 import database.DatabaseManager;
 import javafx.application.Platform;
@@ -14,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.CinemaTableModel;
 import model.Movie;
 import model.MovieTableModel;
 
@@ -28,6 +31,7 @@ import static model.StartupConstants.*;
 public class MovieAppView {
     // LIST OF MOVIES FROM DB
     MovieTableModel movieList;
+    CinemaTableModel cinemaTableModel;
 
     // THIS PANE ORGANIZES THE BIG PICTURE CONTAINERS FOR THE
     // APPLICATION GUI
@@ -89,6 +93,7 @@ public class MovieAppView {
     // PANE FOR FOOTER
     // WILL CONTAIN ADMIN BUTTON AND OTHER INFO
     HBox footerPane;
+    HBox buttonPane;
 
     // ADMIN PANE
     AdminLoginScreen adminLoginScreen;
@@ -98,11 +103,18 @@ public class MovieAppView {
     MovieController controller;
     private static final String cssPath = "css/movieStyle.css";
 
+    JFXButton movieListButton;
+    JFXButton cinemaListButton;
+
+    //CINEMALIST COMPONENTS
+
+
     public MovieAppView(DatabaseManager db) {
         this.db = db;
         movieList = new MovieTableModel();
         movieList = db.getMovieTableModel();
         controller = new MovieController(this);
+        cinemaTableModel = db.getCinemaTableModel();
 
         xOffset = 0.0;
         yOffset = 0.0;
@@ -130,7 +142,7 @@ public class MovieAppView {
 
     private void initTopBarPane() {
         headerPane = new VBox();
-        Image logo = new Image("img/logo2.png");
+        Image logo = new Image("img/logo3.png");
         ImageView logoView = new ImageView(logo);
 
         // SETUP CUSTOM MIN/CLOSE WINDOW BUTTONS
@@ -151,6 +163,20 @@ public class MovieAppView {
         windowPane.getStyleClass().add(CSS_CLASS_WINDOW_PANE);
 
         headerPane.getChildren().addAll(logoView);
+    }
+
+    private void initButtonPane() {
+        buttonPane = new HBox();
+        buttonPane.setStyle("-fx-background-color: black;");
+        movieListButton = new JFXButton("Movies");
+        cinemaListButton = new JFXButton("Cinemas");
+        movieListButton.setFocusTraversable(true);
+        cinemaListButton.setFocusTraversable(true);
+        HBox.setHgrow(movieListButton, Priority.ALWAYS);
+        HBox.setHgrow(cinemaListButton, Priority.ALWAYS);
+        movieListButton.setMaxWidth(Double.MAX_VALUE);
+        cinemaListButton.setMaxWidth(Double.MAX_VALUE);
+        buttonPane.getChildren().addAll(movieListButton, cinemaListButton);
     }
 
     private void initMiddlePane() {
@@ -202,6 +228,7 @@ public class MovieAppView {
 
         window = primaryStage;
         initTopBarPane();
+        initButtonPane();
         initMiddlePane();
         initMovieListPane();
         initFooterPane();
@@ -293,6 +320,37 @@ public class MovieAppView {
                 window.setScene(oldScene);
             });
         });
+        cinemaListButton.setOnAction(e -> {
+            ScrollPane scroll = new ScrollPane();
+            scroll.getStyleClass().add("edge-to-edge");
+
+            Separator lineSeparator = new Separator();
+            CinemaListView cinemaListView = new CinemaListView(cinemaTableModel);
+
+            VBox rootPane2 = new VBox();
+            VBox movieDescriptionPane = new VBox();
+
+            movieListPane = new FlowPane();
+            movieListPane.setPrefWrapLength(945);
+            movieListPane.getChildren().add(cinemaListView);
+
+            windowPane.getStyleClass().add(CSS_CLASS_WINDOW_PANE);
+            movieDescriptionPane.getChildren().addAll(headerPane, movieListPane);
+
+            movieListPane.setBackground(background);
+            scroll.setContent(movieDescriptionPane);
+
+            rootPane2.getChildren().addAll(windowPane, scroll);
+
+            cinemaListView.getBackButton().setOnAction(event -> {
+                window.setScene(oldScene);
+            });
+
+            newScene = new Scene(rootPane2, 960, 600);
+            newScene.getStylesheets().add("css/movieStyle.css");
+            window.setScene(newScene);
+            window.show();
+        });
     }
 
     // ADD LISTENERS TO EACH CHECKBOX AND HANDLE EACH EVENT
@@ -348,11 +406,13 @@ public class MovieAppView {
 
         maPane = new VBox();
         middlePane.setBackground(background);
-        maPane.getChildren().addAll(headerPane, middlePane, movieListPane, footerPane);
+
+        maPane.getChildren().addAll(headerPane, buttonPane, middlePane, movieListPane, footerPane);
 //        maPane.setTop(headerPane);
 //        maPane.setCenter(movieListPane);
 
         scrollPane.setContent(maPane);
+        scrollPane.setHmax(1200);
         movieListPane.setBackground(background);
 
         rootPane = new VBox();
