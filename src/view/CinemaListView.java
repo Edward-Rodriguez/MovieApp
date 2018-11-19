@@ -1,5 +1,7 @@
 package view;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -28,13 +31,17 @@ public class CinemaListView extends VBox {
     private String address;
     private String cinemaName;
     private Label addressLabel;
-    private TextField addressField;
+    private Label XaddressLabel;
+    private Label YaddressLabel;
+    private TextField addressXField;
+    private TextField addressYField;
     private Label radiusLabel;
     private TextField radiusField;
     private CinemaTableModel cinemaTableModel;
     private CinemaTableModel tempTableModel;
     private HBox filterBox;
     private Button backButton;
+    private Button filterButton;
     private Scene scene;
     private Stage stage;
 
@@ -46,19 +53,63 @@ public class CinemaListView extends VBox {
         filterBox = new HBox(10);
         backButton = new Button("Go Back");
         filterLabel = new Label("Filter:");
-        addressLabel = new Label("Address:");
-        addressField = new TextField();
-        addressField.setPromptText("x,y");
+        filterLabel.setTextFill(Color.WHITE);
+        addressLabel = new Label("Enter Your Address:");
+        addressLabel.setTextFill(Color.WHITE);
+        XaddressLabel = new Label("X:");
+        XaddressLabel.setTextFill(Color.WHITE);
+        addressXField = new TextField();
+        YaddressLabel = new Label("Y:");
+        YaddressLabel.setTextFill(Color.WHITE);
+        addressYField = new TextField();
+        addressXField.setPromptText("1-100");
+        addressYField.setPromptText("1-100");
+        addressXField.setMaxWidth(50);
+        addressYField.setMaxWidth(50);
         radiusLabel = new Label("Radius:");
+        radiusLabel.setTextFill(Color.WHITE);
         radiusField = new TextField();
         radiusField.setPromptText("0-100");
-        filterBox.getChildren().addAll(filterLabel, addressLabel, addressField, radiusLabel, radiusField);
+        filterButton = new Button("Apply Filter");
+        filterBox.getChildren().addAll(filterLabel, addressLabel, XaddressLabel, addressXField, YaddressLabel, addressYField, radiusLabel, radiusField, filterButton);
         this.getChildren().addAll(backButton, filterBox);
 
         cinemaTitleLabel = new Label("Cinemas:");
         cinemaTitleLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         this.getChildren().add(cinemaTitleLabel);
+        initEventHandlers();
         generateList();
+    }
+
+    private void initEventHandlers() {
+        // force the coordinates field to be numeric only
+        addressXField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("(100)|(0*\\d{1,2})")) {
+                    addressXField.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+        addressYField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("(100)|(0*\\d{1,2})")) {
+                    addressYField.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+        radiusField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("(100)|(0*\\d{1,2})")) {
+                    radiusField.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
     }
 
     private void generateList() {

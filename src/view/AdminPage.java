@@ -109,6 +109,7 @@ public class AdminPage extends GridPane {
     private String[] listOfMovieTitles;
     TextField xCoordField;
     TextField yCoordField;
+    private Button backButton;
 
     // MOVIELIST PANE, WILL GO AT BOTTOM
     VBox movieListPane;
@@ -140,6 +141,7 @@ public class AdminPage extends GridPane {
         cinemaRatings = FXCollections.observableArrayList();
         Separator lineSeparator = new Separator();
         lineSeparator.setPadding(new Insets(20, 0 , 0 , 0));
+        backButton = new Button("Go Back");
 
         this.setHgap(10);
         this.setVgap(5);

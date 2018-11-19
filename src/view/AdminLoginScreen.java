@@ -36,6 +36,7 @@ public class AdminLoginScreen extends VBox {
     double xOffset;
     double yOffset;
     Stage window;
+    Button backButton;
 
     DatabaseManager db;
 
@@ -97,6 +98,7 @@ public class AdminLoginScreen extends VBox {
 
     private void auhenticate() {
         String password = passwordField.getText();
+        backButton = new Button("Go back");
         if (password.equals(adminPassword)) {
             VBox layout = new VBox();
             VBox rootPane = new VBox();
@@ -104,13 +106,18 @@ public class AdminLoginScreen extends VBox {
 
             window = new Stage();
             window = (Stage) this.getScene().getWindow();
+            Scene oldScene = this.getScene();
 
             AdminPage adminPage = new AdminPage(db);
             windowPane.getStyleClass().addAll(CSS_CLASS_WINDOW_PANE);
-            layout.getChildren().addAll(headerPane, adminPage);
+            layout.getChildren().addAll(headerPane, backButton, adminPage);
             scroll.setContent(layout);
             rootPane.getChildren().addAll(windowPane, scroll);
             scroll.getStyleClass().add("edge-to-edge");
+
+            backButton.setOnAction(e -> {
+                window.setScene(oldScene);
+            });
 
             Scene scene = new Scene(rootPane, 972, 600);
             scene.getStylesheets().add("css/movieStyle.css");
@@ -118,6 +125,10 @@ public class AdminLoginScreen extends VBox {
             window.show();
         } else
             warningLabel.setVisible(true);
+    }
+
+    public Button getBackButton() {
+        return backButton;
     }
 
     private void initWindowPane() {

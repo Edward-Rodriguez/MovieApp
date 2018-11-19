@@ -323,6 +323,13 @@ public class MovieAppView {
             window.setScene(scene);
 
             adminLoginScreen.getCancelButton().setOnAction(event -> {
+                try {
+                    db.retrieveMovies();
+                } catch (Exception f) {
+                    System.err.println(f);
+                }
+                movieList = db.getMovieTableModel();
+                reloadMovieListPane(movieList);
                 window.setScene(oldScene);
             });
         });
