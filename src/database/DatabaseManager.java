@@ -43,6 +43,9 @@ public class DatabaseManager {
         for (Cinema cinema : cinemaTableModel.getCinemas()) {
             cinema = retrieveCinemaShowtimesMovie(cinema);
         }
+        for (Movie movie : movieTableModel.getMovies()) {
+            movie = retrieveCinemasAndShowtimesForMovie(movie);
+        }
     }
 
     public void createTable() throws Exception{
@@ -180,6 +183,29 @@ public class DatabaseManager {
             System.err.println(e);
         }
         return tempCinema;
+    }
+
+    public Movie retrieveCinemasAndShowtimesForMovie(Movie movie) {
+        Movie tempMovie = movie;
+
+        try {
+            Statement stmt = this.conn.createStatement();
+
+            String sql = "SELECT `showTimes`, `cinemaNameID`, `Address` FROM `movies-cinema`, `Cinemas` " +
+                    "WHERE (`cinemaNameID` = `cinemaName` AND `movieNameID` = '" + movie.getMovieTitle() + "');";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                movie.addShowtime (
+                        rs.getString("cinemaNameID"),
+                        rs.getString("showTimes")
+                );
+                movie.addAddress("Address");
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return tempMovie;
     }
 
     //retrieve data from DataBase method

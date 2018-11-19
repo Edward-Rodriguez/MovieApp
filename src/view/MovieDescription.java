@@ -61,7 +61,7 @@ public class MovieDescription extends VBox {
         ratingLabel = new Label(movie.getRating());
 
         posterImage = new Image(movie.getUrlOfImage());
-        
+
         //
       // cinema = new String(movie.getListOfCinemas());
         titleLabel.getStyleClass().add(CSS_CLASS_POSTER_TITLE);
@@ -73,10 +73,10 @@ public class MovieDescription extends VBox {
         imageView.setFitHeight(195);
         imageView.setFitWidth(150);
         imageView.getStyleClass().add(CSS_CLASS_POSTER_IMAGE);
-       
+
         vbox.setAlignment(Pos.CENTER);
         vbox.setPadding(new Insets(15, 15, 15, 22));
-        
+
 
         vbox.getChildren().addAll(titleLabel, imageView, ratingLabel, releaseTypeLabel);
         dT=new VBox();
@@ -110,17 +110,17 @@ public class MovieDescription extends VBox {
         movieInfoPane = new HBox();
         movieInfoPane.getChildren().addAll(vbox, dT);
 
-        CinemaView cinemaView = new CinemaView(movie);
-//        VBox vbox2 = new VBox();
-//        vbox2.getChildren().addAll()
-
-
-        this.getChildren().addAll(movieInfoPane, nowPlayingAt, lineSeparator, cinemaView);
+        this.getChildren().addAll(movieInfoPane, nowPlayingAt, lineSeparator);
         this.setAlignment(Pos.CENTER);
+
+
+        CinemaView cinemaView = new CinemaView(movie);
+        this.getChildren().add(cinemaView);
+
     }
-    
-    
-    
+
+
+
 
     public ImageView getImageView() {
         return imageView;

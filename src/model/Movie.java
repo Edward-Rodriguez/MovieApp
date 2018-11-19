@@ -4,6 +4,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Observable;
 
 public class Movie {
@@ -14,8 +16,8 @@ public class Movie {
     private String releaseType;
     private String urlOfImage;
     private String movieSummary;
-
-    private ObservableList<String> listOfCinemas;
+    private ArrayList<String> tempArray;
+    private CinemaListAndShowtime cinemaListAndShowtime;
 
     public Movie(String movieTitle, String rating, String releaseType, String urlOfImage, String movieSummary) {
         this.movieTitle = movieTitle;
@@ -23,7 +25,24 @@ public class Movie {
         this.releaseType = releaseType;
         this.urlOfImage = urlOfImage;
         this.movieSummary = movieSummary;
-        listOfCinemas = FXCollections.observableArrayList();
+        tempArray = new ArrayList<String>();
+        cinemaListAndShowtime = new CinemaListAndShowtime();
+    }
+
+    public ArrayList<String> getTempArray() {
+        return tempArray;
+    }
+
+    public void setTempArray(ArrayList<String> tempArray) {
+        this.tempArray = tempArray;
+    }
+
+    public CinemaListAndShowtime getCinemaListAndShowtime() {
+        return cinemaListAndShowtime;
+    }
+
+    public void setCinemaListAndShowtime(CinemaListAndShowtime cinemaListAndShowtime) {
+        this.cinemaListAndShowtime = cinemaListAndShowtime;
     }
 
     public String getRating() {
@@ -50,18 +69,9 @@ public class Movie {
         return urlOfImage;
     }
 
-    public ObservableList<String> getListOfCinemas() {
-        return listOfCinemas;
-    }
-
-    public void setListOfCinemas(ObservableList<String> listOfCinemas) {
-        this.listOfCinemas = listOfCinemas;
-    }
-
     public void setUrlOfImage(String urlOfImage) {
         this.urlOfImage = urlOfImage;
     }
-
 
     public void setRating(String rating) {
         this.rating = rating;
@@ -73,6 +83,55 @@ public class Movie {
 
     public void setMovieSummary(String movieSummary) {
         this.movieSummary = movieSummary;
+    }
+
+    public void addShowtime(String cinemaName, String showtime) {
+        cinemaListAndShowtime.addMovieShowtimesToMap(cinemaName, showtime);
+    }
+
+    public void addAddress(String address) {
+        cinemaListAndShowtime.setAddress(address);
+    }
+
+    public class CinemaListAndShowtime {
+        private String cinemaName;
+        private String address;
+        private HashMap<String, ArrayList<String>> movieShowtimesMap;
+
+        public CinemaListAndShowtime() {
+            movieShowtimesMap = new HashMap<String, ArrayList<String>>();
+        }
+
+        public void addMovieShowtimesToMap(String cinema, String showtime) {
+            if(movieShowtimesMap.containsKey(cinema))
+                movieShowtimesMap.get(cinema).add(showtime);
+            else
+                movieShowtimesMap.computeIfAbsent(cinema, k -> new ArrayList<>()).add(showtime);
+        }
+
+        public String getCinemaName() {
+            return cinemaName;
+        }
+
+        public void setCinemaName(String cinemaName) {
+            this.cinemaName = cinemaName;
+        }
+
+        public HashMap<String, ArrayList<String>> getMovieShowtimesMap() {
+            return movieShowtimesMap;
+        }
+
+        public void setMovieShowtimesMap(HashMap<String, ArrayList<String>> movieShowtimesMap) {
+            this.movieShowtimesMap = movieShowtimesMap;
+        }
+
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
+        }
     }
 
 }

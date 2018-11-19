@@ -5,59 +5,68 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import model.Movie;
 
-public class CinemaView extends HBox {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class CinemaView extends VBox {
 
     Movie movie;
-    String[] listOfShowtimes = {"10:30am", "12:30pm", "3:00pm", "5:00pm", "7:15pm", "10:30pm" };
     GridPane gridPane = new GridPane();
-    FlowPane showtimesPane;
-    Label cinemaName;
     Label address;
-    Separator lineSeparator;
-    Label showTimesLabel;
-    VBox showtimesLayout;
     Separator cinemaDividor;
+    Movie.CinemaListAndShowtime cinemaListAndShowtime;
 
     public CinemaView(Movie movie) {
+
+        this.cinemaListAndShowtime = movie.getCinemaListAndShowtime();
         this.movie = movie;
-        showtimesPane = new FlowPane();
-        showtimesPane.setPadding(new Insets(10, 10, 10, 10));
-        showtimesPane.setMaxWidth(250);
-
-        cinemaName = new Label("testing");
-        cinemaName.setStyle("-fx-alignment: center; -fx-font: normal bold 20px 'Arial'; -fx-text-fill: #000000");
-        cinemaName.setMinWidth(200);
-        cinemaName.setAlignment(Pos.CENTER_LEFT);
-
-        lineSeparator = new Separator();
-        showTimesLabel = new Label("Showtimes");
-        showTimesLabel.setStyle("-fx-alignment: CENTER; -fx-font: normal bold 15px 'Arial'; -fx-text-fill: #000000");
-        showTimesLabel.setAlignment(Pos.CENTER);
-        showTimesLabel.setPadding(new Insets(0, 0, 0, 70));
-
-        showtimesLayout = new VBox();
-        showtimesLayout.getChildren().addAll(showTimesLabel, showtimesPane);
-
-//        cinemaDividor = new Separator();
-//        cinemaDividor.setMaxWidth(600);
+        this.setSpacing(25);
+        this.setPadding(new Insets(20,20,20,20));
 
         createShowtimeLabels();
-        this.getChildren().addAll(cinemaName, showtimesLayout);
     }
 
     private void createShowtimeLabels() {
-        for (int i = 0; i < listOfShowtimes.length; ++i) {
-            Button button = new Button(listOfShowtimes[i]);
-            button.setMinWidth(100);
-            button.setPadding(new Insets(5,5,5,5));
-            showtimesPane.getChildren().add(button);
+        for (Map.Entry<String, ArrayList<String>> entry : cinemaListAndShowtime.getMovieShowtimesMap().entrySet()) {
+            String key = entry.getKey();
+            ArrayList<String> value = entry.getValue();
+
+            HBox container = new HBox();
+            Label cinemaName = new Label(key);
+            cinemaName.setStyle("-fx-alignment: center; -fx-font: normal bold 20px 'Arial'; -fx-text-fill: #FFFFFF");
+            cinemaName.setMinWidth(250);
+            cinemaName.setAlignment(Pos.BOTTOM_LEFT);
+            cinemaName.setPadding(new Insets(10,10,10,10));
+            container.getChildren().add(cinemaName);
+
+            Separator lineSeparator = new Separator();
+            lineSeparator.setMaxWidth(300);
+            Label showTimesLabel = new Label("Showtimes");
+            showTimesLabel.setStyle("-fx-alignment: CENTER; -fx-font: normal bold 15px 'Arial'; -fx-text-fill: #FFFFFF");
+            showTimesLabel.setAlignment(Pos.CENTER);
+            showTimesLabel.setPadding(new Insets(0, 0, 0, 110));
+
+            VBox showtimesLayout = new VBox();
+            FlowPane showtimesPane = new FlowPane();
+            showtimesPane.setPadding(new Insets(5,5,5,5));
+
+            for(String aString : value){
+                Button tempShowtimeButton = new Button(aString);
+                tempShowtimeButton.setMinWidth(100);
+                tempShowtimeButton.setPadding(new Insets(5,5,5,5));
+                showtimesPane.getChildren().add(tempShowtimeButton);
+                //System.out.println("key : " + key + " value : " + aString);
+            }
+            showtimesLayout.getChildren().addAll(showTimesLabel, lineSeparator, showtimesPane);
+            container.getChildren().add(showtimesLayout);
+            this.getChildren().add(container);
         }
     }
 }
