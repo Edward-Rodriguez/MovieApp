@@ -368,6 +368,30 @@ public class MovieAppView {
 
     }
 
+    public CheckBox getAllCheckBox() {
+        return allCheckBox;
+    }
+
+    public CheckBox getPgRatingCheckBox() {
+        return pgRatingCheckBox;
+    }
+
+    public CheckBox getPg13RatingCheckBox() {
+        return pg13RatingCheckBox;
+    }
+
+    public CheckBox getrRatingCheckBox() {
+        return rRatingCheckBox;
+    }
+
+    public CheckBox getNc17RatingCheckBox() {
+        return nc17RatingCheckBox;
+    }
+
+    public CheckBox getgRatingCheckBox() {
+        return gRatingCheckBox;
+    }
+
     // ADD LISTENERS TO EACH CHECKBOX AND HANDLE EACH EVENT
     private void initCheckboxListeners() {
         allCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
@@ -382,28 +406,6 @@ public class MovieAppView {
                 }else{
                     // your checkbox has been unticked. do stuff...
                     // clear the config file
-                }
-            }
-        });
-        gRatingCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if(newValue){
-                    controller.processGCheckBox();
-                }else{
-                    // your checkbox has been unticked. do stuff...
-                    // clear the config file
-                }
-            }
-        });
-        pgRatingCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if(newValue){
-                    controller.processPGCheckBox();
-                }else{
-                    reloadMovieListPane(movieList);
-                    //movieListPane.getChildren().clear();
                 }
             }
         });

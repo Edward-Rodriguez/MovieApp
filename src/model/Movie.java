@@ -145,6 +145,7 @@ public class Movie {
         public void setAddress(String address) {
             this.address = address;
         }
+
     }
 
 }
