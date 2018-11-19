@@ -11,12 +11,26 @@ public class Cinema {
     private int id;
     private HashMap<String, ArrayList<String>> movieShowtimesMap;
     private HashMap<String, String> movieShowtimesRatingMap;
+    private ArrayList<String> releaseTypeArray;
 
     public Cinema(String cinemaName, String address) {
+        releaseTypeArray = new ArrayList<String>();
         this.cinemaName = cinemaName;
         this.address = address;
         movieShowtimesMap = new HashMap<String, ArrayList<String>>();
         movieShowtimesRatingMap = new HashMap<String, String>();
+    }
+
+    public ArrayList<String> getReleaseTypeArray() {
+        return releaseTypeArray;
+    }
+
+    public void setReleaseTypeArray(ArrayList<String> releaseTypeArray) {
+        this.releaseTypeArray = releaseTypeArray;
+    }
+
+    public void addReleaseType(String releaseType) {
+        releaseTypeArray.add(releaseType);
     }
 
     public String getCinemaName() {

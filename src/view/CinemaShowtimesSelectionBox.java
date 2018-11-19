@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
+import model.Cinema;
 
 import java.util.Iterator;
 
@@ -16,10 +17,12 @@ public class CinemaShowtimesSelectionBox extends HBox {
     private ComboBox showtimesBox3;
     private String cinemaName;
     private boolean checkboxTicked;
+    private Cinema cinema;
     ObservableList<String> showtimesList;
 
 
-    public CinemaShowtimesSelectionBox(String cinemaName) {
+    public CinemaShowtimesSelectionBox(String cinemaName, Cinema cinema) {
+        this.cinema = cinema;
         checkboxTicked = false;
         this.cinemaName = cinemaName;
         showtimesList = FXCollections.observableArrayList();
@@ -68,6 +71,14 @@ public class CinemaShowtimesSelectionBox extends HBox {
 
     public CheckBox getCinemaCheckBox() {
         return cinemaCheckBox;
+    }
+
+    public Cinema getCinema() {
+        return cinema;
+    }
+
+    public void setCinema(Cinema cinema) {
+        this.cinema = cinema;
     }
 
     public void setCinemaCheckBox(CheckBox cinemaCheckBox) {

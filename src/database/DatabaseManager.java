@@ -42,6 +42,7 @@ public class DatabaseManager {
             retrieveCinemas();
         for (Cinema cinema : cinemaTableModel.getCinemas()) {
             cinema = retrieveCinemaShowtimesMovie(cinema);
+            cinema = retrieveCinemasReleaseType(cinema);
         }
         for (Movie movie : movieTableModel.getMovies()) {
             movie = retrieveCinemasAndShowtimesForMovie(movie);
@@ -207,6 +208,25 @@ public class DatabaseManager {
             System.err.println(e);
         }
         return tempMovie;
+    }
+
+    public Cinema retrieveCinemasReleaseType(Cinema cinema) {
+        Cinema tempCinema = cinema;
+        try {
+            Statement stmt = this.conn.createStatement();
+
+            String sql = "SELECT `MovieType` FROM `CinemasMovieTypes` " +
+                    "WHERE ( `CinemaID` = '" + cinema.getCinemaName() + "');";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                tempCinema.addReleaseType(
+                        rs.getString("MovieType"));
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return tempCinema;
     }
 
     //retrieve data from DataBase method

@@ -64,6 +64,7 @@ public class AdminPage extends GridPane {
     String cinemaName;
     int xCoord;
     int yCoord;
+    Cinema[] actualCinemaList;
 
     // CINEMA LABELS AND COMPONENTS
     Label cinemaHeader;
@@ -574,14 +575,34 @@ public class AdminPage extends GridPane {
         addShowtimeButton.setOnAction(e -> {
             addShowtime();
         });
+        ratingChoiceBox.setOnAction(e -> {
+            for (int i = 0; i < numOfCinemas; i++){
+                cinemaArray[i].setDisable(false);
+            }
+            movieRating = ratingChoiceBox.getValue();
+            checkReleaseTypesOnCinemaListCheckboxes(movieRating);
+        });
     }
 
     private void createCinemaListCheckboxes() {
         getNamesOfCinemas();
         cinemaArray = new CinemaShowtimesSelectionBox[numOfCinemas];
         for (int i = 0; i < numOfCinemas; ++i) {
-            cinemaArray[i] = new CinemaShowtimesSelectionBox(listOfCinemaNames[i]);
+            cinemaArray[i] = new CinemaShowtimesSelectionBox(listOfCinemaNames[i], actualCinemaList[i]);
             cinemasList.getChildren().add(cinemaArray[i]);
+        }
+    }
+
+    private void checkReleaseTypesOnCinemaListCheckboxes(String movieRating) {
+        for (int i = 0; i < numOfCinemas; ++i) {
+            boolean flag = false;
+            for(String temp : cinemaArray[i].getCinema().getReleaseTypeArray()) {
+                if(temp.equals(movieRating)) {
+                    flag = true;
+                }
+            }
+            if(flag != true)
+                cinemaArray[i].setDisable(true);
         }
     }
 
@@ -601,10 +622,12 @@ public class AdminPage extends GridPane {
 
     private void getNamesOfCinemas() {
         getNumOfCinemas();
+        actualCinemaList = new Cinema[numOfCinemas];
         listOfCinemaNames = new String[numOfCinemas];
         int i = 0;
         for (Cinema cinema : cinemaTableModel.getCinemas()) {
-                listOfCinemaNames[i++] = cinema.getCinemaName();
+                listOfCinemaNames[i] = cinema.getCinemaName();
+                actualCinemaList[i++] = cinema;
         }
     }
 
@@ -691,6 +714,8 @@ public class AdminPage extends GridPane {
             });
         }
     }
+
+
 
     // SET WIDTH TO EACH COLUMN OF THIS PANE
     private void setGridpaneConstraints() {
