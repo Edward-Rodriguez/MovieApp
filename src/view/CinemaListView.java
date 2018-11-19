@@ -29,6 +29,10 @@ public class CinemaListView extends VBox {
     private Label filterLabel;
     private Cinema cinema;
     private String address;
+    private int xCoord;
+    private int yCoord;
+    private int radius;
+    private int distance;
     private String cinemaName;
     private Label addressLabel;
     private Label XaddressLabel;
@@ -44,11 +48,14 @@ public class CinemaListView extends VBox {
     private Button filterButton;
     private Scene scene;
     private Stage stage;
+    private Label warningLabel;
+    CinemaTableModel tempCinemaModel;
 
     public CinemaListView (CinemaTableModel model, Stage stage){
         this.cinemaTableModel = model;
         this.setSpacing(10);
         this.stage = stage;
+        tempCinemaModel = new CinemaTableModel();
 
         filterBox = new HBox(10);
         backButton = new Button("Go Back");
@@ -71,6 +78,9 @@ public class CinemaListView extends VBox {
         radiusField = new TextField();
         radiusField.setPromptText("0-100");
         filterButton = new Button("Apply Filter");
+        warningLabel = new Label("Error check fields!");
+        warningLabel.setTextFill(Color.RED);
+        warningLabel.setVisible(false);
         filterBox.getChildren().addAll(filterLabel, addressLabel, XaddressLabel, addressXField, YaddressLabel, addressYField, radiusLabel, radiusField, filterButton);
         this.getChildren().addAll(backButton, filterBox);
 
@@ -78,7 +88,7 @@ public class CinemaListView extends VBox {
         cinemaTitleLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         this.getChildren().add(cinemaTitleLabel);
         initEventHandlers();
-        generateList();
+        generateList(this.cinemaTableModel);
     }
 
     private void initEventHandlers() {
@@ -110,10 +120,40 @@ public class CinemaListView extends VBox {
                 }
             }
         });
+        filterButton.setOnAction(e -> {
+        filterCinemas();
+        });
     }
 
-    private void generateList() {
-        for (Cinema cinema: cinemaTableModel.getCinemas()) {
+    private void filterCinemas() {
+        tempCinemaModel = new CinemaTableModel();
+        if (!addressXField.getText().isEmpty() && !addressYField.getText().isEmpty() && !radiusField.getText().isEmpty()) {
+            xCoord = Integer.parseInt(addressXField.getText());
+            yCoord = Integer.parseInt(addressYField.getText());
+            radius = Integer.parseInt(radiusField.getText());
+
+            if ((xCoord >= 0 && xCoord <= 100) && (yCoord >= 0 && yCoord <= 100) && (radius >= 0 && radius <= 100)) {
+                for (Cinema cinema : cinemaTableModel.getCinemas()) {
+                    String tempAddress = cinema.getAddress();
+                    tempAddress = tempAddress.replace("(", "");
+                    tempAddress = tempAddress.replace(")", "");
+                    String[] xy = tempAddress.split(",");
+                    int x = Integer.parseInt(xy[0]);
+                    int y = Integer.parseInt(xy[1]);
+                    if ((Math.abs(xCoord - x) <= radius) && (Math.abs(yCoord - y) <= radius)) {
+                        tempCinemaModel.addCinema(cinema);
+                    }
+                    warningLabel.setVisible(false);
+                    this.getChildren().clear();
+                    this.getChildren().addAll(backButton, filterBox, cinemaTitleLabel);
+                    generateList(tempCinemaModel);
+                }
+            } else warningLabel.setVisible(true);
+        } else warningLabel.setVisible(true);
+    }
+
+    private void generateList(CinemaTableModel model) {
+        for (Cinema cinema: model.getCinemas()) {
             HBox singleContainer = new HBox();
             Label cinemaAddress = new Label(cinema.getAddress());
             Label cinemaName = new Label(cinema.getCinemaName());

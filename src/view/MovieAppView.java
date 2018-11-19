@@ -351,6 +351,7 @@ public class MovieAppView {
             movieDescriptionPane.getChildren().addAll(headerPane, movieListPane);
 
             movieListPane.setBackground(background);
+            movieListPane.setMinHeight(600);
             scroll.setContent(movieDescriptionPane);
 
             rootPane2.getChildren().addAll(windowPane, scroll);
