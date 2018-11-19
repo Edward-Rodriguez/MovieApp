@@ -107,10 +107,12 @@ public class CinemaListView extends VBox {
          private Cinema cinema;
          private Label cinemaNameLabel;
          private HashMap<String, ArrayList<String>> movieShowtimeMap;
+         private HashMap<String, String> movieShowtimeRatingMap;
 
         public CinemaViewer(Cinema cinema) {
             this.cinema = cinema;
             this.movieShowtimeMap = cinema.getMovieShowtimesMap();
+            this.movieShowtimeRatingMap = cinema.getMovieShowtimesRatingMap();
             this.setSpacing(10);
             backButton = new Button("Go Back");
 //            container = new HBox(10);
@@ -133,7 +135,12 @@ public class CinemaListView extends VBox {
                     Label movieName = new Label(entry.getKey());
                     movieName.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
                     movieName.setMinWidth(150);
-                    container.getChildren().addAll(movieName, spacer);
+
+                    Label ratingLabel = new Label(movieShowtimeRatingMap.get(key));
+                    ratingLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+                    ratingLabel.setMinWidth(50);
+
+                    container.getChildren().addAll(movieName, spacer, ratingLabel);
 
                     for(String aString : value){
                         Button tempShowtimeButton = new Button(aString);
@@ -141,9 +148,7 @@ public class CinemaListView extends VBox {
                         tempShowtimeButton.setMinHeight(28);
                         container.getChildren().add(tempShowtimeButton);
                         tempShowtimeButton.setPadding(new Insets(0,5,0,5));
-                        System.out.println("key : " + key + " value : " + aString);
                     }
-                    System.out.println(entry.getKey() + " = " + value);
                     this.getChildren().add(container);
                 }
 

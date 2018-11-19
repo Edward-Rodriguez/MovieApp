@@ -10,11 +10,13 @@ public class Cinema {
     private String address;
     private int id;
     private HashMap<String, ArrayList<String>> movieShowtimesMap;
+    private HashMap<String, String> movieShowtimesRatingMap;
 
     public Cinema(String cinemaName, String address) {
         this.cinemaName = cinemaName;
         this.address = address;
         movieShowtimesMap = new HashMap<String, ArrayList<String>>();
+        movieShowtimesRatingMap = new HashMap<String, String>();
     }
 
     public String getCinemaName() {
@@ -33,15 +35,20 @@ public class Cinema {
         this.address = address;
     }
 
-    public void addMovieShowtimesToMap(String movie, String showtime) {
+    public void addMovieShowtimesToMap(String movie, String showtime, String rating) {
         if(movieShowtimesMap.containsKey(movie))
             movieShowtimesMap.get(movie).add(showtime);
         else
             movieShowtimesMap.computeIfAbsent(movie, k -> new ArrayList<>()).add(showtime);
+        movieShowtimesRatingMap.put(movie, rating);
     }
 
     public HashMap<String, ArrayList<String>> getMovieShowtimesMap() {
         return movieShowtimesMap;
+    }
+
+    public HashMap<String, String> getMovieShowtimesRatingMap() {
+        return movieShowtimesRatingMap;
     }
 
     public void setMovieShowtimesMap(HashMap<String, ArrayList<String>> movieShowtimesMap) {

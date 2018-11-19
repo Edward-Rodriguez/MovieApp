@@ -170,13 +170,15 @@ public class DatabaseManager {
         try {
             Statement stmt = this.conn.createStatement();
 
-            String sql = "SELECT `showTimes`, `movieNameID` FROM `movies-cinema` WHERE (`cinemaNameID` = '" + cinema.getCinemaName() + "');";
+            String sql = "SELECT `showTimes`, `movieNameID`, `Rating` FROM `movies-cinema`, `MovieList` WHERE (`cinemaNameID` = '" +
+                    cinema.getCinemaName() + "' AND `movieNameID` = `Title`);";
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
                 tempCinema.addMovieShowtimesToMap(
                         rs.getString("movieNameID"),
-                        rs.getString("showTimes")
+                        rs.getString("showTimes"),
+                        rs.getString("Rating")
                 );
             }
         } catch (Exception e) {
