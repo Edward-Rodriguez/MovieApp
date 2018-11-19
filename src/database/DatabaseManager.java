@@ -198,9 +198,8 @@ public class DatabaseManager {
             while (rs.next()) {
                 movie.addShowtime (
                         rs.getString("cinemaNameID"),
-                        rs.getString("showTimes")
-                );
-                movie.addAddress("Address");
+                        rs.getString("showTimes"),
+                        rs.getString("Address"));
             }
         } catch (Exception e) {
             System.err.println(e);

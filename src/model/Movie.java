@@ -18,6 +18,7 @@ public class Movie {
     private String movieSummary;
     private ArrayList<String> tempArray;
     private CinemaListAndShowtime cinemaListAndShowtime;
+    private CinemaListAndShowtime cinemaListAndAddress;
 
     public Movie(String movieTitle, String rating, String releaseType, String urlOfImage, String movieSummary) {
         this.movieTitle = movieTitle;
@@ -27,6 +28,7 @@ public class Movie {
         this.movieSummary = movieSummary;
         tempArray = new ArrayList<String>();
         cinemaListAndShowtime = new CinemaListAndShowtime();
+        cinemaListAndAddress = new CinemaListAndShowtime();
     }
 
     public ArrayList<String> getTempArray() {
@@ -85,8 +87,8 @@ public class Movie {
         this.movieSummary = movieSummary;
     }
 
-    public void addShowtime(String cinemaName, String showtime) {
-        cinemaListAndShowtime.addMovieShowtimesToMap(cinemaName, showtime);
+    public void addShowtime(String cinemaName, String showtime, String address) {
+        cinemaListAndShowtime.addMovieShowtimesToMap(cinemaName, showtime, address);
     }
 
     public void addAddress(String address) {
@@ -97,16 +99,19 @@ public class Movie {
         private String cinemaName;
         private String address;
         private HashMap<String, ArrayList<String>> movieShowtimesMap;
+        private HashMap<String, String> movieCinemaAddressMap;
 
         public CinemaListAndShowtime() {
             movieShowtimesMap = new HashMap<String, ArrayList<String>>();
+            movieCinemaAddressMap = new HashMap<String, String>();
         }
 
-        public void addMovieShowtimesToMap(String cinema, String showtime) {
+        public void addMovieShowtimesToMap(String cinema, String showtime, String address) {
             if(movieShowtimesMap.containsKey(cinema))
                 movieShowtimesMap.get(cinema).add(showtime);
             else
                 movieShowtimesMap.computeIfAbsent(cinema, k -> new ArrayList<>()).add(showtime);
+            movieCinemaAddressMap.put(cinema, address);
         }
 
         public String getCinemaName() {
@@ -123,6 +128,14 @@ public class Movie {
 
         public void setMovieShowtimesMap(HashMap<String, ArrayList<String>> movieShowtimesMap) {
             this.movieShowtimesMap = movieShowtimesMap;
+        }
+
+        public HashMap<String, String> getMovieCinemaAddressMap() {
+            return movieCinemaAddressMap;
+        }
+
+        public void setMovieCinemaAddressMap(HashMap<String, String> movieCinemaAddressMap) {
+            this.movieCinemaAddressMap = movieCinemaAddressMap;
         }
 
         public String getAddress() {

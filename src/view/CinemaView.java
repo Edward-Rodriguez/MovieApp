@@ -46,6 +46,13 @@ public class CinemaView extends VBox {
             cinemaName.setPadding(new Insets(10,10,10,10));
             container.getChildren().add(cinemaName);
 
+            Label addressLabel = new Label(cinemaListAndShowtime.getMovieCinemaAddressMap().get(key));
+            addressLabel.setStyle("-fx-alignment: center; -fx-font: normal bold 20px 'Arial'; -fx-text-fill: #FFFFFF");
+            addressLabel.setMinWidth(100);
+            addressLabel.setAlignment(Pos.BOTTOM_LEFT);
+            addressLabel.setPadding(new Insets(10,10,10,10));
+            container.getChildren().add(addressLabel);
+
             Separator lineSeparator = new Separator();
             lineSeparator.setMaxWidth(300);
             Label showTimesLabel = new Label("Showtimes");
