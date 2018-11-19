@@ -8,7 +8,7 @@ import javafx.collections.ObservableList;
  */
 import javafx.scene.image.Image;
 
-public class MovieTableModel {
+public class MovieTableModel implements Cloneable{
 
     ObservableList<Movie> movies;
 
@@ -36,6 +36,9 @@ public class MovieTableModel {
         return selectedMovie;
     }
 
+    public void setMovies(ObservableList<Movie> movies) {
+        this.movies = movies;
+    }
 
     // MUTATOR METHODS
     public void setSelectedMovie(Movie initSelectedMovie) {
@@ -82,6 +85,11 @@ public class MovieTableModel {
             selectedMovie = null;
             //ui.reloadMessagePane();
         }
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     public void removeMovie(Movie movie) {

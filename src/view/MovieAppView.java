@@ -50,6 +50,7 @@ public class MovieAppView {
     CheckBox rRatingCheckBox;
     CheckBox nc17RatingCheckBox;
     CheckBox gRatingCheckBox;
+    CheckBox noRatingCheckBox;
 
     // POSTER LISTING SPACE (CENTER)
     FlowPane movieListPane;
@@ -105,15 +106,22 @@ public class MovieAppView {
     Button cinemaListButton;
 
     //CINEMALIST COMPONENTS
+    CheckBox[] checkBoxArray;
+    private static MovieTableModel originalModel;
 
 
     public MovieAppView(DatabaseManager db) {
         this.db = db;
         movieList = new MovieTableModel();
         movieList = db.getMovieTableModel();
-        controller = new MovieController(this);
         cinemaTableModel = db.getCinemaTableModel();
-
+        controller = new MovieController(this);
+        try {
+            originalModel = new MovieTableModel();
+            originalModel.setMovies(db.getMovieTableModel().getMovies());
+        } catch (Exception e) {
+            System.err.println(e);
+        }
         xOffset = 0.0;
         yOffset = 0.0;
     }
@@ -198,6 +206,7 @@ public class MovieAppView {
         rRatingCheckBox = new CheckBox("R");;
         nc17RatingCheckBox = new CheckBox("NC-17");
         gRatingCheckBox = new CheckBox("G");
+        noRatingCheckBox = new CheckBox("Not Rated");
 
         // SET ALL CHECKBOXES TO DEFAULT VALUE OF TRUE
         allCheckBox.setSelected(true);
@@ -206,6 +215,15 @@ public class MovieAppView {
         pgRatingCheckBox.setSelected(true);
         rRatingCheckBox.setSelected(true);
         nc17RatingCheckBox.setSelected(true);
+        noRatingCheckBox.setSelected(true);
+        checkBoxArray = new CheckBox[7];
+        checkBoxArray[0] = allCheckBox;
+        checkBoxArray[1] = gRatingCheckBox;
+        checkBoxArray[2] = pgRatingCheckBox;
+        checkBoxArray[3] = pg13RatingCheckBox;
+        checkBoxArray[4] = rRatingCheckBox;
+        checkBoxArray[5] = nc17RatingCheckBox;
+        checkBoxArray[6] = noRatingCheckBox;
 
         // SETUP SPACING AND STYLE CLASSES
         filterBox.getStyleClass().add(CSS_CLASS_FILTER_BOX);
@@ -213,7 +231,7 @@ public class MovieAppView {
 
         middlePane.setAlignment(Pos.CENTER);
         filterBox.getChildren().addAll(filterLabel, allCheckBox, gRatingCheckBox, pgRatingCheckBox, pg13RatingCheckBox,
-                rRatingCheckBox, nc17RatingCheckBox);
+                rRatingCheckBox, nc17RatingCheckBox, noRatingCheckBox);
         middlePane.getChildren().addAll(filterBox);
     }
 
@@ -392,6 +410,10 @@ public class MovieAppView {
         return gRatingCheckBox;
     }
 
+    public CheckBox getNoRatingCheckBox() {
+        return noRatingCheckBox;
+    }
+
     // ADD LISTENERS TO EACH CHECKBOX AND HANDLE EACH EVENT
     private void initCheckboxListeners() {
         allCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
@@ -403,14 +425,68 @@ public class MovieAppView {
                     pgRatingCheckBox.setSelected(true);
                     rRatingCheckBox.setSelected(true);
                     nc17RatingCheckBox.setSelected(true);
+                    noRatingCheckBox.setSelected(true);
+                    upDateMovieList();
+                    reloadMovieListPane(movieList);
                 }else{
                     // your checkbox has been unticked. do stuff...
                     // clear the config file
                 }
             }
         });
+        gRatingCheckBox.setOnAction(e -> {
+            upDateMovieList();
+            if (gRatingCheckBox.isSelected())
+                controller.addMovieToList(movieList, "G");
+            else
+                controller.processCheckboxes(checkBoxArray);
+        });
+        pgRatingCheckBox.setOnAction(e -> {
+            upDateMovieList();
+            if (pgRatingCheckBox.isSelected())
+                controller.addMovieToList(movieList, "PG");
+            else
+                controller.processCheckboxes(checkBoxArray);
+        });
+        pg13RatingCheckBox.setOnAction(e -> {
+            upDateMovieList();
+            if (pg13RatingCheckBox.isSelected())
+                controller.addMovieToList(movieList, "PG-13");
+            else
+                controller.processCheckboxes(checkBoxArray);
+        });
+        rRatingCheckBox.setOnAction(e -> {
+            upDateMovieList();
+            if (rRatingCheckBox.isSelected())
+                controller.addMovieToList(movieList, "R");
+            else
+                controller.processCheckboxes(checkBoxArray);
+        });
+        nc17RatingCheckBox.setOnAction(e -> {
+            upDateMovieList();
+            if (nc17RatingCheckBox.isSelected())
+                controller.addMovieToList(movieList, "NC-17");
+            else
+                controller.processCheckboxes(checkBoxArray);
+        });
+        noRatingCheckBox.setOnAction(e -> {
+            upDateMovieList();
+            if (noRatingCheckBox.isSelected())
+                controller.addMovieToList(movieList, "Not Rated");
+            else
+                controller.processCheckboxes(checkBoxArray);
+        });
 
     }
+    private void upDateMovieList() {
+        try {
+            db.retrieveMovies();
+        } catch (Exception f) {
+            System.err.println(f);
+        }
+        movieList = db.getMovieTableModel();
+    }
+
     public boolean allCheckBoxIsSelected() {
         return allCheckBox.isSelected() ? true : false;
     }
