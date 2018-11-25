@@ -2,23 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Add back button to admin page">
-<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MovieAppProject/database/DatabaseManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MovieAppProject/database/DatabaseManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/database/DatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/DatabaseManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Cinema.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Cinema.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/AdminPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AdminPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/CinemaShowtimesSelectionBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CinemaShowtimesSelectionBox.java" afterDir="false" />
-||||||| merged common ancestors
-      <change beforePath="$PROJECT_DIR$/out/production/MovieAppProject/view/MovieAppView$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/MovieController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Movie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/MovieAppView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MovieAppView.java" afterDir="false" />
-=======
-      <change beforePath="$PROJECT_DIR$/src/controller/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/MovieController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/MovieTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/MovieTableModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/MovieAppView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MovieAppView.java" afterDir="false" />
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -140,19 +129,10 @@
       <file leaf-file-name="MovieAppView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/view/MovieAppView.java">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
             <state relative-caret-position="340">
               <caret line="285" column="45" selection-start-line="285" selection-start-column="45" selection-end-line="285" selection-end-column="45" />
-||||||| merged common ancestors
-            <state relative-caret-position="188">
-              <caret line="410" column="11" selection-start-line="410" selection-start-column="11" selection-end-line="410" selection-end-column="11" />
-=======
-            <state relative-caret-position="72">
-              <caret line="438" column="16" lean-forward="true" selection-start-line="438" selection-start-column="16" selection-end-line="438" selection-end-column="16" />
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
               <folding>
                 <element signature="imports" expanded="true" />
-<<<<<<< HEAD
                 <element signature="e#13078#13079#0" expanded="true" />
                 <element signature="e#13112#13113#0" expanded="true" />
                 <element signature="e#13157#13158#0" expanded="true" />
@@ -165,352 +145,92 @@
                 <element signature="e#13454#13455#0" expanded="true" />
                 <element signature="e#13498#13499#0" expanded="true" />
                 <element signature="e#13536#13537#0" expanded="true" />
-||||||| merged common ancestors
-                <element signature="e#13078#13079#0" expanded="true" />
-                <element signature="e#13112#13113#0" expanded="true" />
-                <element signature="e#13157#13158#0" expanded="true" />
-                <element signature="e#13196#13197#0" expanded="true" />
-                <element signature="e#13243#13244#0" expanded="true" />
-                <element signature="e#13284#13285#0" expanded="true" />
-                <element signature="e#13328#13329#0" expanded="true" />
-                <element signature="e#13366#13367#0" expanded="true" />
-                <element signature="e#13413#13414#0" expanded="true" />
-                <element signature="e#13454#13455#0" expanded="true" />
-                <element signature="e#13498#13499#0" expanded="true" />
-                <element signature="e#13536#13537#0" expanded="true" />
-                <element signature="e#14657#14658#0" expanded="true" />
-                <element signature="e#14719#14720#0" expanded="true" />
-                <element signature="e#14764#14765#0" expanded="true" />
-                <element signature="e#14796#14797#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/controller/MovieController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="487">
-              <caret line="51" selection-start-line="51" selection-end-line="51" />
-              <folding>
-                <element signature="imports" expanded="true" />
-=======
-                <element signature="e#13760#13761#0" expanded="true" />
-                <element signature="e#13794#13795#0" expanded="true" />
-                <element signature="e#13839#13840#0" expanded="true" />
-                <element signature="e#13878#13879#0" expanded="true" />
-                <element signature="e#13925#13926#0" expanded="true" />
-                <element signature="e#13966#13967#0" expanded="true" />
-                <element signature="e#14010#14011#0" expanded="true" />
-                <element signature="e#14048#14049#0" expanded="true" />
-                <element signature="e#14095#14096#0" expanded="true" />
-                <element signature="e#14136#14137#0" expanded="true" />
-                <element signature="e#14180#14181#0" expanded="true" />
-                <element signature="e#14218#14219#0" expanded="true" />
-                <element signature="e#14263#14264#0" expanded="true" />
-                <element signature="e#14302#14303#0" expanded="true" />
-                <element signature="e#16088#16089#0" expanded="true" />
-                <element signature="e#16150#16151#0" expanded="true" />
-                <element signature="e#16195#16196#0" expanded="true" />
-                <element signature="e#16227#16228#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/controller/MovieController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="100" column="19" selection-start-line="100" selection-start-column="19" selection-end-line="100" selection-end-column="19" />
-              <folding>
-                <element signature="imports" expanded="true" />
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-<<<<<<< HEAD
       <file leaf-file-name="Cinema.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/Cinema.java">
-||||||| merged common ancestors
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/MovieDescription.java">
-=======
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/CinemaView.java">
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
             <state relative-caret-position="300">
               <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
-||||||| merged common ancestors
-            <state relative-caret-position="374">
-              <caret line="116" column="52" selection-start-line="116" selection-start-column="52" selection-end-line="116" selection-end-column="52" />
-=======
-            <state relative-caret-position="120">
-              <caret line="36" column="8" selection-start-line="36" selection-start-column="8" selection-end-line="38" selection-end-column="55" />
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
               <folding>
-<<<<<<< HEAD
                 <element signature="e#742#743#0" expanded="true" />
                 <element signature="e#781#782#0" expanded="true" />
                 <element signature="e#856#857#0" expanded="true" />
                 <element signature="e#912#913#0" expanded="true" />
                 <element signature="e#970#971#0" expanded="true" />
                 <element signature="e#1001#1002#0" expanded="true" />
-||||||| merged common ancestors
-                <element signature="e#3442#3443#0" expanded="true" />
-                <element signature="e#3474#3475#0" expanded="true" />
-                <element signature="e#3527#3528#0" expanded="true" />
-                <element signature="e#3569#3570#0" expanded="true" />
-=======
-                <element signature="imports" expanded="true" />
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
       <file leaf-file-name="CinemaView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/view/CinemaView.java">
-||||||| merged common ancestors
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/CinemaView.java">
-=======
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/ConnectedComboBox.java">
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
             <state relative-caret-position="200">
               <caret line="32" column="31" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
-||||||| merged common ancestors
-            <state relative-caret-position="442">
-              <caret line="52" column="50" lean-forward="true" selection-start-line="52" selection-start-column="50" selection-end-line="52" selection-end-column="50" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-=======
-            <state relative-caret-position="388">
-              <caret line="66" column="52" selection-start-line="66" selection-start-column="52" selection-end-line="66" selection-end-column="52" />
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
       <file leaf-file-name="CinemaShowtimesSelectionBox.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/view/CinemaShowtimesSelectionBox.java">
-||||||| merged common ancestors
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/Cinema.java">
-=======
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/MovieView.java">
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
             <state relative-caret-position="288">
               <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
-||||||| merged common ancestors
-            <state relative-caret-position="408">
-              <caret line="49" column="65" selection-start-line="49" selection-start-column="65" selection-end-line="49" selection-end-column="65" />
-=======
-            <state relative-caret-position="-238">
-              <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
               <folding>
                 <element signature="imports" expanded="true" />
-<<<<<<< HEAD
                 <element signature="e#2671#2672#0" expanded="true" />
                 <element signature="e#2700#2701#0" expanded="true" />
                 <element signature="e#2744#2745#0" expanded="true" />
                 <element signature="e#2780#2781#0" expanded="true" />
-||||||| merged common ancestors
-                <element signature="e#1483#1484#0" expanded="true" />
-=======
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
       <file leaf-file-name="CinemaListView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/view/CinemaListView.java">
-||||||| merged common ancestors
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/CinemaListView.java">
-=======
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/event/Event.java">
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
             <state relative-caret-position="389">
               <caret line="139" selection-start-line="139" selection-end-line="139" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-||||||| merged common ancestors
-            <state relative-caret-position="1494">
-              <caret line="139" selection-start-line="139" selection-end-line="139" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#7652#7653#0" expanded="true" />
-                <element signature="e#7685#7686#0" expanded="true" />
-              </folding>
-=======
-            <state relative-caret-position="388">
-              <caret line="197" selection-start-line="197" selection-end-line="197" />
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
       <file leaf-file-name="AdminPage.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/view/AdminPage.java">
-||||||| merged common ancestors
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/AdminLoginScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
-              <caret line="118" column="40" selection-start-line="118" selection-start-column="40" selection-end-line="118" selection-end-column="40" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#4117#4118#0" expanded="true" />
-                <element signature="e#4150#4151#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/AdminPage.java">
-=======
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/scene/Scene.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="2494" selection-start-line="2494" selection-end-line="2494" />
-              <folding>
-                <element signature="e#66572#66573#0" expanded="true" />
-                <element signature="e#66618#66619#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/scene/control/CheckBox.java">
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
-          <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
             <state relative-caret-position="245">
               <caret line="578" selection-start-line="578" selection-end-line="580" selection-end-column="13" />
-||||||| merged common ancestors
-            <state relative-caret-position="22">
-              <caret line="393" column="8" selection-start-line="393" selection-start-column="8" selection-end-line="417" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-=======
-            <state relative-caret-position="180">
-              <caret line="240" selection-start-line="240" selection-end-line="240" />
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
       <file leaf-file-name="Movie.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/Movie.java">
-||||||| merged common ancestors
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/database/DatabaseManager.java">
-=======
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/MovieTableModel.java">
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
             <state relative-caret-position="1560">
               <caret line="140" column="36" lean-forward="true" selection-start-line="140" selection-start-column="36" selection-end-line="140" selection-end-column="36" />
-||||||| merged common ancestors
-            <state relative-caret-position="360">
-              <caret line="180" column="20" selection-start-line="180" selection-start-column="20" selection-end-line="180" selection-end-column="20" />
-=======
-            <state relative-caret-position="212">
-              <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
               <folding>
-<<<<<<< HEAD
                 <element signature="imports" expanded="true" />
                 <element signature="e#4319#4320#0" expanded="true" />
-||||||| merged common ancestors
-                <element signature="e#11217#11218#0" expanded="true" />
-                <element signature="e#11256#11257#0" expanded="true" />
-=======
-                <element signature="imports" expanded="true" />
-                <element signature="e#940#941#0" expanded="true" />
-                <element signature="e#976#977#0" expanded="true" />
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
       <file leaf-file-name="ConnectedComboBox.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/view/ConnectedComboBox.java">
-||||||| merged common ancestors
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/Movie.java">
-=======
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/database/DatabaseManager.java">
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
             <state relative-caret-position="149">
               <caret line="59" column="13" lean-forward="true" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
-||||||| merged common ancestors
-            <state relative-caret-position="2040">
-              <caret line="140" column="36" lean-forward="true" selection-start-line="140" selection-start-column="36" selection-end-line="140" selection-end-column="36" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#936#937#0" expanded="true" />
-                <element signature="e#968#969#0" expanded="true" />
-                <element signature="e#1029#1030#0" expanded="true" />
-                <element signature="e#1071#1072#0" expanded="true" />
-                <element signature="e#1149#1150#0" expanded="true" />
-                <element signature="e#1193#1194#0" expanded="true" />
-                <element signature="e#2462#2463#0" expanded="true" />
-                <element signature="e#2498#2499#0" expanded="true" />
-                <element signature="e#3457#3458#0" expanded="true" />
-                <element signature="e#3498#3499#0" expanded="true" />
-                <element signature="e#3554#3555#0" expanded="true" />
-                <element signature="e#3606#3607#0" expanded="true" />
-                <element signature="e#3682#3683#0" expanded="true" />
-                <element signature="e#3730#3731#0" expanded="true" />
-                <element signature="e#3974#3975#0" expanded="true" />
-                <element signature="e#4026#4027#0" expanded="true" />
-                <element signature="e#4282#4283#0" expanded="true" />
-                <element signature="e#4332#4333#0" expanded="true" />
-                <element signature="e#4378#4379#0" expanded="true" />
-              </folding>
-=======
-            <state relative-caret-position="2669">
-              <caret line="167" selection-start-line="167" selection-end-line="167" />
-              <folding>
-                <element signature="e#11217#11218#0" expanded="true" />
-                <element signature="e#11256#11257#0" expanded="true" />
-              </folding>
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
             </state>
           </provider>
         </entry>
@@ -545,15 +265,9 @@
       <find>JFX</find>
       <find>cance</find>
       <find>cancel</find>
-<<<<<<< HEAD
       <find>cinemaArr</find>
       <find>ID</find>
       <find>initE</find>
-||||||| merged common ancestors
-=======
-      <find>middle</find>
-      <find>rel</find>
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
     </findStrings>
     <replaceStrings>
       <replace>rootPane</replace>
@@ -606,9 +320,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="y" value="23" />
     <option name="width" value="1366" />
-    <option name="height" value="692" />
+    <option name="height" value="768" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectReloadState">
@@ -1016,30 +729,10 @@
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-<<<<<<< HEAD
           <url>file://$PROJECT_DIR$/src/view/AdminPage.java</url>
           <line>582</line>
-||||||| merged common ancestors
-          <url>file://$PROJECT_DIR$/src/database/DatabaseManager.java</url>
-          <line>167</line>
           <properties />
-          <option name="timeStamp" value="26" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/database/DatabaseManager.java</url>
-          <line>21</line>
-=======
-          <url>file://$PROJECT_DIR$/src/controller/MovieController.java</url>
-          <line>102</line>
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
-          <properties />
-<<<<<<< HEAD
           <option name="timeStamp" value="2" />
-||||||| merged common ancestors
-          <option name="timeStamp" value="27" />
-=======
-          <option name="timeStamp" value="36" />
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/controller/MovieController.java</url>
@@ -1071,68 +764,7 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/view/MovieDescription.java">
-||||||| merged common ancestors
-    <entry file="file://$PROJECT_DIR$/src/sample/sample.fxml" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/beans/property/BooleanPropertyBase.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/scene/control/CheckBox.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/com/sun/glass/ui/View.java" />
-    <entry file="file://$PROJECT_DIR$/src/img/posterNA.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/scene/layout/VBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2890">
-          <caret line="224" selection-start-line="224" selection-end-line="224" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/StartupConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="42" column="57" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/com/sun/javafx/scene/control/ReadOnlyUnbackedObservableList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="135" selection-start-line="135" selection-end-line="135" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/scene/control/ComboBoxBase.java">
-=======
-    <entry file="file://$PROJECT_DIR$/src/sample/sample.fxml" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/beans/property/BooleanPropertyBase.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/com/sun/glass/ui/View.java" />
-    <entry file="file://$PROJECT_DIR$/src/img/posterNA.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/scene/layout/VBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2890">
-          <caret line="224" selection-start-line="224" selection-end-line="224" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/StartupConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="42" column="57" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/com/sun/javafx/scene/control/ReadOnlyUnbackedObservableList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="135" selection-start-line="135" selection-end-line="135" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/scene/control/ComboBoxBase.java">
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-517">
           <caret line="80" column="70" selection-start-line="80" selection-start-column="70" selection-end-line="80" selection-end-column="70" />
@@ -1187,7 +819,6 @@
     <entry file="file://$PROJECT_DIR$/src/img/posterNA.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/view/CinemaView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -1196,25 +827,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/AdminPage.java">
-||||||| merged common ancestors
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/scene/Node.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8411" selection-start-line="8411" selection-end-line="8411" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/scene/control/Button.java">
-=======
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/scene/control/Button.java">
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-492">
           <caret line="177" column="55" selection-start-line="177" selection-start-column="55" selection-end-line="177" selection-end-column="55" />
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/view/CinemaShowtimesSelectionBox.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
@@ -1238,36 +856,12 @@
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/com/sun/glass/ui/View.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/scene/layout/VBox.java" />
     <entry file="file://$PROJECT_DIR$/src/model/StartupConstants.java">
-||||||| merged common ancestors
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/event/Event.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="197" selection-start-line="197" selection-end-line="197" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/scene/Scene.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="2494" selection-start-line="2494" selection-end-line="2494" />
-          <folding>
-            <element signature="e#66572#66573#0" expanded="true" />
-            <element signature="e#66618#66619#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/CinemaShowtimesSelectionBox.java">
-=======
-    <entry file="file://$PROJECT_DIR$/src/view/CinemaShowtimesSelectionBox.java">
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="406">
           <caret line="42" column="57" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="57" />
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/com/sun/javafx/scene/control/ReadOnlyUnbackedObservableList.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/scene/control/ComboBoxBase.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/scene/control/ComboBox.java" />
@@ -1295,19 +889,6 @@
         </state>
       </provider>
     </entry>
-||||||| merged common ancestors
-    <entry file="file://$PROJECT_DIR$/src/model/MovieTableModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="86" column="16" selection-start-line="86" selection-end-line="89" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-=======
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
     <entry file="file://$PROJECT_DIR$/src/css/movieStyle.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="163">
@@ -1327,7 +908,6 @@
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/view/ConnectedComboBox.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="149">
@@ -1342,23 +922,6 @@
         </state>
       </provider>
     </entry>
-||||||| merged common ancestors
-    <entry file="file://$PROJECT_DIR$/src/view/ConnectedComboBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="66" column="52" selection-start-line="66" selection-start-column="52" selection-end-line="66" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MovieApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-=======
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
     <entry file="file://$PROJECT_DIR$/src/view/SingleMovieContainerView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="586">
@@ -1433,7 +996,6 @@
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/model/Cinema.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -1450,147 +1012,26 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/CinemaView.java">
-||||||| merged common ancestors
-    <entry file="file://$PROJECT_DIR$/src/view/CinemaView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="52" column="50" lean-forward="true" selection-start-line="52" selection-start-column="50" selection-end-line="52" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/Movie.java">
-=======
-    <entry file="file://$PROJECT_DIR$/src/model/Movie.java">
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="32" column="31" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/view/CinemaListView.java">
-||||||| merged common ancestors
-    <entry file="file://$PROJECT_DIR$/src/database/DatabaseManager.java">
-=======
-    <entry file="file://$PROJECT_DIR$/src/MovieApp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/scene/Node.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8411" selection-start-line="8411" selection-end-line="8411" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/scene/control/CheckBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="240" selection-start-line="240" selection-end-line="240" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/event/Event.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="197" selection-start-line="197" selection-end-line="197" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/scene/Scene.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="2494" selection-start-line="2494" selection-end-line="2494" />
-          <folding>
-            <element signature="e#66572#66573#0" expanded="true" />
-            <element signature="e#66618#66619#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/DatabaseManager.java">
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
-      <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
         <state relative-caret-position="389">
           <caret line="139" selection-start-line="139" selection-end-line="139" />
-||||||| merged common ancestors
-        <state relative-caret-position="360">
-          <caret line="180" column="20" selection-start-line="180" selection-start-column="20" selection-end-line="180" selection-end-column="20" />
-=======
-        <state relative-caret-position="2669">
-          <caret line="167" selection-start-line="167" selection-end-line="167" />
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/view/CinemaShowtimesSelectionBox.java">
-||||||| merged common ancestors
-    <entry file="file://$PROJECT_DIR$/src/controller/MovieController.java">
-=======
-    <entry file="file://$PROJECT_DIR$/src/view/ConnectedComboBox.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="66" column="52" selection-start-line="66" selection-start-column="52" selection-end-line="66" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/MovieTableModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#940#941#0" expanded="true" />
-            <element signature="e#976#977#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/MovieView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-238">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/CinemaView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="36" column="8" selection-start-line="36" selection-start-column="8" selection-end-line="38" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/MovieController.java">
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
-      <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
         <state relative-caret-position="288">
           <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
-||||||| merged common ancestors
-        <state relative-caret-position="487">
-          <caret line="51" selection-start-line="51" selection-end-line="51" />
-=======
-        <state relative-caret-position="102">
-          <caret line="100" column="19" selection-start-line="100" selection-start-column="19" selection-end-line="100" selection-end-column="19" />
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2671#2672#0" expanded="true" />
@@ -1603,59 +1044,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/database/DatabaseManager.java">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
         <state relative-caret-position="-34">
           <caret line="168" selection-start-line="168" selection-end-line="168" />
-||||||| merged common ancestors
-        <state relative-caret-position="188">
-          <caret line="410" column="11" selection-start-line="410" selection-start-column="11" selection-end-line="410" selection-end-column="11" />
-=======
-        <state relative-caret-position="72">
-          <caret line="438" column="16" lean-forward="true" selection-start-line="438" selection-start-column="16" selection-end-line="438" selection-end-column="16" />
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
           <folding>
-<<<<<<< HEAD
             <element signature="e#13234#13235#0" expanded="true" />
             <element signature="e#13273#13274#0" expanded="true" />
-||||||| merged common ancestors
-            <element signature="imports" expanded="true" />
-            <element signature="e#13078#13079#0" expanded="true" />
-            <element signature="e#13112#13113#0" expanded="true" />
-            <element signature="e#13157#13158#0" expanded="true" />
-            <element signature="e#13196#13197#0" expanded="true" />
-            <element signature="e#13243#13244#0" expanded="true" />
-            <element signature="e#13284#13285#0" expanded="true" />
-            <element signature="e#13328#13329#0" expanded="true" />
-            <element signature="e#13366#13367#0" expanded="true" />
-            <element signature="e#13413#13414#0" expanded="true" />
-            <element signature="e#13454#13455#0" expanded="true" />
-            <element signature="e#13498#13499#0" expanded="true" />
-            <element signature="e#13536#13537#0" expanded="true" />
-            <element signature="e#14657#14658#0" expanded="true" />
-            <element signature="e#14719#14720#0" expanded="true" />
-            <element signature="e#14764#14765#0" expanded="true" />
-            <element signature="e#14796#14797#0" expanded="true" />
-=======
-            <element signature="imports" expanded="true" />
-            <element signature="e#13760#13761#0" expanded="true" />
-            <element signature="e#13794#13795#0" expanded="true" />
-            <element signature="e#13839#13840#0" expanded="true" />
-            <element signature="e#13878#13879#0" expanded="true" />
-            <element signature="e#13925#13926#0" expanded="true" />
-            <element signature="e#13966#13967#0" expanded="true" />
-            <element signature="e#14010#14011#0" expanded="true" />
-            <element signature="e#14048#14049#0" expanded="true" />
-            <element signature="e#14095#14096#0" expanded="true" />
-            <element signature="e#14136#14137#0" expanded="true" />
-            <element signature="e#14180#14181#0" expanded="true" />
-            <element signature="e#14218#14219#0" expanded="true" />
-            <element signature="e#14263#14264#0" expanded="true" />
-            <element signature="e#14302#14303#0" expanded="true" />
-            <element signature="e#16088#16089#0" expanded="true" />
-            <element signature="e#16150#16151#0" expanded="true" />
-            <element signature="e#16195#16196#0" expanded="true" />
-            <element signature="e#16227#16228#0" expanded="true" />
->>>>>>> bf662abf73aaabb633e5be294733146e056f82fe
           </folding>
         </state>
       </provider>
